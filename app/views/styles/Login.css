@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+}
+
+.login-dados{
+    background-position: url('../assets/Igreja_Fundo_Login.jpg');
+}
+.img-esquerda{
+
+}

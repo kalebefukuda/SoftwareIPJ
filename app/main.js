@@ -6,7 +6,7 @@ const routes = require('../routes/routes');
 
 // Configuração do body parser para lidar com dados enviados via POST
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); 
 
 // Configuração das rotas
 app.use('/', routes);
