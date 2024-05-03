@@ -17,6 +17,10 @@ h1{
     
 }
 
+button{
+    cursor: pointer;
+}
+
 header{
     display: flex;
     max-height: 149px;
@@ -49,8 +53,6 @@ header{
 nav a ion-icon{
     color: #015B40;
     font-size: 25px;
-    
-    
 }
 
 .cadastro-membro{
@@ -130,7 +132,7 @@ nav a ion-icon{
     transition: background-color 0.3s ease;
 }
 
-.relatorios-btn:hover{
+button:hover{
     background-color: #037955;
 }
 
