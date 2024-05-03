@@ -1,6 +1,6 @@
-const database = require ('../../config/database');
+import connectDatabase from '../../config/database.js';
 
-export class Membro{
+class Membro {
     constructor(id_membro, nome, comungante, data_nascimento, nome_pai, nome_mae, sexo, escolaridade, profissao, numero_de_rol, email, telefone, celular, foto_membro) {
         this.id_membro = id_membro;
         this.nome = nome;
@@ -18,45 +18,40 @@ export class Membro{
         this.foto_membro = foto_membro;
     }
 
-
-
-
     //Funções de DDL(Data Definition Language)
-    static adicionarMembro(membro,callback){
-        const connection = database.connectDatabase();
-        connection.query('INSERT INTO membros SET ?',membro,(error,results) =>{
-            connection.end();
-            if(error){
-                callback(error,null);
-            } else {
-                callback(null,results.insertId); //InsertId retorna o id autoincremeto da nova inserção
-            }
-        })
-    }
-
-
-
-
-
-
-    //Funçoes de DML(Data Manipulation Language)
-    static listarTodosMembros(callback) {
-        const connection = database.connectDatabase();
-        connection.query('SELECT * FROM MEMBRO', (error, results) => {
-            connection.end(); // Fechar a conexão após a consulta
-            if (error) {
-                callback(error, null);
-            } else {
-                const membros = results.map(row => new Membro(row.id_membro, row.nome, row.comungante, row.data_nascimento, row.nome_pai, row.nome_mae, row.sexo, row.escolaridade, row.profissao, row.numero_de_rol, row.email, row.telefone, row.celular, row.foto_membro));
-                callback(null, membros);
-            }
+    static adicionarMembro(membro, callback) {
+        //Método then é como se fosse um async
+        connectDatabase().then(connection => {
+            connection.query('INSERT INTO MEMBRO SET ?', membro, (error, results) => {
+                if (error) {
+                    callback(error, null);
+                } else {
+                    callback(null, results.insertId); // InsertId retorna o id autoincremeto da nova inserção
+                }
+                connection.release();
+            });
+        }).catch(error => {
+            console.error('Erro ao obter conexão do pool:', error);
+            callback(error, null);
         });
     }
 
-
-
-
-
-
-
+    //Funções de DML(Data Manipulation Language)
+    static listarTodosMembros(callback) {
+        connectDatabase().then(connection => {
+            connection.query('SELECT * FROM MEMBRO', (error, results) => {
+                if (error) {
+                    callback(error, null);
+                } else {
+                    callback(null, results);
+                }
+                connection.release();
+            });
+        }).catch(error => {
+            console.error('Erro ao obter conexão do pool:', error);
+            callback(error, null);
+        });
+    }
 }
+
+export default Membro;
