@@ -1,4 +1,4 @@
-const database = require('../../config/database');
+const database = require ('../../config/database');
 
 export class Membro{
     constructor(id_membro, nome, comungante, data_nascimento, nome_pai, nome_mae, sexo, escolaridade, profissao, numero_de_rol, email, telefone, celular, foto_membro) {
