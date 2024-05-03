@@ -83,30 +83,33 @@ body {
     margin-bottom: 15px;
 }
 
-.input {
-    position: relative;
+.input-login {
+    /* position: relative; */
     border-radius: 20px;
     border: 1px solid #c0c0c0;
     outline: 0 !important;
     box-sizing: border-box;
     padding: 12px 15px 12px 40px;
     width: 100%;
-    background-image: url("app/views/assets/user-regular.svg"); 
+    background-image: url("/app/views/assets/person-circle-outline.svg");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 18px 18px; /* Tamanho do ícone */
+    
 }
-
-.input-container {
-    color: #747474;
-
+.input-password {
+    /* position: relative; */
+    border-radius: 20px;
+    border: 1px solid #c0c0c0;
+    outline: 0 !important;
+    box-sizing: border-box;
+    padding: 12px 15px 12px 40px;
+    width: 100%;
+    background-image: url("/app/views/assets/lock-closed-outline.svg");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 18px 18px; /* Tamanho do ícone */
 }
-
-.input-containeri {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #747474;
-}
-
 
 .page-link {
     text-decoration: underline;
