@@ -5,16 +5,29 @@
     padding: 0;
     font-family: "Poppins", sans-serif;
 }
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main{
+    display: flex;
+    flex: 1; /*ocupar todo espaço entre header e footer*/
+    margin: 15px 150px 15px 150px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    gap: 45px;
+    justify-content: flex-start;
+}
 
 a{
     text-decoration: none;
-    
 }
 
 h1{
     font-weight: 700;
     font-size: 40px;
-    
 }
 
 header{
@@ -39,7 +52,6 @@ header{
     display: flex;
     gap: 45px;
     margin-right: 10px;
-    
 }
 
 .nav-header a{
@@ -66,8 +78,62 @@ nav a ion-icon{
 
 /* main */
 
+.container h2{
+    color: #B5B5B5;
+    width: 312px;
+    text-align: center;
+}
+
+.container > div {
+    width: 30%;
+    margin: 10px;
+    border-radius: 20px;
+    padding: 40px;
+    height: 110px;
+}
+
+.card{
+    display: flex;
+    background-color: #EFEFEF;
+    padding: 10px;
+    height: 150px;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.card:hover{
+    transform: scale(1.03);
+    background-color: #0b6047;
+}
+
+.campo-img{
+    margin-left: 20px;
+}
+
+
+.campo-foto-card{
+    width: 100px;
+    height: 100px;
+}
+
+.text-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.text-card ion-icon{
+    font-size: 32px;
+    color: #B5B5B5;
+    font-weight:bold;
+}
 
 footer {
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -81,7 +147,6 @@ footer {
     height: 292px;
     width: 310px;
 }
-
 
 .social-footer {
     height: 292px;
