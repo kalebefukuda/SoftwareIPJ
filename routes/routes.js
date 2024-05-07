@@ -9,3 +9,13 @@ router.post('/membros', Membro.MembroController.inserirMembro);
 router.get('/membros', Membro.MembroController.listarTodos);
 
 module.exports = router;
+
+const app = express()
+
+app.get("/", function(req,res){
+    res.sendFile(__dirname + "../app/views/pages/Login.html")
+})
+
+app.get("/home", function(req,res){
+    res.sendFile(__dirname + "../app/views/pages/Home.html")
+})
