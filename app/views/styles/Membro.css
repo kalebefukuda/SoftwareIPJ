@@ -177,7 +177,7 @@ button:hover{
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-left: 40px;
+    margin-left: 70px;
 }
 
 .result-filtros{
@@ -211,11 +211,31 @@ button:hover{
     flex-direction: column;
     justify-content: center;
     gap: 8px;
+    color: #818181;
+}
+
+.text-icon{
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #015B40;
+    color: white;
+    width: 35px;
+    height: 24px;
+    border-radius: 8px;
+    margin-right: 14px;
+    transition: background-color 0.3s ease;
 }
 
 .telefone-membro{
     display: flex;
-
+    gap: 10px;
 }
 
 .campo-foto-card{
