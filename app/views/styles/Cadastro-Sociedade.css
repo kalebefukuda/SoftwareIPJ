@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+/* header */
 * {
     margin: 0;
     padding: 0;
@@ -19,6 +19,7 @@ main{
     margin-top: 15px;
     gap: 45px;
     justify-content: flex-start;
+    flex-direction: column;
 }
 
 a{
@@ -78,85 +79,74 @@ nav a ion-icon{
 
 /* main */
 
-.container h2{
-    color: #B5B5B5;
-    width: 312px;
-    text-align: center;
-}
-
-.container > div {
-    width: 30%;
-    margin: 10px;
-    border-radius: 20px;
-    padding: 40px;
-    height: 110px;
-}
-
-.card{
+.form {
+    flex-direction: column;
     display: flex;
-    background-color: #EFEFEF;
-    padding: 10px;
-    height: 150px;
+    margin: 20px auto;
+    width: 50vh;
+    gap: 50px;
+    justify-content: center;
     align-items: center;
+}
+
+.select-photo {
+    display: flex;
+    background-color: #E7E7E7;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    padding: 5%;
+    border-radius: 75%;
+    margin: 20px auto;
     cursor: pointer;
-    border: none;
+    /* margin-top: 60px; */
+}
+
+.titulo-form {
+    display: flex;
+    margin: auto;
+    font-size: 30px;
+    color: #015B40;
+    font-weight: 650;
+    margin-bottom: 30px;
+}
+
+.input-name-sociedade {
     border-radius: 20px;
-    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    border: 1px;
+    outline: 0 !important;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    width: 100%;
+    background-color:#E7E7E7;
+    font-size: 16px;
 }
 
-.card:hover{
-    transform: scale(1.03);
-    background-color: #0b6047;
-}
-
-.campo-img{
-    margin-left: 20px;
-}
-
-
-.campo-foto-card{
-    width: 100px;
-    height: 100px;
-}
-
-.campo-foto-card-white{
-    display: none;
-}
-
-.card:hover .campo-foto-card{
-    display: none;
-}
-
-.card:hover .campo-foto-card-white{
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-}
-
-.text-card{
+.form-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    color: gray;
 }
 
-.card:hover .text-card h2 {
-    color: white; /* Altera a cor para branco quando há hover */
+.form-btn {
+    padding: 10px 15px;
+    width: 50%;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 0 !important;
+    outline: 0 !important;
+    background: #015B40;
+    color: white;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: background-color 0.3s ease;
 }
 
-.text-card ion-icon{
-    font-size: 32px;
-    color: #B5B5B5;
-    font-weight:bold;
+.form-btn:hover{
+    background-color: #037955;
 }
 
-.card:hover .text-card ion-icon{
-    font-size: 32px;
-    color:white;
-    font-weight:bold;
-}
-
+/* footer */
 footer {
     margin-top: auto;
     display: flex;
