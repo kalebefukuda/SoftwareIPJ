@@ -99,6 +99,7 @@ nav a ion-icon{
     padding: 5%;
     border-radius: 75%;
     margin: 20px auto;
+    cursor: pointer;
     /* margin-top: 60px; */
 }
 
