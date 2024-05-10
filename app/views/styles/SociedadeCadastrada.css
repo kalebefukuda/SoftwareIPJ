@@ -79,12 +79,14 @@ main{
     align-items: center;
     color: white;
     justify-content: center;
+    gap: 7rem;
 
 }
 
 .banner-div-img{
     display: flex;
     align-items: center;
+    margin-left: 96px;
 }
 .banner-div-texto{
     width: 70%;
@@ -112,16 +114,16 @@ main{
     display: flex;
     background-color: #E7E7E7;
     align-items: center;
-    width: 40%;
+    width: 45%;
     color: #015B40;
-    height: 30px;
+    height: 35px;
     justify-content: space-between;
     border-radius: 15px;
     padding: 3px;
 }
 .busca-div input{
     border: none;
-    color: #015B40;
+    color: #757575;
     background-color: #E7E7E7;
     width: 100%;
     margin-left: 12px;
@@ -134,11 +136,16 @@ main{
 .btn-add{
     border: none;
     cursor: pointer;
-    width: 100px;
-    height: 30px;
-    border-radius: 10px;
+    width: 105px;
+    height: 38px;
+    border-radius: 14px;
     background-color: #015B40;
     color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add:hover{
+    background-color: #037955;
 }
 
 .div-membros-resultado{
@@ -156,14 +163,67 @@ main{
 .membros-cadastrados{
     display: flex;
     background-color: #F6F6F6;
-    width: 60%;
     height: 125px;
     border-radius: 20px;
     gap: 40px;
+    margin-bottom: 20px;
+}
+
+.img-result{
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+   
+}
+
+input:focus {
+    outline: none;
+}
+
+.text-result-membro{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    color: #818181;
+}
+
+.text-icon{
+    display: flex;
+    justify-content: space-between;
+}
+
+.remove-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #CD201F;
+    color: white;
+    width: 35px;
+    height: 24px;
+    border-radius: 8px;
+    margin-right: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.idade-membro{
+    display: flex;
+    gap: 6px;
 }
 
 
+.campo-foto-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.campo-foto-card{
+    width: 100px;
+    height: 100px;
+}
 
 footer {
     display: flex;
@@ -221,4 +281,20 @@ footer {
     font-size: 25px;
     margin-right: 10px;
     margin-left: 10px;
+}
+
+
+/* Responsivo */
+@media screen and (max-width: 1600px) {
+    .pesquisa-div{
+        margin-top: 30px;
+    }
+
+    .div-membros-resultado{
+        margin-top: 40px;
+    }
+
+    .div-membros-resultado h2{
+        margin-bottom: 30px;
+    }
 }
