@@ -10,20 +10,19 @@ const databaseConfig = {
 // Criar um pool de conexões
 const pool = database.createPool(databaseConfig);
 
-// Função que retorna uma nova conexão do pool
-const connectDatabase = () => {
-    return new Promise((resolve, reject) => {
-        pool.getConnection((err, connection) => {
-            if (err) {
-                console.error('Erro ao obter conexão do pool:', err);
-                reject(err);
-            } else {
-                console.log('Conexão do pool obtida com sucesso');
-                // Configurações adicionais da conexão, se necessário
-                resolve(connection);
-            }
-        });
+
+// Função que obtém uma conexão do pool e a passa para a função de retorno de chamada
+const connectDatabase = (callback) => {
+    pool.getConnection((err, connection) => {
+        if (err) {
+            console.error('Erro ao obter conexão do pool:', err);
+            callback(err, null);
+        } else {
+            console.log('Conexão do pool obtida com sucesso');
+            // Configurações adicionais da conexão, se necessário
+            callback(null, connection);
+        }
     });
 };
 
-export default connectDatabase;
+export { connectDatabase };

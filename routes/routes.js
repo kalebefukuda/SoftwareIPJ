@@ -9,7 +9,6 @@ const router = express.Router();
 // Rota para inserir um novo membro
 router.post('/membros', (req, res) => {
     MembroController.inserirMembro(req, res);
-    console.log(req.body);
 });
 
 // Rota para listar todos os membros
