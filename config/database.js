@@ -1,23 +1,28 @@
-const database = require('mysql2');
+import database from "mysql2";
 
-//Config
-const databaseConfig ={
+// Configuração do banco de dados
+const databaseConfig = {
     host: 'localhost',
     user: 'root',
     database: 'SOFTWARE_IPJ'
-}
+};
 
-export function connectDatabase() {
-    const connection = database.createConnection(databaseConfig);
-    connection.connect((err) => {
+// Criar um pool de conexões
+const pool = database.createPool(databaseConfig);
+
+
+// Função que obtém uma conexão do pool e a passa para a função de retorno de chamada
+const connectDatabase = (callback) => {
+    pool.getConnection((err, connection) => {
         if (err) {
-            console.error('Erro ao conectar ao banco de dados:', err);
-            return;
+            console.error('Erro ao obter conexão do pool:', err);
+            callback(err, null);
+        } else {
+            console.log('Conexão do pool obtida com sucesso');
+            // Configurações adicionais da conexão, se necessário
+            callback(null, connection);
         }
-        console.log('Conexão foi efetivada');
     });
-    return connection;
-}
+};
 
-
-
+export { connectDatabase };

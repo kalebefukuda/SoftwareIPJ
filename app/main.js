@@ -1,18 +1,21 @@
-//TODO rever funcionamento dessa main
+// Importar o módulo Express
+import express from 'express';
 
-const express = require('express');
+// Importar as rotas
+import routes from '../routes/routes.js';
+
+// Criar uma instância do aplicativo Express
 const app = express();
-const routes = require('../routes/routes');
 
-// Configuração do body parser para lidar com dados enviados via POST
+// Configurar o body parser para lidar com dados enviados via POST
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 
-// Configuração das rotas
+// Configurar as rotas
 app.use('/', routes);
 
 // Iniciar o servidor
-const port = process.env.PORT || 3000;
+const port = 3000;
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
