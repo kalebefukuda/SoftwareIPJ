@@ -65,11 +65,8 @@ nav a ion-icon{
 main{
     display: flex;
     flex: 1; /*ocupar todo espaço entre header e footer*/
-    margin: 15px 150px 15px 150px;
     flex-wrap: wrap;
     margin-top: 15px;
-    gap: 45px;
-    justify-content: flex-start;
 }
 
 .banner{
@@ -77,8 +74,96 @@ main{
     background-image: url('../assets/Banner1_Home.jpg');
     background-size: cover;
     margin-top: 10px;
+    width: 100%;
+    height: 18rem;
+    align-items: center;
+    color: white;
     justify-content: center;
+
 }
+
+.banner-div-img{
+    display: flex;
+    align-items: center;
+}
+.banner-div-texto{
+    width: 70%;
+    justify-content: start;
+    align-items: center;
+}
+
+.banner img{
+    margin-right: 10px;
+    height: 225px;
+}
+
+.banner h1{
+    text-align: center;
+    width: 450px;
+}
+
+.pesquisa-div{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 30px; 
+}
+.busca-div{
+    display: flex;
+    background-color: #E7E7E7;
+    align-items: center;
+    width: 40%;
+    color: #015B40;
+    height: 30px;
+    justify-content: space-between;
+    border-radius: 15px;
+    padding: 3px;
+}
+.busca-div input{
+    border: none;
+    color: #015B40;
+    background-color: #E7E7E7;
+    width: 100%;
+    margin-left: 12px;
+}
+
+.busca-div ion-icon{
+    margin-right: 12px;
+}
+
+.btn-add{
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #015B40;
+    color: white;
+}
+
+.div-membros-resultado{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.div-membros-resultado h2{
+   color: #015B40;
+}
+
+.membros-cadastrados{
+    display: flex;
+    background-color: #F6F6F6;
+    width: 60%;
+    height: 125px;
+    border-radius: 20px;
+    gap: 40px;
+}
+
+
+
 
 footer {
     display: flex;
