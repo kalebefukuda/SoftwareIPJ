@@ -71,7 +71,7 @@ main{
 
 .banner{
     display: flex;
-    background-image: url('../assets/Banner1_Home.jpg');
+    background-image: url('../assets/BannerSocCadastrada.png');
     background-size: cover;
     margin-top: 10px;
     width: 100%;
