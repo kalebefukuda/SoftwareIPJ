@@ -1,34 +1,47 @@
-const express = require('express');
+import express from 'express';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
-const path = require('path');
 
-// Configurando o middleware para servir arquivos estáticos do diretório 'app/views'
-app.use(express.static(path.join(__dirname, 'app/views')));
+// Configurar o Express.js para servir arquivos estáticos
+app.use(express.static(path.join(__dirname, 'app', 'views')));
 
-// Definindo a rota para a página inicial
+// Rota para página de login
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app/views/pages/Login.html'));
+  res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Login.html'));
 });
 
-// Definindo a rota para a página Home
-app.get("/home", (req, res) => {
-    res.sendFile(path.join(__dirname, "app/views/pages/Home.html"));
+// Rota para página inicial (home)
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Home.html'));
 });
 
-app.get("/relatorios", (req, res) => {
-    res.sendFile(path.join(__dirname, "app/views/pages/Relatorio.html"));
+// Rota para página de cadastro de membro
+app.post('/cadastro', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'CadastroMembro.html'));
 });
 
-app.get("/membros", (req, res) => {
-    res.sendFile(path.join(__dirname, "app/views/pages/Membro.html"));
+// Rota para página de membros
+app.get('/membros', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Membro.html'));
 });
 
-app.get("/sociedades", (req, res) => {
-    res.sendFile(path.join(__dirname, "app/views/pages/Sociedade.html"));
+// Rota para página de relatórios
+app.get('/relatorios', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Relatorio.html'));
+});
+
+// Rota para página de sociedades
+app.get('/sociedades', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Sociedade.html'));
 });
 
 // Configurando o servidor para escutar na porta 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
