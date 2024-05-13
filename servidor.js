@@ -21,7 +21,7 @@ app.get('/home', (req, res) => {
 });
 
 // Rota para página de cadastro de membro
-app.post('/cadastro', (req, res) => {
+app.get('/cadastro', (req, res) => {
   res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'CadastroMembro.html'));
 });
 
