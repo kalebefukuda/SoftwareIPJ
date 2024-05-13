@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Membros</title>
+    <link rel="stylesheet" href="../styles/CadastroMembro.css">
+</head>
+
+<body>
+    <header>
+        <a href="#"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
+        <nav class="nav-header">
+            <a href="#">Home</a>
+            <a href="#">Cadastro</a>
+            <a href="#">Membros</a>
+            <a href="#">Relatórios</a>
+            <a href="#">Sociedades Internas</a>
+            <a href="#"><ion-icon name="exit-outline"></a>
+        </nav>
+    </header>
+    <div class="titulo-page">
+        <h1>Cadastro de Membros</h1>
+    </div>
+
+
+    <main>
+        <form class="form">
+            <div class="div1">
+                <div class="section1">
+                    <div class="wrap">
+                        <label for="campo1">Nome completo</label>
+                        <input type="text" id="campo1" class="input" pattern="[A-Za-zÀ-ú\s]+" style="width: 400px;"
+                            required>
+                    </div>
+
+                    <div class="wrap">
+                        <label for="campo2">Comungante?</label>
+                        <select name="comungante" id="campo2" class="input" required>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                        </select>
+                    </div>
+
+                    <div class="wrap">
+                        <label for="campo3">Data de Nascimento</label>
+                        <input type="date" id="campo3" class="input" required>
+                    </div>
+
+                    <div class="wrap">
+                        <div class="labels">
+                            <label for="campo4">Local de Nascimento</label>
+                        </div>
+                        <div class="inputs">
+                            <input type="text" id="campo4" class="input" pattern="[A-Za-zÀ-ú\s]+" required>
+                            <select name="estado" id="campo4" class="input" style="width: 65px;" required>
+                                <option value="" disabled selected>UF</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="wrap">
+                        <label for="campo5">Numero de Rol</label>
+                        <input type="number" id="campo5" class="input" style="width: 150px;" required>
+                    </div>
+
+                    <div class="wrap">
+                        <label for="campo6">Nome do Pai</label>
+                        <input type="text" id="campo6" class="input" style="width: 400px;" pattern="[A-Za-zÀ-ú\s]+"
+                            required>
+                    </div>
+
+                    <div class="wrap">
+                        <label for="campo7">Nome da Mãe</label>
+                        <input type="text" id="campo7" class="input" style="width: 400px;" pattern="[A-Za-zÀ-ú\s]+"
+                            required>
+                    </div>
+
+                    <div class="wrap">
+                        <label for="campo8">Sexo</label>
+                        <select name="sex" id="campo8" class="input" style="width: 230px;" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="sim">Masculino</option>
+                            <option value="nao">Feminino</option>
+                        </select>
+                    </div>
+
+                    <div class="wrap">
+                        <label for="campo9">Escolaridade</label>
+                        <input type="text" id="campo9" class="input" style="width: 300px;" pattern="[A-Za-zÀ-ú\s]+">
+                    </div>
+
+                    <div class="wrap">
+                        <label for="campo10">Profissão</label>
+                        <input type="text" id="campo10" class="input" style="width: 300px;" pattern="[A-Za-zÀ-ú\s]+">
+                    </div>
+                </div>
+                <div class="select-photo" id="select-photo">
+                    <input type="file" id="upload-file" style="display: none;" accept="image/*" tabindex="-1"
+                        autocomplete="off">
+                    <label for="upload-file">
+                        <div class="icon-container">
+                            <div class="photo">
+                                <img src="../assets/Insira sua foto.png" class="image-icon" alt="Image icon">
+                            </div>
+                            <img src="../assets/camera.svg" class="camera-icon" alt="Camera icon">
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="div2">
+                <div class="section3">
+                    <div class="wrap">
+                        <label for="campo11">E-mail</label>
+                        <input type="email" id="campo11" class="input" style="width: 400px;">
+                    </div>
+
+                    <div class="wrap">
+                        <label for="campo12">Telefone</label>
+                        <input type="tel" name="tel1" id="campo12" style="width: 170px;" class="input">
+                    </div>
+
+                    <div class="wrap">
+                        <label for="campo13">Celular</label>
+                        <input type="tel" name="tel2" id="campo13" style="width: 170px;" class="input" required>
+                    </div>
+                </div>
+            </div>
+            <div class="div3">
+                <div class="section4">
+                    <!-- Conteudo a ser colocado -->
+                </div>
+                <div class="section5">
+                    <!-- Conteudo a ser colocado -->
+                </div>
+            </div>
+            <div class="div4">
+                <div class="section-center">
+                    <!-- Conteudo a ser colocado -->
+                </div>
+            </div>
+            <button class="button-save" type="submit">Salvar</button>
+        </form>
+    </main>
+
+
+    <footer>
+        <div class="logo-footer">
+            <img src="../assets/IPJ_Logo_Login.jpg" alt="Logo Igreja Presbiteriana de Joinville">
+        </div>
+
+        <div class="social-footer">
+            <h2>Siga-nos</h2>
+            <div class="icons-social">
+                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-youtube"></ion-icon></a>
+            </div>
+        </div>
+
+        <div class="nav-footer">
+            <ul class="nav-links-footer">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Cadastro</a></li>
+                <li><a href="#">Relatórios</a></li>
+                <li><a href="#">Membros</a></li>
+            </ul>
+        </div>
+
+    </footer>
+
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="../scripts/CadastroMembro.js"></script>
+
+</html>
