@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software IPJ</title>
+    <link rel="stylesheet" href="../styles/SociedadeCadastrada.css">
+</head>
+<body>
+    <header>
+        <a href="#"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
+        <nav class="nav-header">
+            <a href="#">Home</a>
+            <a href="#">Cadastro</a>
+            <a href="#">Membros</a>
+            <a href="#">Relatórios</a>
+            <a href="#">Sociedades Internas</a>
+            <a href="#"><ion-icon name="exit-outline"></a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="banner">
+            <div class="banner-div-img">
+                <img src="../assets/UpaExemplo.png" alt="">
+            </div>
+            <div class="banner-div-texto">
+                <h1>União Presbiteriana de Adolescentes</h1>
+            </div>
+        </div>
+
+        <div class="pesquisa-div">
+            <div class="busca-div">
+                <input type="text" id="nome" placeholder="Digite o nome do membro...">
+                <ion-icon name="search-outline"></ion-icon>
+            </div>
+            <div class="adicionar-membro">
+                <button class="btn-add">
+                    Adicionar
+                </button>
+            </div>
+        </div>
+
+        <div class="div-membros-resultado">
+            <h2>Membros Cadastrados:</h2>
+            <div class="membros-cadastrados">
+                <div class="img-result">
+                    <img class="campo-foto-card" src="../assets/Ellipse.png" alt="">
+                </div>
+                    <div class="text-result-membro">
+                        <div class="text-icon">
+                            <h3> Nome membro</h3>
+                            <button class="remove-icon" type="submit">
+                                <ion-icon name="close-outline"></ion-icon>
+                            </button>
+                        </div>
+                        
+                        <div class="idade-membro">
+                            <h5>Idade:</h5>
+                            <h5>23</h5>
+                        </div>
+                    </div>
+            </div>
+            <div class="membros-cadastrados">
+                <div class="img-result">
+                    <img class="campo-foto-card" src="../assets/Ellipse.png" alt="">
+                </div>
+                    <div class="text-result-membro">
+                        <div class="text-icon">
+                            <h3> Nome membro</h3>
+                            <button class="remove-icon" type="submit">
+                                <ion-icon name="close-outline"></ion-icon>
+                            </button>
+                        </div>
+                        
+                        <div class="idade-membro">
+                            <h5>Idade:</h5>
+                            <h5>23</h5>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="logo-footer">
+            <img src="../assets/IPJ_Logo_Login.jpg" alt="Logo Igreja Presbiteriana de Joinville">
+        </div>
+
+        <div class="social-footer">
+            <h2>Siga-nos</h2>
+            <div class="icons-social">
+                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-youtube"></ion-icon></a>
+            </div>
+        </div>
+
+            <div class="nav-footer">
+                <ul class="nav-links-footer">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Cadastro</a></li>
+                    <li><a href="#">Relatórios</a></li>
+                    <li><a href="#">Membros</a></li>
+                </ul>
+            </div>
+
+    </footer>
+
+    
+    
+</body>
+<script src="../scripts/SociedadeCadastrada.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>

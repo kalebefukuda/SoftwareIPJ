@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Membro IPJ</title>
-    <link rel="stylesheet" href="../styles/CadastroMembro.css">
+    <link rel="stylesheet" href="../styles/Membro.css">
 </head>
 <body>
-
     <header>
         <a href="/home"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
         <nav class="nav-header">
@@ -20,6 +19,10 @@
         </nav>
     </header>
 
+    <div class="titulo-page">
+        <h1>Membros</h1>
+    </div>
+
     <main>
         <aside class="filter-section">
             <div class="text-filtro">
@@ -27,22 +30,64 @@
                 <h2>Filtros</h2>
             </div>
             <div class="filtros">
-                <div class="dado-nome">
+                <div class="dado-nome input-div">
                     <h3>Nome:</h3>
                     <input type="text" id="nome" placeholder="Digite o nome do membro...">
                 </div>
-                <div class="dado-telefone">
+                <div class="dado-telefone input-div">
                     <h3>Telefone:</h3>
                     <input type="tel" id="telefone" placeholder="Digite seu telefone...">
                 </div>
-                <div class="dado-telefone">
+                <div class="dado-telefone input-div">
                     <h3>Nome do pai:</h3>
-                    <input type="text" id="nome" placeholder="Digite o nome do pai...">
+                    <input type="text" id="nome-pai" placeholder="Digite o nome do pai...">
                 </div>
-                <div>
-                    <select name="" id=""></select>
+                <div class="input-div">
+                    <h3>Sexo:</h3>
+                    <select name="sexo" id="sexo">
+                        <option value="masculino">M</option>
+                        <option value="feminino" selected>F</option>
+                    </select>
+                </div>
+
+                <div class="input-div">
+                    <h3>Comungante:</h3>
+                    <select name="comungante" id="comungante">
+                        <option value="sim">Sim</option>
+                        <option value="nao" selected>Não</option>
+                    </select>
+                </div>
+                <div class="input-div div-button">
+                    <button class="button-filtro">Filtrar</button>
                 </div>
                 
+            </div>
+        </aside>
+
+        <aside class="result-section">
+            <div class="result-filtros">
+                <h2 class="titulo-resutado">
+                    Resultados Filtrados:
+                </h2>
+                <div class="card-result">
+                    <div class="img-result">
+                        <img class="campo-foto-card" src="../assets/Ellipse.png" alt="">
+                    </div>
+                        <div class="text-result-membro">
+                            <div class="text-icon">
+                                <h3> Nome membro</h3>
+                                <button class="edit-icon">
+                                    <ion-icon name="pencil-outline"></ion-icon>
+                                </button>
+                            </div>
+                            
+                            <div class="telefone-membro">
+                                <ion-icon name="phone-portrait-outline"></ion-icon>
+                                <h5>telefone membro</h5>
+                            </div>
+                        </div>
+                    
+                </div>
             </div>
         </aside>
     </main>
@@ -73,7 +118,7 @@
     </footer>
     
 </body>
-<script src="../scripts/CadastroMembro.js"></script>
+<script src="../scripts/Membro.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </html>
