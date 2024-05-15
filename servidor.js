@@ -40,6 +40,11 @@ app.get('/sociedades', (req, res) => {
   res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Sociedade.html'));
 });
 
+// Rota para página de cadastro de sociedades
+app.get('/cadastroSociedade', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'CadastroSociedade.html'));
+});
+
 // Configurando o servidor para escutar na porta 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

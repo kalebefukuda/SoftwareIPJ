@@ -36,3 +36,7 @@ app.get("/cadastro", function(req,res){
 app.get("/membros", function(req,res){
     res.sendFile(__dirname + "../app/views/pages/Membro.html")
 })
+
+app.get("/cadastroSociedade", function(req,res){
+    res.sendFile(__dirname + "../app/views/pages/CadastradoSociedade.html")
+})
