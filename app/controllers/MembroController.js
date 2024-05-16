@@ -19,6 +19,7 @@ const MembroController = {
             telefone,
             celular,
             foto_membro,
+            estado_civil
         } = await req.body;
 
             // Deserialização do JSON TODO ....
@@ -103,7 +104,8 @@ const MembroController = {
                 email,
                 telefone,
                 celular,
-                foto_membro
+                foto_membro,
+                estado_civil
             );
 
             // Uso da função criada no model

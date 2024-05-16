@@ -19,7 +19,6 @@ const connectDatabase = (callback) => {
             callback(err, null);
         } else {
             console.log('Conexão do pool obtida com sucesso');
-            // Configurações adicionais da conexão, se necessário
             callback(null, connection);
         }
     });

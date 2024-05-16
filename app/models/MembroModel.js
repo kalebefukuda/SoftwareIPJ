@@ -1,6 +1,6 @@
 import { connectDatabase } from '../../config/database.js';
 class Membro {
-    constructor(nome, comungante, data_nascimento, nome_pai, nome_mae, sexo, escolaridade, profissao, numero_de_rol, email, telefone, celular, foto_membro) {
+    constructor(nome, comungante, data_nascimento, nome_pai, nome_mae, sexo, escolaridade, profissao, numero_de_rol, email, telefone, celular, foto_membro,estado_civil) {
         this.nome = nome;
         this.comungante = comungante;
         this.data_nascimento = data_nascimento;
@@ -14,13 +14,14 @@ class Membro {
         this.telefone = telefone;
         this.celular = celular;
         this.foto_membro = foto_membro;
+        this.estado_civil = estado_civil;
     }
 
     static adicionarMembro(membro, callback) {
         connectDatabase((err, connection) => {
             if (err) {
                 callback(err, null);
-                console.error(error);
+                console.error(err);
                 return;
             }
     
