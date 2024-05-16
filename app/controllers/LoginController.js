@@ -1,29 +1,29 @@
 import connect from '../../config/Connection.js';
 
-const login = async (req, res) => {
-    // Extrair o login e senha do corpo da requisição
-    const { login, password } = req.body;
+let loginController = {};
 
+// Função de login
+loginController.login = async function(req, res) {
     try {
-        // Conectar ao banco de dados
+        const { usuario, senha } = req.body;
+
+        // Conectando ao banco de dados
         const con = await connect();
 
-        // Consultar o banco de dados para verificar as credenciais do usuário
-        const [rows] = await con.query('SELECT * FROM login WHERE usuario = ? AND senha = ?', [login, password]);
+        // Consultando o banco de dados para verificar as credenciais
+        const [rows] = await con.query('SELECT * FROM login WHERE usuario = ? AND senha = ?', [usuario, senha]);
 
-        // Verificar se o usuário foi encontrado
         if (rows.length > 0) {
-            // Se o usuário for encontrado, retornar um status 200 (OK) e uma mensagem de sucesso
-            res.status(200).json({ message: 'Login bem-sucedido' });
+            // Credenciais válidas
+            res.send({ status: 'success', message: 'Login realizado com sucesso!' });
         } else {
-            // Se as credenciais estiverem incorretas, retornar um status 401 (Unauthorized) e uma mensagem de erro
-            res.status(401).json({ error: 'Credenciais inválidas' });
+            // Credenciais inválidas
+            res.send({ status: 'error', message: 'Credenciais inválidas!' });
         }
-    } catch (error) {
-        // Se ocorrer um erro durante a consulta ao banco de dados, retornar um status 500 (Internal Server Error) e uma mensagem de erro
-        console.error('Erro durante o login:', error);
-        res.status(500).json({ error: 'Erro durante o login' });
+    } catch (e) {
+        console.log('Erro ao tentar fazer login', e);
+        res.status(500).send({ status: 'error', message: 'Erro ao tentar fazer login' });
     }
 };
 
-export { login };
+export { loginController };
