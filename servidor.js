@@ -32,6 +32,23 @@ server.get("/home", (req, res) => {
 });
 
 
+// Cadastro
+server.get("/cadastro", (req, res) => {
+    res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'CadastroMembro.html'));
+});
+
+
+// Relatorio
+server.get("/relatorios", (req, res) => {
+    res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Relatorio.html'));
+});
+
+
+//Membro
+server.get("/membros", (req, res) => {
+    res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Membro.html'));
+});
+
 //Sociedade Interna
 server.use("/sociedade-interna", sociedadeInternaRoutes);
 
