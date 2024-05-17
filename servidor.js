@@ -4,6 +4,9 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { router as sociedadeInternaRoutes } from './routes/rotaSociedadeInterna.js';
 import { router as loginRoutes } from './routes/rotaLogin.js';
+import { router as relatorioRoutes } from './routes/rotaRelatorio.js';
+import { router as cadastroRoutes } from './routes/rotaCadastro.js';
+import { router as membroRoutes } from './routes/rotaMembro.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,9 +34,22 @@ server.get("/home", (req, res) => {
     res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Home.html'));
 });
 
+//Cadastro 
+server.get("/cadastro", cadastroRoutes);
+
+//Membro
+server.get("/membros", membroRoutes);
+
+
+
+// Relatorios
+server.get("/relatorios", relatorioRoutes)
+
 
 //Sociedade Interna
-server.use("/sociedade-interna", sociedadeInternaRoutes);
+server.get("/sociedade-interna", sociedadeInternaRoutes)
+server.get("/sociedade-interna/inserir",sociedadeInternaRoutes)
+server.post("/sociedade-interna/inserir",sociedadeInternaRoutes)
 
 // Configurando o servidor 
 const PORT = process.env.PORT || 3000;

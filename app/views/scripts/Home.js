@@ -5,7 +5,7 @@ document.getElementById('verMembrosBtn').addEventListener('click', function() {
 });
 
 document.getElementById('sociedadesBtn').addEventListener('click', function(){
-    window.location.href = '/sociedades';
+    window.location.href = '/sociedade-interna';
 })
 
 document.getElementById('relatoriosBtn').addEventListener('click', function(){
