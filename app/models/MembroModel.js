@@ -30,14 +30,14 @@ class Membro {
                     callback(error, null);
                     console.error(error);
                 } else {
-                    callback(null, results);
+                    const novoMembroId = results.insertId;
+                    callback(null, novoMembroId); // Retorna o ID do novo membro
                 }
                 connection.release();
             });
         });
     }    
     
-
     static listarTodosMembros(callback) {
         connectDatabase((err, connection) => {
             if (err) {
@@ -46,12 +46,71 @@ class Membro {
             }
 
 
-            getDatabasePool.query('SELECT * FROM MEMBRO', (error, results) => {
+            connection.query('SELECT * FROM MEMBRO', (error, results) => {
                 if (error) {
                     callback(error, null);
                 } else {
                     callback(null, results);
-                    console.log(results);
+                }
+                connection.release();
+            });
+        });
+    }
+
+    static obterMembroPorId(id, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+    
+            connection.query('SELECT * FROM MEMBRO WHERE ID_MEMBRO = ?', id, (error, results) => {
+                if (error) {
+                    callback(error, null);
+                    console.error(error);
+                } else {
+                    if (results.length === 0) {
+                        callback(null, null); // Membro não encontrado
+                    } else {
+                        const membro = results[0];
+                        callback(null, membro);
+                    }
+                }
+                connection.release();
+            });
+        });
+    }    
+
+    static atualizarMembro(id, novosDados, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+    
+            connection.query('UPDATE MEMBRO SET ? WHERE ID_MEMBRO = ?', [novosDados, id], (error, results) => {
+                if (error) {
+                    callback(error, null);
+                } else {
+                    callback(null, results.affectedRows > 0); // Retorna true se a atualização foi bem-sucedida
+                }
+                connection.release();
+            });
+        });
+    }
+
+    static excluirMembro(id, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+    
+            connection.query('DELETE FROM MEMBRO WHERE ID_MEMBRO = ?', id, (error, results) => {
+                if (error) {
+                    callback(error, null);
+                } else {
+                    callback(null, results.affectedRows > 0); // Retorna true se a exclusão foi bem-sucedida
                 }
                 connection.release();
             });

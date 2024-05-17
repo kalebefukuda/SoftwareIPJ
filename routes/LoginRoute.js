@@ -1,12 +1,15 @@
-// import express from 'express';
-// import LoginController from '../app/controllers/LoginController.js';
+import express from 'express';
+import LoginController from '../app/controllers/LoginController.js';
 
-// const router = express.Router();
+const router = express.Router();
 
-// // Rota de login
-// router.post('/', LoginController.login);
+// Rota de login
+router.post('/', LoginController.login);
 
-// // Rota de logout (se aplicável)
-// router.post('/logout', LoginController.logout);
+// Rota de registro
+router.post('/register', LoginController.register);
 
-// export { router };
+// Rota de logout
+router.post('/logout', LoginController.logout);
+
+export { router };

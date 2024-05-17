@@ -1,7 +1,7 @@
-// import express from 'express';
-// import SociedadeInternaController from '../app/controllers/SociedadeInternaController.js';
+import express from 'express';
+//import SociedadeInternaController from '../app/controllers/SociedadeInternaController.js';
 
-// const router = express.Router();
+const router = express.Router();
 
 // // Listar todas as sociedades internas
 // router.get('/', SociedadeInternaController.listar);

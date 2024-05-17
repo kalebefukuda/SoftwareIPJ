@@ -1,5 +1,5 @@
 import express from 'express';
-import EleicaoDiaconoController from '../app/controllers/EleicaoDiaconoController.js';
+import EleicaoDiaconoController from '../app/controllers/EleiçãoDiaconoController.js';
 
 const router = express.Router();
 

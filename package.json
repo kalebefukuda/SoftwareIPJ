@@ -2,6 +2,8 @@
   "type": "module",
   "dependencies": {
     "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "fetch-blob": "^4.0.0",
     "moment": "^2.30.1",

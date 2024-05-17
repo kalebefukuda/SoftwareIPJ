@@ -1,4 +1,4 @@
-import Model from '../models/EndereçoModel';
+import Model from '../models/EndereçoModel.js';
 
 const EndereçoController = {
 

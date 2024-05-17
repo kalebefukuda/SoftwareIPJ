@@ -1,15 +1,18 @@
-import database from "mysql2";
+import mysql from 'mysql2';
+import dotenv from 'dotenv';
 
-// Configuração do banco de dados
+dotenv.config();
+
+// Configuração do banco de dados usando variáveis de ambiente
 const databaseConfig = {
-    host: 'localhost',
-    user: 'root',
-    database: 'SOFTWARE_IPJ'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME
 };
 
 // Criar um pool de conexões
-const pool = database.createPool(databaseConfig);
-
+const pool = mysql.createPool(databaseConfig);
 
 // Função que obtém uma conexão do pool e a passa para a função de retorno de chamada
 const connectDatabase = (callback) => {

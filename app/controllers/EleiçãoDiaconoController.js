@@ -1,4 +1,4 @@
-import EleicaoDiacono from '../models/EleicaoDiaconoModel.js';
+import EleicaoDiacono from '../models/EleiçãoDiaconoModel.js';
 
 const EleicaoDiaconoController = {
     inserirEleicaoDiacono: async (req, res) => {

@@ -1,5 +1,5 @@
 import express from 'express';
-import EleicaoPresbiteroController from '../app/controllers/EleicaoPresbiteroController.js';
+import EleicaoPresbiteroController from '../app/controllers/EleiçãoPresbiteroController.js';
 
 const router = express.Router();
 

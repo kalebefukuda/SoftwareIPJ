@@ -1,4 +1,4 @@
-import Model from '../models/MembroModel.js'
+import MembroModel from '../models/MembroModel.js'
 import moment from 'moment';
 
 
@@ -21,77 +21,8 @@ const MembroController = {
             foto_membro,
             estado_civil
         } = await req.body;
-
-            // Deserialização do JSON TODO ....
-            // Verificação de tipo de dados
-
-            //EsquecI que isso é javascript /;
-
-            // try
-            // {
-            //     if (typeof nome !== 'string') {
-            //         throw new Error('O nome do membro deve ser uma string.');
-            //     }
-
-            //     if (typeof comungante !== 'boolean') {
-            //         throw new Error('O status de comungante deve ser um booleano.');
-            //     }
-
-            //     if (VerificaData(data_nascimento)) {
-            //         throw new Error('A data de nascimento é inválida.');
-            //     }
-
-            //     if (typeof nome_pai !== 'string') {
-            //         throw new Error('O nome do pai deve ser uma string.');
-            //     }
-
-            //     if (typeof nome_mae !== 'string') {
-            //         throw new Error('O nome da mãe deve ser uma string.');
-            //     }
-
-            //     if (typeof sexo !== 'string') {
-            //         throw new Error('O sexo deve ser uma string.');
-            //     }
-
-            //     if (typeof escolaridade !== 'string') {
-            //         throw new Error('A escolaridade deve ser uma string.');
-            //     }
-
-            //     if (typeof profissao !== 'string') {
-            //         throw new Error('A profissão deve ser uma string.');
-            //     }
-
-            //     if (typeof numero_de_rol !== 'number') {
-            //         throw new Error('O número de rol deve ser um número.');
-            //     }
-
-            //     if (typeof email !== 'string') {
-            //         throw new Error('O email deve ser uma string.');
-            //     }
-
-            //     if (typeof telefone !== 'string') {
-            //         throw new Error('O telefone deve ser uma string.');
-            //     }
-
-            //     if (typeof celular !== 'string') {
-            //         throw new Error('O celular deve ser uma string.');
-            //     }
-
-            //     if (!isBinary(blob)) {
-            //         throw new Error('A foto do membro deve ser um objeto binário.');
-            //     }
-            // }catch(error)
-            // {
-            //     console.log(error);
-            // }
-    
-
-
-
-
-
             // Criação de novo objeto do model 
-            const novoMembro = new Model(
+            const novoMembro = new MembroModel(
                 nome,
                 comungante,
                 data_nascimento,
@@ -107,9 +38,8 @@ const MembroController = {
                 foto_membro,
                 estado_civil
             );
-
             // Uso da função criada no model
-            Model.adicionarMembro(novoMembro, (error, memberId) => {
+            MembroModel.adicionarMembro(novoMembro, (error, memberId) => {
                 if (error) {
                     res.status(500).json({ error: 'Erro ao inserir membro' });
                 } else {
@@ -119,15 +49,64 @@ const MembroController = {
     },
 
     listarTodosMembros:  async (req, res) => {
-        Model.listarTodosMembros((error, results) => {
+        MembroModel.listarTodosMembros((error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Erro na requisição dos membros' });
             } else {
-                const membros = results.map(row => new Model(row.id_membro, row.nome, row.comungante, row.data_nascimento, row.nome_pai, row.nome_mae, row.sexo, row.escolaridade, row.profissao, row.numero_de_rol, row.email, row.telefone, row.celular, row.foto_membro));
-                res.status(201).json({ message: 'Membros em json:', membros });
+                res.status(201).json({ message: 'Membros em json:', results: results });
             }
         });
     },
+
+    obterMembroPorId: async (req, res) => {
+        const memberId = req.params.id;
+    
+        MembroModel.obterMembroPorId(memberId, (err, membro) => {
+            if (err) {
+                res.status(500).json({ error: 'Erro ao buscar membro por ID' });
+            } else if (!membro) {
+                res.status(404).json({ message: 'Membro não encontrado' });
+            } else {
+                res.status(200).json({ membro });
+            }
+        });
+    },
+    
+
+    atualizarMembro: async (req, res) => {
+        const memberId = req.params.id;
+        const novosDadosMembro = req.body; // Dados atualizados do membro
+    
+        MembroModel.atualizarMembro(memberId, novosDadosMembro, (err, result) => {
+            if (err) {
+                res.status(500).json({ error: 'Erro ao atualizar membro' });
+            } else {
+                if (result) {
+                    res.status(200).json({ message: 'Membro atualizado com sucesso', LinesAffected: result });
+                } else {
+                    res.status(404).json({ message: 'Membro não encontrado' });
+                }
+            }
+        });
+    },
+
+    excluirMembro: async (req, res) => {
+        const memberId = req.params.id;
+    
+        MembroModel.excluirMembro(memberId, (err, result) => {
+            if (err) {
+                res.status(500).json({ error: 'Erro ao excluir membro' });
+            } else {
+                if (result) {
+                    res.status(200).json({ message: 'Membro excluído com sucesso' });
+                } else {
+                    res.status(404).json({ message: 'Membro não encontrado' });
+                }
+            }
+        });
+    },
+    
+    
 };
 
 

@@ -1,4 +1,4 @@
-import EleicaoPresbitero from '../models/EleicaoPresbiteroModel.js';
+import EleicaoPresbitero from '../models/EleiçãoPresbiterioModel.js';
 
 const EleicaoPresbiteroController = {
     inserirEleicaoPresbitero: async (req, res) => {
