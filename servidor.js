@@ -41,9 +41,14 @@ server.get("/cadastro", cadastroRoutes);
 server.get("/membros", membroRoutes);
 
 
-
 // Relatorios
 server.get("/relatorios", relatorioRoutes)
+
+
+// Cadastro
+server.get("/cadastro", (req, res) => {
+    res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'CadastroMembro.html'));
+});
 
 
 //Sociedade Interna
