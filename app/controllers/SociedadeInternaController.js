@@ -15,20 +15,22 @@ sociedadeInterna.all = async function(req,res){
 };
 
 // Create
-sociedadeInterna.create = async function(req,res){
+sociedadeInterna.create = async function(req, res) {
     try {
-        let sociedade = req.body
-        let sql = "INSERT INTO sociedade_interna (id_sociedade_interna ,nome_sociedade, foto_sociedade) VALUES (?,?,?);"
-        let values = [sociedade.id_sociedade_interna, sociedade.nome_sociedade, sociedade.foto_sociedade];
-        let result = await con.query(sql,values)
+        const { nome_sociedade, foto_sociedade } = req.body; // Extrair os dados do corpo da solicitação
 
-        res.send({
-            status: "inserção concluida",
-            result: result
-        });
+        // Preparar a consulta SQL e os valores
+        const sql = "INSERT INTO sociedade_interna (nome_sociedade, foto_sociedade) VALUES (?, ?);";
+        const values = [nome_sociedade, foto_sociedade];
 
-    } catch (e) {
-        console.log('Erro na inserção',e)
+        // Executar a consulta SQL
+        const result = await con.query(sql, values);
+
+        // Redirecionar de volta para a página de sociedade-interna após a inserção
+        res.redirect('/sociedade-interna');
+    } catch (error) {
+        console.log('Erro na inserção', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
     }
 }
 

@@ -8,8 +8,8 @@ const __dirname = dirname(__filename);
 
 let router = express.Router();
 
-router.get('/relatorios', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'Relatorio.html'));
+router.get('/cadastro', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'CadastroMembro.html'));
 });
 
 export {router}

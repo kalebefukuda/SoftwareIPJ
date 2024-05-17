@@ -1,37 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-/* header */
+
 * {
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
 }
-body{
+
+body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-main{
+main {
     display: flex;
-    flex: 1; /*ocupar todo espaço entre header e footer*/
-    margin: 15px 150px 15px 150px;
-    flex-wrap: wrap;
-    margin-top: 15px;
-    gap: 45px;
-    justify-content: flex-start;
+    flex: 1;
     flex-direction: column;
+    margin: 15px 150px;
+    gap: 45px;
+    justify-content: center;
+    align-items: center;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-h1{
+h1 {
     font-weight: 700;
     font-size: 40px;
 }
 
-header{
+header {
     display: flex;
     max-height: 149px;
     background-color: white;
@@ -42,28 +42,29 @@ header{
     margin-right: 30px;
 }
 
-.logo-ipb{
+.logo-ipb {
     width: 98px;
     height: 85px;
     margin-right: 10px;
 }
 
-.nav-header{
+.nav-header {
     font-size: 18px;
     display: flex;
     gap: 45px;
     margin-right: 10px;
 }
 
-.nav-header a{
+.nav-header a {
     color: #818181;
 }
 
-nav a ion-icon{
+nav a ion-icon {
     color: #015B40;
     font-size: 25px;
 }
-.titulo-page{
+
+.titulo-page {
     background-color: #015B40;
     display: flex;
     justify-content: center;
@@ -73,11 +74,19 @@ nav a ion-icon{
     margin-bottom: 25px;
 }
 
-.titulo-page h1{
+.titulo-page h1 {
     color: white;
 }
 
 /* main */
+
+#sociedadeForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
 
 .form {
     flex-direction: column;
@@ -100,7 +109,6 @@ nav a ion-icon{
     border-radius: 75%;
     margin: 20px auto;
     cursor: pointer;
-    /* margin-top: 60px; */
 }
 
 .titulo-form {
@@ -119,7 +127,7 @@ nav a ion-icon{
     box-sizing: border-box;
     padding: 10px 15px;
     width: 100%;
-    background-color:#E7E7E7;
+    background-color: #E7E7E7;
     font-size: 16px;
 }
 
@@ -142,7 +150,7 @@ nav a ion-icon{
     transition: background-color 0.3s ease;
 }
 
-.form-btn:hover{
+.form-btn:hover {
     background-color: #037955;
 }
 
@@ -156,8 +164,8 @@ footer {
     margin-top: 30px;
 }
 
-.logo-footer img{
-    position:relative;
+.logo-footer img {
+    position: relative;
     left: 55px;
     height: 292px;
     width: 310px;
@@ -170,7 +178,7 @@ footer {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: 40px; 
+    gap: 40px;
     color: white;
 }
 
@@ -186,19 +194,20 @@ footer {
     gap: 5px;
 }
 
-.nav-links-footer li a{
+.nav-links-footer li a {
     color: white;
     font-weight: 700;
     font-size: 23px;
     text-align: right;
 }
-.nav-footer{
+
+.nav-footer {
     display: flex;
     justify-content: center;
     align-self: center;
 }
 
-.icons-social ion-icon{
+.icons-social ion-icon {
     color: white;
     font-size: 25px;
     margin-right: 10px;
