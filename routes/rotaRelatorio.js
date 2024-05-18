@@ -38,6 +38,13 @@ router.get('/relatorios/lista-comungantes-sede', (req, res) => {
     res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaComunSede.html'));
 });
 
+router.get('/relatorios/lista-data-casamento', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaDataCasamento.html'));
+});
+
+router.get('/relatorios/lista-chamada-assembleia', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaChamadaAssembleia.html'));
+});
 
 
 router.get('/api/lista-aniversarios', async (req, res) => {
@@ -94,10 +101,30 @@ router.get('/api/lista-nao-comungantes-fem', async (req, res) => {
 
 router.get('/api/lista-comungantes-sede', async (req, res) => {
     try {
-        const ComunSede= await relatorioGeral.getListaComunSede();
-        res.json(ComunSede);
+        const comunSede= await relatorioGeral.getListaComunSede();
+        res.json(comunSede);
     } catch (e) {
         console.error('Erro ao obter lista comungantes sede', e);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
+router.get('/api/lista-data-casamento', async (req, res) => {
+    try {
+        const dataCasamento= await relatorioGeral.getListaDataCasamento();
+        res.json(dataCasamento);
+    } catch (e) {
+        console.error('Erro ao obter lista de data de casamento', e);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
+router.get('/api/lista-chamada-assembleia', async (req, res) => {
+    try {
+        const chamadaAssembleia= await relatorioGeral.getListaAssembleia();
+        res.json(chamadaAssembleia);
+    } catch (e) {
+        console.error('Erro ao obter lista de chamada de assembleia', e);
         res.status(500).json({ error: 'Erro interno do servidor' });
     }
 });

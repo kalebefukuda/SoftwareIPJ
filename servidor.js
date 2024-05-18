@@ -49,12 +49,17 @@ server.get("/relatorios/lista-comungantes-mas", relatorioRoutes)
 server.get("/relatorios/lista-nao-comungantes-fem", relatorioRoutes)
 server.get("/relatorios/lista-nao-comungantes-mas", relatorioRoutes)
 server.get("/relatorios/lista-comungantes-sede", relatorioRoutes)
+server.get("/relatorios/lista-data-casamento", relatorioRoutes)
+server.get("/relatorios/lista-chamada-assembleia", relatorioRoutes)
+
 server.get("/api/lista-aniversarios", relatorioRoutes)
 server.get("/api/lista-comungantes-fem", relatorioRoutes)
 server.get("/api/lista-comungantes-mas", relatorioRoutes)
 server.get("/api/lista-nao-comungantes-fem", relatorioRoutes)
 server.get("/api/lista-nao-comungantes-mas", relatorioRoutes)
 server.get("/api/lista-comungantes-sede", relatorioRoutes)
+server.get("/api/lista-data-casamento", relatorioRoutes)
+server.get("/api/lista-chamada-assembleia", relatorioRoutes)
 
 
 // Cadastro
