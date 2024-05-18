@@ -42,10 +42,10 @@ relatorioGeral.getListaComunFem = async function(req,res){
 
 relatorioGeral.getListaComunMas = async function(req,res){
     try {
-        let relatorio = await con.query("SELECT M.NOME, M.NUMERO_DE_ROL, M.DATA_NASCIMENTO, E.LOCAL_RESIDENCIA\
+        let relatorio = await con.query("SELECT m.nome, m.numero_de_rol, m.data_nascimento, e.local_residencia\
         FROM MEMBRO M\
         JOIN ENDERECO E ON M.ID_MEMBRO = E.ID_MEMBRO\
-        WHERE M.COMUNGANTE = TRUE\
+        WHERE M.COMUNGANTE = 1\
           AND M.SEXO = 'M';")
 
         res.send(relatorio)

@@ -22,6 +22,10 @@ router.get('/relatorios/lista-comungantes-fem', (req, res) => {
     res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaComunFem.html'));
 });
 
+router.get('/relatorios/lista-comungantes-mas', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaComunMas.html'));
+});
+
 
 
 router.get('/api/lista-aniversarios', async (req, res) => {
