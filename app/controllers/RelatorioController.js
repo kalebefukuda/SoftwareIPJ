@@ -85,4 +85,17 @@ relatorioGeral.getListaNaoComunMas = async function(req,res){
     }
 }
 
+relatorioGeral.getListaComunSede= async function(req,res){
+    try {
+        let relatorio = await con.query("SELECT m.nome, m.data_nascimento, m.numero_de_rol, e.local_residencia\
+                FROM membro m inner join endereco e on m.id_membro = e.id_membro\
+                WHERE m.comungante = 1 AND e.local_residencia = 'Sede';");
+
+          return relatorio[0];
+
+    } catch (e) {
+        console.log('Erro ao mostrar Lista de Nao Comungantes Masculino',e)
+    }
+}
+
 export {relatorioGeral}
