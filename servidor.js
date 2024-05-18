@@ -46,9 +46,13 @@ server.get("/relatorios", relatorioRoutes)
 server.get("/relatorios/lista-aniversarios", relatorioRoutes)
 server.get("/relatorios/lista-comungantes-fem", relatorioRoutes)
 server.get("/relatorios/lista-comungantes-mas", relatorioRoutes)
+server.get("/relatorios/lista-nao-comungantes-fem", relatorioRoutes)
+server.get("/relatorios/lista-nao-comungantes-mas", relatorioRoutes)
 server.get("/api/lista-aniversarios", relatorioRoutes)
 server.get("/api/lista-comungantes-fem", relatorioRoutes)
 server.get("/api/lista-comungantes-mas", relatorioRoutes)
+server.get("/api/lista-nao-comungantes-fem", relatorioRoutes)
+server.get("/api/lista-nao-comungantes-mas", relatorioRoutes)
 
 
 // Cadastro

@@ -26,6 +26,14 @@ router.get('/relatorios/lista-comungantes-mas', (req, res) => {
     res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaComunMas.html'));
 });
 
+router.get('/relatorios/lista-nao-comungantes-mas', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaNaoComunMas.html'));
+});
+
+router.get('/relatorios/lista-nao-comungantes-fem', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaNaoComunFem.html'));
+});
+
 
 
 router.get('/api/lista-aniversarios', async (req, res) => {
@@ -60,4 +68,23 @@ router.get('/api/lista-comungantes-mas', async (req, res) => {
     }
 });
 
+router.get('/api/lista-nao-comungantes-mas', async (req, res) => {
+    try {
+        const naoComunMas= await relatorioGeral.getListaNaoComunMas();
+        res.json(naoComunMas);
+    } catch (e) {
+        console.error('Erro ao obter lista de nao comungantes masculino', e);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
+router.get('/api/lista-nao-comungantes-fem', async (req, res) => {
+    try {
+        const naoComunFem= await relatorioGeral.getListaNaoComunFem();
+        res.json(naoComunFem);
+    } catch (e) {
+        console.error('Erro ao obter lista de nao comungantes feminino', e);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
 export {router}
