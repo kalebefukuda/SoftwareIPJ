@@ -98,4 +98,17 @@ relatorioGeral.getListaComunSede= async function(req,res){
     }
 }
 
+relatorioGeral.getListaDataCasamento= async function(req,res){
+    try {
+        // fazer query
+        let relatorio = await con.query(" ");
+
+          return relatorio[0];
+
+    } catch (e) {
+        console.log('Erro ao mostrar Lista de Nao Comungantes Masculino',e)
+    }
+}
+
+
 export {relatorioGeral}
