@@ -9,6 +9,7 @@ const __dirname = dirname(__filename);
 
 let router = express.Router();
 
+// Chamar arquivo
 router.get('/relatorios', (req, res) => {
     res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'Relatorio.html'));
 });
@@ -16,6 +17,16 @@ router.get('/relatorios', (req, res) => {
 router.get('/relatorios/lista-aniversarios', (req, res) => {
     res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaAniversario.html'));
 });
+
+router.get('/relatorios/lista-comungantes-fem', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaComunFem.html'));
+});
+
+router.get('/relatorios/lista-comungantes-mas', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaComunMas.html'));
+});
+
+
 
 router.get('/api/lista-aniversarios', async (req, res) => {
     try {
@@ -27,23 +38,19 @@ router.get('/api/lista-aniversarios', async (req, res) => {
     }
 });
 
-// fazer get lista assembleia
-
-router.get('/relatorios/lista-comungantes-fem', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaAniversario.html'));
-});
 
 router.get('/api/lista-comungantes-fem', async (req, res) => {
     try {
         const comunFem = await relatorioGeral.getListaComunFem();
+        console.log(comunFem);
         res.json(comunFem);
     } catch (e) {
-        console.error('Erro ao obter lista de comungantes femino', e);
+        console.error('Erro ao obter lista de comungantes feminino', e);
         res.status(500).json({ error: 'Erro interno do servidor' });
     }
 });
 
-router.get('/relatorios/lista-comungantes-mas', async (req, res) => {
+router.get('/api/lista-comungantes-mas', async (req, res) => {
     try {
         const comunMas= await relatorioGeral.getListaComunMas();
         res.json(comunMas);
