@@ -43,6 +43,8 @@ server.get("/membros", membroRoutes);
 
 // Relatorios
 server.get("/relatorios", relatorioRoutes)
+server.get("/relatorios/lista-aniversarios", relatorioRoutes)
+server.get("/api/lista-aniversarios", relatorioRoutes)
 
 
 // Cadastro
