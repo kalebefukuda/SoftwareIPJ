@@ -50,7 +50,7 @@ router.get('/api/lista-comungantes-fem', async (req, res) => {
     }
 });
 
-router.get('/relatorios/lista-comungantes-mas', async (req, res) => {
+router.get('/api/lista-comungantes-mas', async (req, res) => {
     try {
         const comunMas= await relatorioGeral.getListaComunMas();
         res.json(comunMas);

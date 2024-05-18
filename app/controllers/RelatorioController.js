@@ -48,7 +48,7 @@ relatorioGeral.getListaComunMas = async function(req,res){
         WHERE M.COMUNGANTE = 1\
           AND M.SEXO = 'M';")
 
-        res.send(relatorio)
+          return relatorio[0];
 
     } catch (e) {
         console.log('Erro ao mostrar Lista Comungantes Masculino',e)
@@ -56,4 +56,3 @@ relatorioGeral.getListaComunMas = async function(req,res){
 }
 
 export {relatorioGeral}
-
