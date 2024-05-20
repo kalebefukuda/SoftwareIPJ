@@ -70,8 +70,9 @@ server.get("/cadastro", (req, res) => {
 
 //Sociedade Interna
 server.get("/sociedade-interna", sociedadeInternaRoutes)
-server.get("/sociedade-interna/inserir",sociedadeInternaRoutes)
-server.post("/sociedade-interna/inserir",sociedadeInternaRoutes)
+server.get("/sociedade-interna/cadastro",sociedadeInternaRoutes)
+server.get("/api/sociedade-interna",sociedadeInternaRoutes)
+server.post("/api/cadastro-sociedade",sociedadeInternaRoutes)
 
 // Configurando o servidor 
 const PORT = process.env.PORT || 3000;
