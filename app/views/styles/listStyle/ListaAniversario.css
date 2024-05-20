@@ -55,6 +55,20 @@ nav a ion-icon{
     font-size: 25px;
 }
 
+.titulo-page {
+    background-color: #015B40;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.titulo-page h1 {
+    color: white;
+}
+
 body{
     display: flex;
     flex-direction: column;
