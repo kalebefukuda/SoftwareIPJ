@@ -1,5 +1,5 @@
 document.getElementById('newSociedade').addEventListener('click', function() {
-    window.location.href = '/sociedade-interna/inserir';
+    window.location.href = '/sociedade-interna/cadastro';
 });
 
 // document.addEventListener('DOMContentLoaded', function() {
@@ -13,39 +13,31 @@ document.getElementById('newSociedade').addEventListener('click', function() {
 // });
 
 // Função para buscar e exibir sociedades internas
-async function carregarSociedades() {
-    const response = await fetch('/sociedade-interna');
-    const sociedades = await response.json();
+    // Função para buscar e renderizar as sociedades
+    async function fetchSociedades() {
+        try {
+            const response = await fetch('/api/sociedade-interna');
+            const sociedades = await response.json();
+            const container = document.getElementById('sociedades-container');
+            console.log(sociedades)
 
-    const container = document.getElementById('sociedades-container');
+            sociedades.forEach(sociedade => {
+                const div = document.createElement('div');
+                div.className = 'sociedade card card-sociedade-cadastrada';
+                div.innerHTML = `
+                    <div class="campo-img">
+                        <img class="campo-foto-card" src="${sociedade.FOTO_SOCIEDADE}" alt="">
+                        <img class="campo-foto-card-white" src="../assets/Ellipse white.png" alt="">
+                    </div>
+                    <div class="text-card text-sociedade-cadastrada">
+                        <h2>${sociedade.NOME_SOCIEDADE}</h2>
+                    </div>`;
+                container.appendChild(div);
+            });
+        } catch (error) {
+            console.error('Erro ao buscar sociedades:', error);
+        }
+    }
 
-    sociedades.forEach(sociedade => {
-        const card = document.createElement('div');
-        card.classList.add('sociedade', 'card');
-
-        const campoImg = document.createElement('div');
-        campoImg.classList.add('campo-img');
-
-        const foto = document.createElement('img');
-        foto.classList.add('campo-foto-card');
-        foto.src = sociedade.foto_sociedade || '../assets/default-image.jpg'; // Se não houver foto, use uma imagem padrão
-        foto.alt = sociedade.nome_sociedade;
-
-        const texto = document.createElement('div');
-        texto.classList.add('text-card');
-
-        const nome = document.createElement('h2');
-        nome.textContent = sociedade.nome_sociedade;
-
-        texto.appendChild(nome);
-        campoImg.appendChild(foto);
-
-        card.appendChild(campoImg);
-        card.appendChild(texto);
-
-        container.appendChild(card);
-    });
-}
-
-// Chamar a função para carregar as sociedades quando a página carregar
-window.addEventListener('load', carregarSociedades);
+    // Chama a função quando a página é carregada
+    window.onload = fetchSociedades;

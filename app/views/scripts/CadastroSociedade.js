@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
             nome_sociedade: nomeSociedade
         };
 
-        fetch('/sociedade-interna/inserir', {
+        fetch('/api/cadastro-sociedade', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

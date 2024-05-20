@@ -9,25 +9,29 @@ const __dirname = dirname(__filename);
 
 let router = express.Router();
 
-router.get('/sociedade-interna', async (req, res) => {
-    try {
-        const sociedades = await sociedadeInterna.all();
-        res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'Sociedade.html'));
-    } catch (error) {
-        console.error('Erro ao carregar a página da sociedade:', error);
-        res.status(500).send('Erro interno do servidor');
-    }
+router.get('/sociedade-interna', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'Sociedade.html'));
 });
 
-router.get('/sociedade-interna/inserir', (req, res) => {
+router.get('/sociedade-interna/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'CadastroSociedade.html'));
 });
 
-router.post('/sociedade-interna/inserir', async (req, res) => {
+router.get('/api/sociedade-interna', async (req, res) => {
+    try {
+        const sociedades = await sociedadeInterna.all();
+        res.json(sociedades);
+    } catch (error) {
+        console.error('Erro ao buscar sociedades:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+});
+
+router.post('/api/cadastro-sociedade', async (req, res) => {
     try {
         const result = await sociedadeInterna.create(req, res);
         console.log('Sociedade inserida');
-        res.status(201).json({ ok:true, message: 'Sociedade inserida com sucesso', data: result });
+        res.json( result );
     } catch (error) {
         
         console.error('Erro ao inserir sociedade:', error);
