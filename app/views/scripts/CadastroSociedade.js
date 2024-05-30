@@ -43,4 +43,42 @@ document.addEventListener("DOMContentLoaded", function () {
             alert('Erro ao enviar dados: ' + error.message);
         });
     });
+
+    // Captura o elemento input file para visualizar a foto
+    const inputFile = document.getElementById('upload-file');
+
+    inputFile.addEventListener('change', function () {
+        // Verifica se um arquivo foi selecionado
+        if (inputFile.files && inputFile.files[0]) {
+            // Cria um objeto URL para o arquivo selecionado
+            const reader = new FileReader();
+
+            // Define o evento onload para carregar a imagem selecionada
+            reader.onload = function (e) {
+                // Remove a imagem atual, se houver
+                const currentImage = document.querySelector('.image-icon');
+                if (currentImage) {
+                    currentImage.remove();
+                }
+
+                // Cria um elemento de imagem
+                const imgElement = document.createElement('img');
+
+                // Define o src da imagem como o URL do arquivo selecionado
+                imgElement.src = e.target.result;
+
+                // Define as classes da imagem
+                imgElement.classList.add('image-icon');
+                imgElement.classList.add('selected-image');
+
+                // Adiciona a imagem como filho da div icon-container
+                const iconContainer = document.querySelector('.photo');
+                iconContainer.innerHTML = ''; // Limpa qualquer conteúdo existente na div
+                iconContainer.appendChild(imgElement);
+            };
+
+            // Lê o arquivo como uma URL de dados
+            reader.readAsDataURL(inputFile.files[0]);
+        }
+    });
 });

@@ -23,9 +23,23 @@
     </div>
 
     <main>
-        <div class="select-photo">
+        <form class="select-photo">
+            <div class="select-photo" id="select-photo">
+                <input type="file" id="upload-file" style="display: none;" accept="image/*" tabindex="-1"
+                    autocomplete="off">
+                <label for="upload-file">
+                    <div class="icon-container">
+                        <div class="photo">
+                            <img src="../assets/Insira sua foto.png" class="image-icon" alt="Image icon">
+                        </div>
+                        <img src="../assets/camera.svg" class="camera-icon" alt="Camera icon">
+                    </div>
+                </label>
+            </div>
+        </form>
+        <!-- <div class="select-photo">
             <img src="../assets/image2.svg" alt="Image icon">
-        </div>
+        </div> -->
         <div class="form-container">
             <p class="titulo-form">Nome da sociedade:</p>
             <form class="form">
