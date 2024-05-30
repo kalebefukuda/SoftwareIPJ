@@ -4,7 +4,9 @@
 
 <h3 align="center">Projeto Software IPJ</h3>
 
-![Logo do Projeto](app/views/assets/imgProjeto.png)
+<p align="center">
+  <img src="app/views/assets/imgProjeto.png" alt="Home do Projeto">
+</p>
 
 
 <!-- ABOUT THE PROJECT -->
@@ -13,10 +15,7 @@
 Esse projeto está sendo realizado para a Igreja Presbiteriana de Joinville, com o fim principal de controle de membros da igreja.
 
 
-
-
-### Contruído com:
-
+### Construído com:
 
 
 <img align= "center" alt= "HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
@@ -55,6 +54,9 @@ Para rodar iniciar o projeto, execute o comando:
   ```sh
   npm start
   ```
+
+### Lembrando:
+Os inserts de membros estão ainda sendo feitos manuais diretos do banco, a função de cadastro de membro ainda não está funcionando.
 
 <!-- LICENSE -->
 ## Licença
