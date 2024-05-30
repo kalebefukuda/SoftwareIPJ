@@ -23,28 +23,15 @@
     </div>
 
     <main>
-        <form class="select-photo">
-            <div class="select-photo" id="select-photo">
-                <input type="file" id="upload-file" style="display: none;" accept="image/*" tabindex="-1"
-                    autocomplete="off">
-                <label for="upload-file">
-                    <div class="icon-container">
-                        <div class="photo">
-                            <img src="../assets/Insira sua foto.png" class="image-icon" alt="Image icon">
-                        </div>
-                        <img src="../assets/camera.svg" class="camera-icon" alt="Camera icon">
-                    </div>
-                </label>
-            </div>
-        </form>
-        <!-- <div class="select-photo">
-            <img src="../assets/image2.svg" alt="Image icon">
-        </div> -->
+        <input type="file" id="foto-sociedade" class="input-foto-sociedade" accept="image/*" style="display: none;">
+        <label for="foto-sociedade" class="select-photo">
+            <img src="../assets/ImgCadastroSoci.svg" alt="Image icon">
+        </label>
         <div class="form-container">
             <p class="titulo-form">Nome da sociedade:</p>
-            <form class="form">
-                <input type="text" class="input-name-sociedade" placeholder="Digite o nome">
-                <button type="submit" class="form-btn">Cadastrar</button>
+            <form class="form" enctype="multipart/form-data">
+                <input type="text" class="input-name-sociedade" name="nome_sociedade" placeholder="Digite o nome">
+                <button type="submit" class="form-btn">Cadastrar</button> 
             </form>
         </div>
     </main>
