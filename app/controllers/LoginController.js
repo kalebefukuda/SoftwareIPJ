@@ -1,4 +1,4 @@
-import connect from '../../config/Connection.js';
+import connect from '../../config/Connection.js'
 
 let loginController = {};
 
