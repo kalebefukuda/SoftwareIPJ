@@ -13,6 +13,7 @@ body{
 
 main{
     display: flex;
+    flex: 1;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 15px;
@@ -114,6 +115,7 @@ nav a ion-icon{
 .campo-foto-card{
     width: 100px;
     height: 100px;
+    border-radius: 50%;
 }
 
 .campo-foto-card-white{

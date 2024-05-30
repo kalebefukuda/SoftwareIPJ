@@ -29,18 +29,29 @@ router.get('/api/sociedade-interna', async (req, res) => {
 
 router.post('/api/cadastro-sociedade', async (req, res) => {
     try {
-        const result = await sociedadeInterna.create(req, res);
-        console.log('Sociedade inserida');
-        res.json( result );
+        await sociedadeInterna.create(req, res);
     } catch (error) {
-        
         console.error('Erro ao inserir sociedade:', error);
         res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
     }
 });
 
-router.put('/sociedade-interna/:id_sociedade_interna', sociedadeInterna.update);
+router.put('/sociedade-interna/:id_sociedade_interna', async (req, res) => {
+    try {
+        await sociedadeInterna.update(req, res);
+    } catch (error) {
+        console.error('Erro ao atualizar sociedade:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+});
 
-router.delete('/sociedade-interna/:id_sociedade_interna', sociedadeInterna.delete);
+router.delete('/sociedade-interna/:id_sociedade_interna', async (req, res) => {
+    try {
+        await sociedadeInterna.delete(req, res);
+    } catch (error) {
+        console.error('Erro ao deletar sociedade:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+});
 
 export { router };

@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import fileUpload from 'express-fileupload';
 import { router as sociedadeInternaRoutes } from './routes/rotaSociedadeInterna.js';
 import { router as loginRoutes } from './routes/rotaLogin.js';
 import { router as relatorioRoutes } from './routes/rotaRelatorio.js';
@@ -11,6 +12,9 @@ import { router as membroRoutes } from './routes/rotaMembro.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const server = express();
+
+// habilitar o fileUpload
+server.use(fileUpload());
 
 
 // tratar requisições JSON

@@ -21,6 +21,7 @@ import mysql from "mysql2/promise";
 const databaseConfig = {
     host: 'localhost',
     user: 'root',
+    password: "1234",
     database: 'SOFTWARE_IPJ'
 };
 
