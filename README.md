@@ -22,7 +22,11 @@ Esse projeto está sendo realizado para a Igreja Presbiteriana de Joinville, com
     <img align= "center" alt= "CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
     <img align= "center" alt= "Java Script" src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E">
 
-
+### Alunos:
+* Kalebe Fukuda de Oliveira
+* João Paulo Duarte
+* Hélio Costa
+* Vinicius Zanatta
 
 
 <!-- GETTING STARTED -->
