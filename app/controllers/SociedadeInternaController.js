@@ -6,8 +6,8 @@ let sociedadeInterna = {}
 // Listar sociedades
 sociedadeInterna.all = async function(req,res){
     try {
-        let sociedade = await con.query('SELECT * FROM sociedade_interna;')
-        res.send(sociedade)
+        let [sociedade] = await con.query('SELECT * FROM sociedade_interna;')
+        return sociedade;
 
     } catch (e) {
         console.log('Erro ao mostrar sociedades',e)
