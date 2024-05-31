@@ -66,6 +66,13 @@ Altere os dados de conexão de acordo com a sua conexão local, no arquivo:
 config/Connection.js
   ```
 
+### Login e Senha
+
+  ```sh
+login: ipj
+senha: ipj
+  ```
+
 ### Para startar:
 
 Execute o comando abaixo em seu terminal:
