@@ -10,6 +10,9 @@
     "readline-sync": "^1.4.10"
   },
   "scripts": {
-    "start": "node servidor.js"
+    "start": "nodemon servidor.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.2"
   }
 }
