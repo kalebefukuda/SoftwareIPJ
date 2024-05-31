@@ -20,6 +20,7 @@ import mysql from "mysql2/promise";
 // Configuração do banco de dados
 const databaseConfig = {
     host: 'localhost',
+    password: 'jpdx1906',
     user: 'root',
     database: 'SOFTWARE_IPJ'
 };
