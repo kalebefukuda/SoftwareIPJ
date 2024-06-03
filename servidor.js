@@ -10,6 +10,10 @@ import { router as enderecoRoutes } from './routes/EndereçoRoute.js';
 import { router as eleicaoDiaconoRoutes } from './routes/EleiçãoDiaconoRoute.js';
 import { router as eleicaoPresbiteroRoutes } from './routes/EleiçãoPresbiteroRoute.js';
 import { router as batismoRoutes } from './routes/BatismoRoute.js';
+import { router as admissaoRoutes } from './routes/AdmissãoRoute.js';
+import { router as demissaoRoutes } from './routes/DemissãoRoute.js';
+import { router as profissaodeFeRoutes } from './routes/ProfissãoDeFéRoute.js';
+
 
 
 
@@ -34,6 +38,11 @@ server.use('/endereco', enderecoRoutes);
 server.use('/eleicao-diacono', eleicaoDiaconoRoutes);
 server.use('/eleicao-presbitero', eleicaoPresbiteroRoutes);
 server.use('/batismo', batismoRoutes);
+server.use('/admissao', admissaoRoutes);
+server.use('/demissao', demissaoRoutes);
+server.use('/profissao-de-fe', profissaodeFeRoutes);
+
+
 
 // Configurar o servidor
 const PORT = process.env.PORT || 3000;

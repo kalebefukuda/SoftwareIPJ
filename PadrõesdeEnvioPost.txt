@@ -1,1 +1,19 @@
- 
+Para Membros:
+{
+        "nome": "Louio",
+        "comungante": true,
+        "data_nascimento": "1990-01-01",
+        "nome_pai": "José",
+        "nome_mae": "Maria",
+        "sexo": "M",
+        "escolaridade": "Ensino Médio",
+        "profissao": "Engenheiro",
+        "numero_de_rol": 12345,
+        "email": "joao@example.com",
+        "telefone": "1234567890",
+        "celular": "987654321",
+        "foto_membro": "file:///C:/Users/vinic/OneDrive/%C3%81rea%20de%20Trabalho/photo.webp",
+        "estado_civil": "Casado"
+}
+
+Para Endereço:
