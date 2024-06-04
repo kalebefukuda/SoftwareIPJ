@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-//import { router as sociedadeInternaRoutes } from './routes/SociedadeInternaRoute.js';
+
+
 import { router as loginRoutes } from './routes/LoginRoute.js';
 import { router as membroRoutes } from './routes/MembroRoute.js';
 import { router as enderecoRoutes } from './routes/EndereçoRoute.js';
@@ -13,6 +14,8 @@ import { router as batismoRoutes } from './routes/BatismoRoute.js';
 import { router as admissaoRoutes } from './routes/AdmissãoRoute.js';
 import { router as demissaoRoutes } from './routes/DemissãoRoute.js';
 import { router as profissaodeFeRoutes } from './routes/ProfissãoDeFéRoute.js';
+import { router as RolSeparadoRoutes } from './routes/RolSeparadoRoute.js';
+import { router as SociedadeInternaRoutes } from './routes/SociedadeInternaRoute.js';
 
 
 
@@ -31,7 +34,6 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.static(path.join(__dirname, 'app', 'views')));
 
 // Configurar rotas
-//server.use('/sociedade-interna', sociedadeInternaRoutes);
 server.use('/login', loginRoutes);
 server.use('/membro', membroRoutes);
 server.use('/endereco', enderecoRoutes);
@@ -41,7 +43,8 @@ server.use('/batismo', batismoRoutes);
 server.use('/admissao', admissaoRoutes);
 server.use('/demissao', demissaoRoutes);
 server.use('/profissao-de-fe', profissaodeFeRoutes);
-
+server.use('/rol-separado', RolSeparadoRoutes);
+server.use('/rol-separado', SociedadeInternaRoutes);
 
 
 // Configurar o servidor

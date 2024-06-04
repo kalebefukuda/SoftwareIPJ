@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
 
 // Obter um membro específico
 router.get('/:id', (req, res) => {
-    MembroController.obterMembroPorId(req,res); //TODO buscar por id
+    MembroController.obterMembroPorId(req,res);
 });
 
 // Atualizar um membro existente

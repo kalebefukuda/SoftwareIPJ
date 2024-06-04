@@ -5,27 +5,27 @@ const router = express.Router();
 
 //
 router.post('/', (req, res) => {
-    ProfissaodeFeController.inserirProfissaoDeFe(req,res);
+    RolSeparadoController.inserirRolSeparado(req,res);
 });
 
 //
 router.get('/', (req,res) => {
-    ProfissaodeFeController.listarTodasProfissoesDeFe(req,res);
+    RolSeparadoController.listarTodosRolSeparado(req,res);
 })
 
 //
 router.get('/:id', (req, res) => {
-    ProfissaodeFeController.obterProfissaoDeFePorId(req,res);
+    RolSeparadoController.obterRolSeparadoPorId(req,res);
 });
 
 //
 router.put('/:id', (req,res) => {
-    ProfissaodeFeController.atualizarProfissaoDeFe(req,res);
+    RolSeparadoController.atualizarRolSeparado(req,res);
 });
 
 //
 router.delete('/:id', (req, res) => {
-    ProfissaodeFeController.excluirProfissaoDeFe(req,res);
+    RolSeparadoController.excluirRolSeparado(req,res);
 });
 
 
