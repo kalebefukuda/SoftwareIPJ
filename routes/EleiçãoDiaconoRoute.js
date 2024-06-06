@@ -7,21 +7,25 @@ router.post('/', (req,res) =>{
     EleicaoDiaconoController.inserirEleicaoDiacono(req,res);
 });
 
+// Listar todas as eleições de diácono
+router.get('/', (req,res) => {
+    EleicaoDiaconoController.listarTodasEleicoes(req,res);
+});
 
-//TODO
+// Obter uma eleição de diácono específica
+router.get('/:id', (req,res) => {
+    EleicaoDiaconoController.obterEleicaoDiaconoPorId(req,res);
+});
 
-// // Listar todas as eleições de diácono
-// router.get('/', EleicaoDiaconoController.listar);
 
-// // Obter uma eleição de diácono específica
-// router.get('/:id', EleicaoDiaconoController.obter);
+// Atualizar uma eleição de diácono existente
+router.put('/:id', (req,res) => {
+    EleicaoDiaconoController.atualizarEleicaoDiacono(req,res);
+});
 
-// // Criar uma nova eleição de diácono
-
-// // Atualizar uma eleição de diácono existente
-// router.put('/:id', EleicaoDiaconoController.atualizar);
-
-// // Excluir uma eleição de diácono
-// router.delete('/:id', EleicaoDiaconoController.excluir);
+// Excluir uma eleição de diácono
+router.delete('/:id', (req,res) => {
+    EleicaoDiaconoController.excluirEleicaoDiacono(req,res);
+});
 
 export { router };

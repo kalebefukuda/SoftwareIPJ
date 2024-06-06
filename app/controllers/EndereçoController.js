@@ -49,7 +49,7 @@ const EnderecoController = {
     },
 
     obterEnderecoPorId: async (req, res) => {
-        const id = req.params.id; 
+        const id = req.params.id;
         const porMembro = req.query.porMembro === 'true';  // Verifica se o parâmetro porMembro é 'true'
     
         EnderecoModel.obterEnderecoPorId(id, porMembro, (error, endereco) => {
@@ -65,10 +65,10 @@ const EnderecoController = {
     
 
     atualizarEndereco: async (req, res) => {
-        const id = req.params;
+        const enderecoId = req.params.id;
         const novosDados = req.body;
 
-        EnderecoModel.atualizarEndereco(id, novosDados, (error, result) => {
+        EnderecoModel.atualizarEndereco(enderecoId, novosDados, (error, result) => {
             if (error) {
                 res.status(500).json({ error: 'Erro ao atualizar endereço' });
             } else {
@@ -82,7 +82,7 @@ const EnderecoController = {
     },
 
     excluirEndereco: async (req, res) => {
-        const id = req.params;
+        const id = req.params.id;
 
         EnderecoModel.excluirEndereco(id, (error, result) => {
             if (error) {

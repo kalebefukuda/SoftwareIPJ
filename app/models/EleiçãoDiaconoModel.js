@@ -1,8 +1,7 @@
 import { connectDatabase } from '../../config/database.js';
 
 class EleicaoDiacono {
-    constructor(id_eleicao_diacono, data_eleicao, reeleicao_1, reeleicao_2, reeleicao_3, reeleicao_4,id_membro) {
-        this.id_eleicao_diacono = id_eleicao_diacono;
+    constructor(data_eleicao, reeleicao_1, reeleicao_2, reeleicao_3, reeleicao_4, id_membro) {
         this.data_eleicao = data_eleicao;
         this.reeleicao_1 = reeleicao_1;
         this.reeleicao_2 = reeleicao_2;
@@ -43,6 +42,62 @@ class EleicaoDiacono {
                     callback(error, null);
                 } else {
                     callback(null, results);
+                }
+                connection.release();
+            });
+        });
+    }
+
+    static obterEleicaoDiaconoPorId(id, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            connection.query('SELECT * FROM ELEICAO_DIACONO WHERE ID_ELEICAO_DIACONO = ?', [id], (error, results) => {
+                if (error) {
+                    callback(error, null);
+                } else {
+                    callback(null, results[0]);
+                }
+                connection.release();
+            });
+        });
+    }
+
+    static atualizarEleicaoDiacono(id, novosDados, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            connection.query('UPDATE ELEICAO_DIACONO SET ? WHERE ID_ELEICAO_DIACONO = ?', [novosDados, id], (error, results) => {
+                if (error) {
+                    callback(error, null);
+                    console.error(error);
+                } else {
+                    callback(null, results.affectedRows > 0);
+                }
+                connection.release();
+            });
+        });
+    }
+
+    static excluirEleicaoDiacono(id, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            connection.query('DELETE FROM ELEICAO_DIACONO WHERE ID_ELEICAO_DIACONO = ?', [id], (error, results) => {
+                if (error) {
+                    callback(error, null);
+                    console.error(error);
+                } else {
+                    callback(null, results.affectedRows > 0);
                 }
                 connection.release();
             });

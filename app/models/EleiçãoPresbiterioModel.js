@@ -47,6 +47,64 @@ class EleicaoPresbitero {
             });
         });
     }
+
+    static obterEleicaoPresbiteroPorId(id, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            connection.query('SELECT * FROM ELEICAO_PRESBITERO WHERE id_membro = ?', [id], (error, results) => {
+                if (error) {
+                    callback(error, null);
+                } else {
+                    if (results.length === 0) {
+                        callback(null, null);
+                    } else {
+                        callback(null, results[0]);
+                    }
+                }
+                connection.release();
+            });
+        });
+    }
+
+    static excluirEleicaoPresbitero(id, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            connection.query('DELETE FROM ELEICAO_PRESBITERO WHERE id_membro = ?', [id], (error, results) => {
+                if (error) {
+                    callback(error, null);
+                } else {
+                    callback(null, results.affectedRows > 0);
+                }
+                connection.release();
+            });
+        });
+    }
+
+    static atualizarEleicaoPresbitero(id, novosDados, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            connection.query('UPDATE ELEICAO_PRESBITERO SET ? WHERE id_membro = ?', [novosDados, id], (error, results) => {
+                if (error) {
+                    callback(error, null);
+                } else {
+                    callback(null, results.affectedRows > 0);
+                }
+                connection.release();
+            });
+        });
+    }
 }
 
 export default EleicaoPresbitero;

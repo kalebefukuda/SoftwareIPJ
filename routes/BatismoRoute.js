@@ -5,22 +5,26 @@ const router = express.Router();
 
 // Criar um novo batismo
 router.post('/', (req,res) =>{
-    BatismoController.inserirBatismo(req,res);
+    BatismoController.adicionarBatismo(req,res);
+});
+// Listar todos os batismos
+router.get('/', (req,res) => {
+    BatismoController.listarTodosBatismos(req,res);
 });
 
-//TODO
+// Obter um batismo específico
+router.get('/:id', (req,res) => {
+    BatismoController.obterBatismoPorId(req,res);
+});
 
-// // Listar todos os batismos
-// router.get('/', BatismoController.listar);
+// Atualizar um batismo existente
+router.put('/:id', (req,res) => {
+    BatismoController.atualizarBatismo(req,res);
+});
 
-// // Obter um batismo específico
-// router.get('/:id', BatismoController.obter);
-
-
-// // Atualizar um batismo existente
-// router.put('/:id', BatismoController.atualizar);
-
-// // Excluir um batismo
-// router.delete('/:id', BatismoController.excluir);
+// Excluir um batismo
+router.delete('/:id', (req,res) => {
+    BatismoController.excluirBatismo(req,res);
+});
 
 export { router };

@@ -44,6 +44,66 @@ class Batismo {
             });
         });
     }
+
+    static obterBatismoPorId(id, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            connection.query('SELECT * FROM BATISMO WHERE id_batismo = ?', [id], (error, results) => {
+                if (error) {
+                    callback(error, null);
+                } else {
+                    if (results.length === 0) {
+                        callback(null, null);
+                    } else {
+                        callback(null, results[0]);
+                    }
+                }
+                connection.release();
+            });
+        });
+    }
+
+    static atualizarBatismo(id, novosDados, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            connection.query('UPDATE BATISMO SET ? WHERE id_batismo = ?', [novosDados, id], (error, results) => {
+                if (error) {
+                    callback(error, null);
+                    console.error(error);
+                } else {
+                    callback(null, results.affectedRows > 0);
+                }
+                connection.release();
+            });
+        });
+    }
+
+    static excluirBatismo(id, callback) {
+        connectDatabase((err, connection) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            connection.query('DELETE FROM BATISMO WHERE id_batismo = ?', [id], (error, results) => {
+                if (error) {
+                    callback(error, null);
+                    console.error(error);
+                } else {
+                    callback(null, results.affectedRows > 0);
+                }
+                connection.release();
+            });
+        });
+    }
 }
 
 export default Batismo;

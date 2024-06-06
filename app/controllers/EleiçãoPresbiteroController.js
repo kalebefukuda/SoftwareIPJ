@@ -30,6 +30,49 @@ const EleicaoPresbiteroController = {
                 res.status(200).json(results);
             }
         });
+    },
+
+    obterEleicaoPresbiteroPorId: (req, res) => {
+        const id = req.params.id;
+
+        EleicaoPresbitero.obterEleicaoPresbiteroPorId(id, (error, eleicaoPresbitero) => {
+            if (error) {
+                res.status(500).json({ error: 'Erro ao buscar eleição de presbítero por ID' });
+            } else if (!eleicaoPresbitero) {
+                res.status(404).json({ message: 'Eleição de presbítero não encontrada' });
+            } else {
+                res.status(200).json({ message: 'Eleição de presbítero encontrada', data: eleicaoPresbitero });
+            }
+        });
+    },
+
+    atualizarEleicaoPresbitero: (req, res) => {
+        const id = req.params.id;
+        const novosDados = req.body;
+
+        EleicaoPresbitero.atualizarEleicaoPresbitero(id, novosDados, (error, success) => {
+            if (error) {
+                res.status(500).json({ error: 'Erro ao atualizar eleição de presbítero' });
+            } else if (!success) {
+                res.status(404).json({ message: 'Eleição de presbítero não encontrada para atualização' });
+            } else {
+                res.status(200).json({ message: 'Eleição de presbítero atualizada com sucesso' });
+            }
+        });
+    },
+
+    excluirEleicaoPresbitero: (req, res) => {
+        const id = req.params.id;
+
+        EleicaoPresbitero.excluirEleicaoPresbitero(id, (error, success) => {
+            if (error) {
+                res.status(500).json({ error: 'Erro ao excluir eleição de presbítero' });
+            } else if (!success) {
+                res.status(404).json({ message: 'Eleição de presbítero não encontrada para exclusão' });
+            } else {
+                res.status(200).json({ message: 'Eleição de presbítero excluída com sucesso' });
+            }
+        });
     }
 };
 
