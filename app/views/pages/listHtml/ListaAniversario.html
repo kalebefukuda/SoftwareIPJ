@@ -26,7 +26,7 @@
     <main>
         <div>
             <img class="logo-ipb2" src="../assets/IPJ86Ver02 2.png" alt="IPB logo2">
-            <button class="btn" id="printBtn" style="margin-left: auto; display: block;">Imprimir PDF</button>
+            <button class="btn" id="printBtn">Imprimir PDF</button>
         </div>
         <table>
             <thead>
@@ -43,6 +43,10 @@
                 <!-- Conteúdo será preenchido pelo JavaScript -->
             </tbody>
         </table>
+        <div class="pages">
+            <button class="btn" id="prev">Voltar</button>
+            <button class="btn" id="next">Avançar</button>
+        </div>
     </main>
 
     <footer>
@@ -77,4 +81,6 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
 </html>
