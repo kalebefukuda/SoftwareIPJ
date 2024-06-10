@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const itemsPerPage = 30;
     let data = [];
 
-    // Fetch data and initialize pagination
+    // Buscar dados e inicializar a tabela
     async function fetchData() {
         try {
             const response = await fetch('/api/lista-aniversarios');
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Update the table with the current page
+    // Atualizar a tabela (somente a visualização na web, se necessário)
     function updateTable() {
         const tbody = document.getElementById('aniversariantes');
         tbody.innerHTML = '';
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('next').disabled = end >= data.length;
     }
 
-    // Event listeners for pagination buttons
+    // Funções para os botões de AVANÇAR e VOLTAR
     document.getElementById('prev').addEventListener('click', () => {
         if (currentPage > 0) {
             currentPage--;
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Fetch data on load
+    // Buscar dados ao carregar a página
     fetchData();
 
     document.getElementById('printBtn').addEventListener('click', () => {
@@ -85,10 +85,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             doc.setLineWidth(0.1);
             doc.line(20, 40, 190, 40);
         };
-
-        addHeader(); // Add header only on the first page
+        addHeader(); // Adicionar o cabeçalho na primeira página
         
+
         let currentDataIndex = 0;
+        const itemsPerPageFirstPage = 20;
+        const itemsPerPageOtherPages = 23;
 
         const marginTopFirstPage = 45;
         const marginTopOtherPages = 10;
@@ -97,8 +99,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (currentDataIndex > 0) {
                 doc.addPage();
             }
-            addHeader(currentDataIndex === 0); // Add header only on the first page
+            const isFirstPage = currentDataIndex === 0;
+            if (isFirstPage) {
+                addHeader();
+            }
 
+            const itemsPerPage = isFirstPage ? itemsPerPageFirstPage : itemsPerPageOtherPages;            
             const pageData = data.slice(currentDataIndex, currentDataIndex + itemsPerPage);
 
             doc.autoTable({
