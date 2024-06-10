@@ -50,13 +50,35 @@ Para uma instalação completa dos pacotes usados no projeto use o comando:
   npm install --force
   ```
 
-<!-- USAGE EXAMPLES -->
-## Para usar
-Para rodar iniciar o projeto, execute o comando:
+### Banco de dados
 
+Como o projeto ainda está sendo testado localmente, será necessário a inserção do banco no MySql de sua máquina. Copie as queries do arquivo a baixo em seu mysql.
 
   ```sh
-  npm start
+modeloDatabase.sql
+  ```
+
+### Alteracao de conexão
+
+Altere os dados de conexão de acordo com a sua conexão local, no arquivo:
+
+  ```sh
+config/Connection.js
+  ```
+
+### Login e Senha
+
+  ```sh
+login: ipj
+senha: ipj
+  ```
+
+### Para startar:
+
+Execute o comando abaixo em seu terminal:
+
+  ```sh
+npm start
   ```
 
 ### Lembrando:
