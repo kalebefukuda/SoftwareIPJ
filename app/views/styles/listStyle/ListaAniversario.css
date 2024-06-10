@@ -84,8 +84,10 @@ main{
 }
 
 main div {
-    flex: 1;
-    align-items: flex-end;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .logo-ipb2 {
@@ -125,12 +127,12 @@ tbody tr:hover {
 }
 
 .btn {
-    margin: auto;
+    margin-block: auto;
     padding: 10px 15px;;
     align-items: center;
-    width: 15%;
-    font-size: 16px;
-    border-radius: 20px;
+    width: 8%;
+    font-size: 12px;
+    border-radius: 10px;
     border: 0 !important;
     outline: 0 !important;
     background: #015B40;
@@ -143,6 +145,12 @@ tbody tr:hover {
 
 .btn:hover{
     background-color: #037955;
+}
+
+.pages {
+    justify-content: flex-end;
+    margin-block: 10px;
+    gap: 5px;
 }
 
 /* footer */
