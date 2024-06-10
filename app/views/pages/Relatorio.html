@@ -8,14 +8,14 @@
 </head>
 <body>
     <header>
-        <a href="#"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
+        <a href="/home"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
         <nav class="nav-header">
-            <a href="#">Home</a>
-            <a href="#">Cadastro</a>
-            <a href="#">Membros</a>
-            <a href="#">Relatórios</a>
-            <a href="#">Sociedades Internas</a>
-            <a href="#"><ion-icon name="exit-outline"></a>
+            <a href="/home">Home</a>
+            <a href="/cadastro">Cadastro</a>
+            <a href="/membros">Membros</a>
+            <a href="/relatorios">Relatórios</a>
+            <a href="/sociedade-interna">Sociedades Internas</a>
+            <a href="/"><ion-icon name="exit-outline"></a>
         </nav>
     </header>
     <div class="titulo-page">
@@ -23,43 +23,43 @@
     </div>
 
     <main class="container">
-        <div class="aniversariantes card">
-            <h2>Lista de aniversariantes</h2>
+        <div class="aniversariantes card" id="listaAniversario">
+            <h2>Lista de Aniversariantes</h2>
             <button>Visualizar</button>
         </div>
 
-        <div class="chamada-assembleia card">
+        <div class="chamada-assembleia card" id="listaAssembleia">
             <h2>Lista de Chamada Assembleia</h2>
             <button>Visualizar</button>
         </div>
 
-        <div class="comungantes-feminino card">
-            <h2>Lista de comungantes feminino</h2>
+        <div class="comungantes-feminino card" id="listaComunFem">
+            <h2>Lista de Comungantes Feminino</h2>
             <button>Visualizar</button>
         </div>
 
-        <div class="comungantes-masculino card">
-            <h2>Lista de comungantes masculino</h2>
+        <div class="comungantes-masculino card" id="listaComunMas">
+            <h2>Lista de Comungantes Masculino</h2>
             <button>Visualizar</button>
         </div>
 
-        <div class="nao-comungantes-feminino card">
-            <h2>Lista de nao comungantes feminino</h2>
+        <div class="nao-comungantes-feminino card" id="listaNaoComunFem">
+            <h2>Lista de nao Comungantes Feminino</h2>
             <button>Visualizar</button>
         </div>
 
-        <div class="nao-comungantes-masculino card">
-            <h2>Lista de nao comungantes masculino</h2>
+        <div class="nao-comungantes-masculino card" id="listaNaoComunMas">
+            <h2>Lista de nao Comungantes Masculino</h2>
             <button>Visualizar</button>
         </div>
 
-        <div class="comungantes-sede card">
-            <h2>Lista de comungantes sede</h2>
+        <div class="comungantes-sede card" id="listaComunSede">
+            <h2>Lista de Comungantes Sede</h2>
             <button>Visualizar</button>
         </div>
 
-        <div class="datas-casamento card">
-            <h2>Lista de datas de casamento</h2>
+        <div class="datas-casamento card" id="listaDataCasamento">
+            <h2>Lista de Datas de Casamento</h2>
             <button>Visualizar</button>
         </div>
     </main>
@@ -72,20 +72,21 @@
         <div class="social-footer">
             <h2>Siga-nos</h2>
             <div class="icons-social">
-                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-youtube"></ion-icon></a>
+                <a href="https://www.facebook.com/ipjoinville/?locale=pt_BR" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
+                <a href="https://www.instagram.com/ipb.joinville/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="https://www.youtube.com/@IgrejaPresbiterianadeJoinville" target="_blank"><ion-icon name="logo-youtube"></ion-icon></a>
             </div>
         </div>
 
-            <div class="nav-footer">
-                <ul class="nav-links-footer">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Cadastro</a></li>
-                    <li><a href="#">Relatórios</a></li>
-                    <li><a href="#">Membros</a></li>
-                </ul>
-            </div>
+        <div class="nav-footer">
+            <ul class="nav-links-footer">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/cadastro">Cadastro</a></li>
+                <li><a href="/relatorios">Relatórios</a></li>
+                <li><a href="/membros">Membros</a></li>
+                <li><a href="/sociedade-interna">Sociedades</a></li>
+            </ul>
+        </div>
 
     </footer>
     

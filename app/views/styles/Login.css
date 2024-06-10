@@ -93,7 +93,7 @@ body {
     box-sizing: border-box;
     padding: 12px 15px 12px 40px;
     width: 100%;
-    background-image: url("/app/views/assets/user-round.svg");
+    background-image: url("../assets/user-round.svg");
     background-repeat: no-repeat;
     background-position: 10px center;
     font-size: 16px;
@@ -108,7 +108,7 @@ body {
     box-sizing: border-box;
     padding: 12px 15px 12px 40px;
     width: 100%;
-    background-image: url("/app/views/assets/lock.svg");
+    background-image: url("../assets/lock.svg");
     background-repeat: no-repeat;
     background-position: 10px center;
     font-size: 16px;

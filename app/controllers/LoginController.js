@@ -1,50 +1,29 @@
-import Login from '../models/LoginModel.js';
+import connect from '../../config/Connection.js'
 
-class LoginController {
-    static login(req, res) {
-        const { username, password } = req.body;
-        const login = new Login(username, password);
+let loginController = {};
 
-        Login.verificarCredenciais(login, (err, user) => {
-            if (err) {
-                return res.status(500).json({ message: 'Erro no servidor', error: err.message });
-            }
+// Função de login
+loginController.login = async function(req, res) {
+    try {
+        const { usuario, senha } = req.body;
 
-            if (!user) {
-                return res.status(401).json({ message: 'Usuário ou senha incorretos' });
-            }
+        // Conectando ao banco de dados
+        const con = await connect();
 
-            res.json({ message: 'Login bem-sucedido', user });
-        });
+        // Consultando o banco de dados para verificar as credenciais
+        const [rows] = await con.query('SELECT * FROM login WHERE usuario = ? AND senha = ?', [usuario, senha]);
+
+        if (rows.length > 0) {
+            // Credenciais válidas
+            res.send({ status: 'success', message: 'Login realizado com sucesso!' });
+        } else {
+            // Credenciais inválidas
+            res.send({ status: 'error', message: 'Credenciais inválidas!' });
+        }
+    } catch (e) {
+        console.log('Erro ao tentar fazer login', e);
+        res.status(500).send({ status: 'error', message: 'Erro ao tentar fazer login' });
     }
+};
 
-    static register(req, res) {
-        const { username, password } = req.body;
-        const login = new Login(username, password);
-
-        Login.encontrarUsuarioPorNome(username, (err, existingUser) => {
-            if (err) {
-                return res.status(500).json({ message: 'Erro no servidor', error: err.message });
-            }
-
-            if (existingUser) {
-                return res.status(400).json({ message: 'Usuário já existe' });
-            }
-
-            Login.registrarUsuario(login, (err, result) => {
-                if (err) {
-                    return res.status(500).json({ message: 'Erro no servidor', error: err.message });
-                }
-
-                res.status(201).json({ message: 'Usuário registrado com sucesso', result });
-            });
-        });
-    }
-
-    static logout(req, res) {
-        // Implementação de logout se necessário
-        res.json({ message: 'Logout bem-sucedido' });
-    }
-}
-
-export default LoginController;
+export { loginController };
