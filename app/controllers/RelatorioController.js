@@ -6,7 +6,8 @@ let relatorioGeral = {}
 relatorioGeral.getAniverario = async function(req, res) {
     try {
         let relatorio = await con.query('SELECT nome, data_nascimento, \
-            TIMESTAMPDIFF(YEAR, DATA_NASCIMENTO, CURDATE()) AS idade FROM membro;');
+            TIMESTAMPDIFF(YEAR, DATA_NASCIMENTO, CURDATE()) AS idade FROM membro \
+            ORDER BY nome;');
         return relatorio[0]; 
     } catch (e) {
         console.log('Erro ao mostrar Lista de Aniversario', e);
@@ -32,7 +33,7 @@ relatorioGeral.getListaComunFem = async function(req,res){
         FROM MEMBRO M\
         JOIN ENDERECO E ON M.ID_MEMBRO = E.ID_MEMBRO\
         WHERE M.COMUNGANTE = 1\
-          AND M.SEXO = 'F';")
+          AND M.SEXO = 'F' ORDER BY m.nome;")
         return relatorio[0];
 
     } catch (e) {
@@ -46,7 +47,7 @@ relatorioGeral.getListaComunMas = async function(req,res){
         FROM MEMBRO M\
         JOIN ENDERECO E ON M.ID_MEMBRO = E.ID_MEMBRO\
         WHERE M.COMUNGANTE = 1\
-          AND M.SEXO = 'M';")
+          AND M.SEXO = 'M' ORDER BY m.nome;")
 
           return relatorio[0];
 
@@ -61,7 +62,7 @@ relatorioGeral.getListaNaoComunFem = async function(req,res){
         FROM MEMBRO M\
         JOIN ENDERECO E ON M.ID_MEMBRO = E.ID_MEMBRO\
         WHERE M.COMUNGANTE = 0\
-          AND M.SEXO = 'F';")
+          AND M.SEXO = 'F' ORDER BY m.nome;")
 
           return relatorio[0];
 
@@ -76,7 +77,7 @@ relatorioGeral.getListaNaoComunMas = async function(req,res){
         FROM MEMBRO M\
         JOIN ENDERECO E ON M.ID_MEMBRO = E.ID_MEMBRO\
         WHERE M.COMUNGANTE = 0\
-          AND M.SEXO = 'M';")
+          AND M.SEXO = 'M' ORDER BY m.nome;")
 
           return relatorio[0];
 
@@ -89,7 +90,7 @@ relatorioGeral.getListaComunSede= async function(req,res){
     try {
         let relatorio = await con.query("SELECT m.nome, m.data_nascimento, m.numero_de_rol, e.local_residencia\
                 FROM membro m inner join endereco e on m.id_membro = e.id_membro\
-                WHERE m.comungante = 1 AND e.local_residencia = 'Sede';");
+                WHERE m.comungante = 1 AND e.local_residencia = 'Sede' ORDER BY m.nome;");
 
           return relatorio[0];
 
