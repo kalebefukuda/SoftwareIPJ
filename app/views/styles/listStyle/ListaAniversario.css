@@ -147,6 +147,12 @@ tbody tr:hover {
     background-color: #037955;
 }
 
+.btn.disabled {
+    background-color: #5f5f5f; /* Cor cinza para botão desativado */
+    color: #ffffff;
+    cursor: not-allowed;
+}
+
 .pages {
     justify-content: flex-end;
     margin-block: 10px;

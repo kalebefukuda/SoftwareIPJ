@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     let currentPage = 0;
     const itemsPerPage = 30;
     let data = [];
+    const tbody = document.getElementById('aniversariantes');
+    const prevBtn = document.getElementById('prev'); //Variavel para estilizar o botão avançar ficar cinza
+    const nextBtn = document.getElementById('next'); //Variavel para estilizar o botão voltar ficar cinza
 
     // Buscar dados e inicializar a tabela
     async function fetchData() {
@@ -9,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const response = await fetch('/api/lista-aniversarios');
             data = await response.json();
             updateTable();
+            updateButtons();
         } catch (error) {
             console.error('Erro ao carregar lista de aniversariantes:', error);
         }
@@ -16,7 +20,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Atualizar a tabela (somente a visualização na web, se necessário)
     function updateTable() {
-        const tbody = document.getElementById('aniversariantes');
         tbody.innerHTML = '';
 
         const start = currentPage * itemsPerPage;
@@ -32,23 +35,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             `;
             tbody.appendChild(tr);
         });
+    }
 
-        document.getElementById('prev').disabled = currentPage === 0;
-        document.getElementById('next').disabled = end >= data.length;
+    // Atualizar os estados dos botões
+    function updateButtons() {
+        prevBtn.classList.toggle('disabled', currentPage === 0);
+        nextBtn.classList.toggle('disabled', (currentPage + 1) * itemsPerPage >= data.length);
     }
 
     // Funções para os botões de AVANÇAR e VOLTAR
-    document.getElementById('prev').addEventListener('click', () => {
+    prevBtn.addEventListener('click', () => {
         if (currentPage > 0) {
             currentPage--;
             updateTable();
+            updateButtons();
         }
     });
 
-    document.getElementById('next').addEventListener('click', () => {
+    nextBtn.addEventListener('click', () => {
         if ((currentPage + 1) * itemsPerPage < data.length) {
             currentPage++;
             updateTable();
+            updateButtons();
         }
     });
 
@@ -86,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             doc.line(20, 40, 190, 40);
         };
         addHeader(); // Adicionar o cabeçalho na primeira página
-        
+
 
         let currentDataIndex = 0;
         const itemsPerPageFirstPage = 20;
@@ -104,7 +112,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 addHeader();
             }
 
-            const itemsPerPage = isFirstPage ? itemsPerPageFirstPage : itemsPerPageOtherPages;            
+            const itemsPerPage = isFirstPage ? itemsPerPageFirstPage : itemsPerPageOtherPages;
             const pageData = data.slice(currentDataIndex, currentDataIndex + itemsPerPage);
 
             doc.autoTable({
