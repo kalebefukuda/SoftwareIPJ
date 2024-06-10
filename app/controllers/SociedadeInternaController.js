@@ -25,25 +25,15 @@ sociedadeInterna.all = async function(req, res) {
 // Create
 sociedadeInterna.create = async function(req, res) {
     try {
-        const { nome_sociedade } = req.body; // Extrair o nome da sociedade do corpo da solicitação
+        const { nome_sociedade } = req.body;
         const foto_sociedade = req.files ? req.files.foto_sociedade : null;
-
-        const uniqueFilename = Date.now() + '-' + Math.round(Math.random() * 1000) + '.jpg';
-
-        foto_sociedade.mv(path.join(uploadDir, uniqueFilename), async function(err) {
-        if (err) {
-        console.error('Erro ao mover o arquivo:', err);
-        return res.status(500).send(err);
-        }
-
-    // Resto do seu código para salvar no banco de dados...
-        });
 
         if (!nome_sociedade || !foto_sociedade) {
             return res.status(400).json({ error: 'Nome da sociedade e foto são obrigatórios' });
         }
 
-        const uploadPath = path.join(uploadDir, foto_sociedade.name);
+        const uniqueFilename = Date.now() + '-' + Math.round(Math.random() * 1000) + path.extname(foto_sociedade.name);
+        const uploadPath = path.join(uploadDir, uniqueFilename);
 
         foto_sociedade.mv(uploadPath, async function(err) {
             if (err) {
@@ -51,21 +41,24 @@ sociedadeInterna.create = async function(req, res) {
                 return res.status(500).send(err);
             }
 
-            // Preparar a consulta SQL e os valores
-            const sql = "INSERT INTO sociedade_interna (nome_sociedade, foto_sociedade) VALUES (?, ?);";
-            const values = [nome_sociedade, `/uploads/${foto_sociedade.name}`];
+            try {
+                const sql = "INSERT INTO sociedade_interna (nome_sociedade, foto_sociedade) VALUES (?, ?);";
+                const values = [nome_sociedade, `/uploads/${uniqueFilename}`];
 
-            // Executar a consulta SQL
-            const result = await con.query(sql, values);
+                const result = await con.query(sql, values);
 
-            // Responder com sucesso e o caminho da imagem
-            res.json({ ok: true, message: 'Sociedade cadastrada com sucesso', filePath: `/uploads/${foto_sociedade.name}` });
+                res.json({ ok: true, message: 'Sociedade cadastrada com sucesso', filePath: `/uploads/${uniqueFilename}` });
+            } catch (error) {
+                console.log('Erro na inserção', error);
+                res.status(500).json({ error: 'Erro interno do servidor' });
+            }
         });
     } catch (error) {
         console.log('Erro na inserção', error);
         res.status(500).json({ error: 'Erro interno do servidor' });
     }
-}
+};
+
 
 // Update
 sociedadeInterna.update = async function(req, res) {
