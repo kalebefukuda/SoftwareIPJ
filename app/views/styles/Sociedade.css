@@ -130,10 +130,16 @@ nav a ion-icon{
     display: inline-block;
     width: 100px;
     height: 100px;
+    border-radius: 50%;
+    
 }
 
 .card-sociedade-cadastrada{
     background-color: #015B40;
+}
+
+.card-sociedade-cadastrada:hover{
+    background-color: #037955;
 }
 
 .text-card{
