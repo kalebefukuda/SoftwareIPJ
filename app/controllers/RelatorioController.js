@@ -101,8 +101,11 @@ relatorioGeral.getListaComunSede= async function(req,res){
 
 relatorioGeral.getListaDataCasamento= async function(req,res){
     try {
-        // fazer query
-        let relatorio = await con.query(" ");
+        let relatorio = await con.query(" SELECT DATE_FORMAT(r.CASAMENTO, '%d/%m/%Y') AS DATA_CASAMENTO, \
+            CONCAT_WS(' e ', m1.NOME, m2.NOME) AS CASAL,TIMESTAMPDIFF(YEAR, r.CASAMENTO, CURDATE()) AS ANOS_CASAMENTO \
+            FROM ROL_SEPARADO r JOIN MEMBRO m1 ON r.ID_MEMBRO = m1.ID_MEMBRO AND m1.SEXO = 'M' \
+            JOIN ROL_SEPARADO r2 ON r.CASAMENTO = r2.CASAMENTO JOIN MEMBRO m2 ON r2.ID_MEMBRO = m2.ID_MEMBRO AND m2.SEXO = 'F'\
+            WHERE r.CASAMENTO IS NOT NULL GROUP BY r.CASAMENTO, m1.ID_MEMBRO, m2.ID_MEMBRO ORDER BY DATE_FORMAT(r.CASAMENTO, '%m-%d');;");
 
           return relatorio[0];
 
