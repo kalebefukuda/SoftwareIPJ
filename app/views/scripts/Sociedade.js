@@ -27,7 +27,8 @@ document.getElementById('newSociedade').addEventListener('click', function() {
                 div.innerHTML = `
                     <div class="campo-img">
                         <img class="campo-foto-card" src="${sociedade.FOTO_SOCIEDADE}" alt="">
-                        <img class="campo-foto-card-white" src="../assets/Ellipse white.png" alt="">
+                        <img class="campo-foto-card-white" src="${sociedade.FOTO_SOCIEDADE}" alt="">
+                        
                     </div>
                     <div class="text-card text-sociedade-cadastrada">
                         <h2>${sociedade.NOME_SOCIEDADE}</h2>
