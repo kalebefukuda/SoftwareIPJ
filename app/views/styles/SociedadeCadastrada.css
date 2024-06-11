@@ -79,23 +79,20 @@ main{
     align-items: center;
     color: white;
     justify-content: center;
-    gap: 7rem;
+    gap: 21rem;
 
 }
 
 .banner-div-img{
     display: flex;
     align-items: center;
-    margin-left: 96px;
 }
 .banner-div-texto{
-    width: 70%;
     justify-content: start;
     align-items: center;
 }
 
 .banner img{
-    margin-right: 10px;
     height: 225px;
 }
 
@@ -109,6 +106,8 @@ main{
     justify-content: center;
     width: 100%;
     gap: 30px; 
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 .busca-div{
     display: flex;
@@ -158,6 +157,7 @@ main{
 
 .div-membros-resultado h2{
    color: #015B40;
+   margin-bottom: 25px;
 }
 
 .membros-cadastrados{
