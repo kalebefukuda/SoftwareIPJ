@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateTable();
             updateButtons();
             updatePageInfo();
+            scrollToTop();
         } catch (error) {
             console.error('Erro ao carregar lista de aniversariantes:', error);
         }
@@ -40,6 +41,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    function scrollToTop() {
+        window.scrollTo(0, 0);
+    }
+
     // Atualizar os estados dos botões
     function updateButtons() {
         prevBtn.classList.toggle('disabled', currentPage === 0);
@@ -59,6 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateTable();
             updateButtons();
             updatePageInfo();
+            scrollToTop();
         }
     });
 
@@ -68,6 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateTable();
             updateButtons();
             updatePageInfo();
+            scrollToTop();
         }
     });
 
