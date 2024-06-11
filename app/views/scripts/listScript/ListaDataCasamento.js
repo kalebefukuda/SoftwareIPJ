@@ -7,14 +7,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         data.forEach(item => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${item.nome}</td>
-                <td>${item.numero_de_rol}</td>
-                <td>${new Date(item.data_nascimento).toLocaleDateString('pt-BR')}</td>
-                <td>${item.local_residencia}</td>
+                <td>${item.DATA_CASAMENTO}</td>
+                <td>${item.CASAL}</td>
+                <td>${item.ANOS_CASAMENTO}</td>
             `;
             tbody.appendChild(tr);
         });
     } catch (error) {
-        console.error('Erro ao carregar lista de comungantes masculinos:', error);
+        console.error('Erro ao carregar lista de casamentos:', error);
     }
 });
