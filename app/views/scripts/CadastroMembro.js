@@ -671,6 +671,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    //Casamento
+    const campo44 = document.getElementById('campo44');
+    if (campo44) {
+        campo44.addEventListener('change', function () {
+            applyInitialSelectedClass(this);
+        });
+
+        // Defina a classe inicial para o estado inicial
+        applyInitialSelectedClass(campo44);
+
+        // Verifique se o campo de data está vazio ao carregar a página
+        if (!campo44.value) {
+            campo44.classList.add('initial');
+        }
+    }
+
     //Disciplina
     document.getElementById("campo45").addEventListener("input", function (event) {
         // Obtém o valor atual do campo
