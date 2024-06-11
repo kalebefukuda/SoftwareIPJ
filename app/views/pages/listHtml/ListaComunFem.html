@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles/listStyle/ListaAniversario.css">
-    <title>Lista Comungantes Feminino</title>
+    <link rel="stylesheet" href="../../styles/listStyle/Listas.css">
+    <title>Lista de comungantes - Feminino</title>
 </head>
 <body>
     <header>
@@ -20,10 +20,14 @@
     </header>
 
     <div class="titulo-page">
-        <h1>Lista Comungantes Feminino</h1>
+        <h1>Lista de comungantes - Feminino</h1>
     </div>
 
     <main>
+        <div>
+            <img class="logo-ipb2" src="../assets/IPJ86Ver02 2.png" alt="IPB logo2">
+            <button class="btn" id="printBtn">Imprimir PDF</button>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -37,6 +41,15 @@
                 <!-- Conteúdo será preenchido pelo JavaScript -->
             </tbody>
         </table>
+        <div class="pages">
+            <div class="pagination-info">
+                Página <span id="page-number" style="font-weight: 700;"></span> de <span id="total-pages" style="font-weight: 700;"></span>
+            </div>
+            <div class="btns">
+                <button class="btn" id="prev">Voltar</button>
+                <button class="btn" id="next">Avançar</button>    
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -69,4 +82,8 @@
 <script src="../../scripts/listScript/ListaComunFem.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
 </html>
