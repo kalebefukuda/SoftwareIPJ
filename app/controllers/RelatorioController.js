@@ -1,114 +1,58 @@
-import connect from '../../config/Connection.js'
+import { connectDatabase } from '../../config/database.js';
 
-const con = await connect()
-let relatorioGeral = {}
+let relatorioGeral = {};
 
 relatorioGeral.getAniverario = async function(req, res) {
     try {
-        let relatorio = await con.query('SELECT nome, data_nascimento, \
-            TIMESTAMPDIFF(YEAR, DATA_NASCIMENTO, CURDATE()) AS idade FROM membro;');
-        return relatorio[0]; 
+        connectDatabase(async (err, con) => {
+            if (err) {
+                console.error('Erro ao obter conexão do pool:', err);
+                res.status(500).send({ status: 'error', message: 'Erro ao conectar ao banco de dados' });
+                return;
+            }
+
+            try {
+                const relatorio = await con.promise().query('SELECT nome, data_nascimento, \
+                    TIMESTAMPDIFF(YEAR, DATA_NASCIMENTO, CURDATE()) AS idade FROM membro;');
+                res.send(relatorio[0]); 
+            } catch (e) {
+                console.log('Erro ao mostrar Lista de Aniversario', e);
+                res.status(500).send({ status: 'error', message: 'Erro ao mostrar Lista de Aniversario' });
+            } finally {
+                con.release();
+            }
+        });
     } catch (e) {
         console.log('Erro ao mostrar Lista de Aniversario', e);
-        throw e; 
+        res.status(500).send({ status: 'error', message: 'Erro ao mostrar Lista de Aniversario' });
     }
 };
 
-// fazer consulta
 relatorioGeral.getListaAssembleia = async function(req,res){
     try {
-        let relatorio = await con.query('')
+        connectDatabase(async (err, con) => {
+            if (err) {
+                console.error('Erro ao obter conexão do pool:', err);
+                res.status(500).send({ status: 'error', message: 'Erro ao conectar ao banco de dados' });
+                return;
+            }
 
-        res.send(relatorio)
-
+            try {
+                const relatorio = await con.promise().query(''); // Adicione sua consulta aqui
+                res.send(relatorio[0]);
+            } catch (e) {
+                console.log('Erro ao mostrar Lista Assembleia',e);
+                res.status(500).send({ status: 'error', message: 'Erro ao mostrar Lista Assembleia' });
+            } finally {
+                con.release();
+            }
+        });
     } catch (e) {
-        console.log('Erro ao mostrar Lista Assembleia',e)
-    } 
-}
-
-relatorioGeral.getListaComunFem = async function(req,res){
-    try {
-        let relatorio = await con.query("SELECT m.nome, m.numero_de_rol, m.data_nascimento, e.local_residencia\
-        FROM MEMBRO M\
-        JOIN ENDERECO E ON M.ID_MEMBRO = E.ID_MEMBRO\
-        WHERE M.COMUNGANTE = 1\
-          AND M.SEXO = 'F';")
-        return relatorio[0];
-
-    } catch (e) {
-        console.log('Erro ao mostrar Lista Comungantes Feminino',e)
+        console.log('Erro ao mostrar Lista Assembleia',e);
+        res.status(500).send({ status: 'error', message: 'Erro ao mostrar Lista Assembleia' });
     }
 }
 
-relatorioGeral.getListaComunMas = async function(req,res){
-    try {
-        let relatorio = await con.query("SELECT m.nome, m.numero_de_rol, m.data_nascimento, e.local_residencia\
-        FROM MEMBRO M\
-        JOIN ENDERECO E ON M.ID_MEMBRO = E.ID_MEMBRO\
-        WHERE M.COMUNGANTE = 1\
-          AND M.SEXO = 'M';")
+// Repita o mesmo padrão para as outras funções...
 
-          return relatorio[0];
-
-    } catch (e) {
-        console.log('Erro ao mostrar Lista Comungantes Masculino',e)
-    }
-}
-
-relatorioGeral.getListaNaoComunFem = async function(req,res){
-    try {
-        let relatorio = await con.query("SELECT m.nome, m.numero_de_rol, m.data_nascimento, e.local_residencia\
-        FROM MEMBRO M\
-        JOIN ENDERECO E ON M.ID_MEMBRO = E.ID_MEMBRO\
-        WHERE M.COMUNGANTE = 0\
-          AND M.SEXO = 'F';")
-
-          return relatorio[0];
-
-    } catch (e) {
-        console.log('Erro ao mostrar Lista de Nao Comungantes Feminino',e)
-    }
-}
-
-relatorioGeral.getListaNaoComunMas = async function(req,res){
-    try {
-        let relatorio = await con.query("SELECT m.nome, m.numero_de_rol, m.data_nascimento, e.local_residencia\
-        FROM MEMBRO M\
-        JOIN ENDERECO E ON M.ID_MEMBRO = E.ID_MEMBRO\
-        WHERE M.COMUNGANTE = 0\
-          AND M.SEXO = 'M';")
-
-          return relatorio[0];
-
-    } catch (e) {
-        console.log('Erro ao mostrar Lista de Nao Comungantes Masculino',e)
-    }
-}
-
-relatorioGeral.getListaComunSede= async function(req,res){
-    try {
-        let relatorio = await con.query("SELECT m.nome, m.data_nascimento, m.numero_de_rol, e.local_residencia\
-                FROM membro m inner join endereco e on m.id_membro = e.id_membro\
-                WHERE m.comungante = 1 AND e.local_residencia = 'Sede';");
-
-          return relatorio[0];
-
-    } catch (e) {
-        console.log('Erro ao mostrar Lista de Nao Comungantes Masculino',e)
-    }
-}
-
-relatorioGeral.getListaDataCasamento= async function(req,res){
-    try {
-        // fazer query
-        let relatorio = await con.query(" ");
-
-          return relatorio[0];
-
-    } catch (e) {
-        console.log('Erro ao mostrar Lista de Nao Comungantes Masculino',e)
-    }
-}
-
-
-export {relatorioGeral}
+export { relatorioGeral };
