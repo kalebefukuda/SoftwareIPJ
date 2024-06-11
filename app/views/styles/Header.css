@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+header {
+    display: flex;
+    max-height: 149px;
+    background-color: white;
+    align-items: center;
+    margin-top: 12px;
+    justify-content: space-between;
+    margin-left: 45px;
+    margin-right: 30px;
+}
+
+.logo-ipb {
+    width: 98px;
+    height: 85px;
+    margin-right: 10px;
+}
+
+.nav-header {
+    font-size: 18px;
+    display: flex;
+    gap: 45px;
+    margin-right: 10px;
+}
+
+.nav-header a.active {
+    color: #015B40; /* Cor verde */
+    font-weight: 500;
+}
+
+/* Aplica estilos comuns a todos os links */
+.nav-header a {
+    color: #818181;
+    position: relative; /* Posicionamento para o pseudo-elemento */
+    text-decoration: none; /* Remove o sublinhado padrão */
+}
+
+/* Estilos específicos para links sem a classe 'icon-link' */
+.nav-header a:not(.icon-link)::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #015B40;
+    transition: width 0.3s;
+}
+
+.nav-header a:not(.icon-link):hover {
+    color: #015B40; /* Cor ao passar o mouse */
+}
+
+.nav-header a:not(.icon-link):hover::after {
+    width: 100%; /* Animação da linha sob o link */
+}
+
+/* Estilos para o ícone dentro do link */
+nav a.icon-link ion-icon {
+    color: #015B40;
+    font-size: 25px;
+}
+
+nav a ion-icon{
+    color: #015B40;
+    font-size: 25px;
+}
