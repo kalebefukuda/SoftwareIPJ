@@ -126,6 +126,14 @@ tbody tr:hover {
     background-color: #f1f1f1;
 }
 
+.pagination-info {
+    margin-block: auto;
+    padding: 10px 15px;;
+    width: 8%;
+    font-size: 15px;
+    align-self: center;
+}
+
 .btn {
     margin-block: auto;
     padding: 10px 15px;;
@@ -153,10 +161,17 @@ tbody tr:hover {
     cursor: not-allowed;
 }
 
-.pages {
-    justify-content: flex-end;
-    margin-block: 10px;
+.btns {
+    align-items: center;
+    justify-content: center;
     gap: 5px;
+}
+
+.pages {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
 }
 
 /* footer */
