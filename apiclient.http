@@ -1,0 +1,25 @@
+GET http://localhost:3000/sociedade-interna HTTP/1.1
+Content-Type: application/json
+###
+
+POST  http://localhost:3000/sociedade-interna HTTP/1.1
+Content-Type: application/json
+
+{
+    "id_sociedade_interna": null,
+    "nome_sociedade": "Uniao de Jovens",
+    "foto_sociedade": null
+}
+###
+PUT  http://localhost:3000/sociedade-interna/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "nome_sociedade": "Uniao de Homens",
+    "foto_sociedade": null
+}
+###my
+
+DELETE http://localhost:3000/sociedade-interna/3 HTTP/1.1
+Content-Type: application/json
+###

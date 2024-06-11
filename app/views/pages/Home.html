@@ -8,14 +8,14 @@
 </head>
 <body>
     <header>
-        <a href="#"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
+        <a href="/home"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
         <nav class="nav-header">
-            <a href="#">Home</a>
-            <a href="#">Cadastro</a>
-            <a href="#">Membros</a>
-            <a href="#">Relatórios</a>
-            <a href="#">Sociedades Internas</a>
-            <a href="#"><ion-icon name="exit-outline"></a>
+            <a href="/home">Home</a>
+            <a href="/cadastro">Cadastro</a>
+            <a href="/membros">Membros</a>
+            <a href="/relatorios">Relatórios</a>
+            <a href="/sociedade-interna">Sociedades Internas</a>
+            <a href="/"><ion-icon name="exit-outline"></a>
         </nav>
     </header>
 
@@ -23,14 +23,14 @@
         <div class="cadastro-membro">
             <h1>Cadastro de membros</h1>
             <p>Cadastre novos membros aqui</p>
-            <a href="#"><button>Cadastrar</button></a>
+            <a href="/cadastro"><button>Cadastrar</button></a>
         </div>
 
         <div class="relatorios">
             <aside class="relatorios-texto">
                 <h1>Acompanhe os relatórios</h1>
                 <p class="relatorios-p">Veja as informações mais detalhadas na área de relatórios</p>
-                <button class="relatorios-btn">Relatórios</button>
+                <button class="relatorios-btn" id="relatoriosBtn">Relatórios</button>
             </aside>
             <aside class="relatorios-img">
                 <img src="../assets/Imagem_Relatorio_Home.jpg" alt="Imagem relatorios">
@@ -40,7 +40,7 @@
         <div class="ver-membros">
             <div class="conteudo-ver-membros">
                 <h1>Visualizar membros da igreja</h1>
-                <button>Ver membros</button>
+                <button id="verMembrosBtn">Ver membros</button>
             </div>
             
         </div>
@@ -49,7 +49,7 @@
             <aside class="sociedades-texto">
                 <h1>Sociedades Internas</h1>
                 <p class="sociedades-p">Cadastre e visualize os membros nas sociedades internas</p>
-                <button class="sociedades-btn">Acompanhar</button>
+                <button class="sociedades-btn" id="sociedadesBtn">Acompanhar</button>
             </aside>
             <aside class="sociedades-img">
                 <img src="../assets/Imagem_Sociedades_Home.jpg" alt="Imagem sociedades internas">
@@ -65,24 +65,26 @@
         <div class="social-footer">
             <h2>Siga-nos</h2>
             <div class="icons-social">
-                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-youtube"></ion-icon></a>
+                <a href="https://www.facebook.com/ipjoinville/?locale=pt_BR" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
+                <a href="https://www.instagram.com/ipb.joinville/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="https://www.youtube.com/@IgrejaPresbiterianadeJoinville" target="_blank"><ion-icon name="logo-youtube"></ion-icon></a>
             </div>
         </div>
 
             <div class="nav-footer">
                 <ul class="nav-links-footer">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Cadastro</a></li>
-                    <li><a href="#">Relatórios</a></li>
-                    <li><a href="#">Membros</a></li>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/cadastro">Cadastro</a></li>
+                    <li><a href="/relatorios">Relatórios</a></li>
+                    <li><a href="/membros">Membros</a></li>
+                    <li><a href="/sociedade-interna">Sociedades</a></li>
                 </ul>
             </div>
 
     </footer>
     
 </body>
+<script src="../scripts/Home.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </html>
