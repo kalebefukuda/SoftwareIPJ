@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await fetch('/api/lista-chamada-assembleia');
+        const response = await fetch('/api/lista-chamada-assembleia-adm');
         const data = await response.json();
 
-        const tbody = document.getElementById('listachamadaAssembleia');
+        const tbody = document.getElementById('listachamadaAssembleiaAdm');
         data.forEach(item => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
