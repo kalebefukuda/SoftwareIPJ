@@ -114,6 +114,7 @@ nav a ion-icon {
     width: 200px;
     height: 200px;
     border-radius: 50%; /* Mantém a forma redonda da imagem */
+    cursor: pointer;
 }
 
 .titulo-form {

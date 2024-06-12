@@ -12,7 +12,9 @@
 //     global.connection = connection
 //     return connection
 //     }
-    
+  
+// teste
+
 // export default connect
 
 import mysql from "mysql2/promise";
