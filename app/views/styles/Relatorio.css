@@ -17,40 +17,6 @@ h1{
     
 }
 
-header{
-    display: flex;
-    max-height: 149px;
-    background-color: white;
-    align-items: center;
-    margin-top: 12px;
-    justify-content: space-between;
-    margin-left: 45px;
-    margin-right: 30px;
-}
-
-.logo-ipb{
-    width: 98px;
-    height: 85px;
-    margin-right: 10px;
-}
-
-.nav-header{
-    font-size: 18px;
-    display: flex;
-    gap: 45px;
-    margin-right: 10px;
-    
-}
-
-.nav-header a{
-    color: #818181;
-}
-
-nav a ion-icon{
-    color: #015B40;
-    font-size: 25px;
-}
-
 .titulo-page{
     background-color: #015B40;
     display: flex;
@@ -77,24 +43,30 @@ main{
 
 .container h2{
     color: #015B40;
-    width: 316px;;
+    width: 1000px;;
 }
 
 .container > div {
-    width: 35%;
-    margin: 10px;
+    width: 75%;
+    margin: 5px;
     border-radius: 20px;
-    padding: 40px;
+    padding-inline: 40px;
+    padding-block: 20px;
+    justify-content: space-between;
 }
 
 .card{
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 30px;
     background-color: #EFEFEF;
-    width: 200px; 
     padding: 10px;
 }
+
+/* .card:hover{
+    background-color: #d8d8d8;
+    transition: background-color 0.3s ease;
+} */
 
 button{
     cursor: pointer;
@@ -111,68 +83,3 @@ button:hover{
     transition: background-color 0.3s ease;
 }
 
-.aniversariantes h2{
-    width: 280px;
-}
-
-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #015B40;
-    margin-top: 30px;
-}
-
-.logo-footer img{
-    position:relative;
-    left: 55px;
-    height: 292px;
-    width: 310px;
-}
-
-
-.social-footer {
-    height: 292px;
-    width: 310px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px; 
-    color: white;
-}
-
-.nav-links-footer {
-    height: 292px;
-    width: 310px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    gap: 5px;
-}
-
-.nav-links-footer li a{
-    color: white;
-    font-weight: 700;
-    font-size: 23px;
-    text-align: right;
-}
-.nav-footer{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-}
-
-.icons-social ion-icon{
-    color: white;
-    font-size: 25px;
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
-.social-footer h2{
-    color: white;
-}
