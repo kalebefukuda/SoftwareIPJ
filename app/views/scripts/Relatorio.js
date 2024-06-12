@@ -70,6 +70,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const comunSedeBtn = document.getElementById("listaAdmAssembleia");
+    if (comunSedeBtn) {
+        comunSedeBtn.addEventListener("click", function () {
+            window.location.href = "/relatorios/lista-chamada-assembleia-adm";
+        });
+    }
+});
+
 
 
 

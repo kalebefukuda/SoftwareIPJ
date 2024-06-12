@@ -46,6 +46,10 @@ router.get('/relatorios/lista-chamada-assembleia', (req, res) => {
     res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaChamadaAssembleia.html'));
 });
 
+router.get('/relatorios/lista-chamada-assembleia-adm', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaChamadaAssembleiaAdm.html'));
+});
+
 
 router.get('/api/lista-aniversarios', async (req, res) => {
     try {
@@ -125,6 +129,16 @@ router.get('/api/lista-chamada-assembleia', async (req, res) => {
         res.json(chamadaAssembleia);
     } catch (e) {
         console.error('Erro ao obter lista de chamada de assembleia', e);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
+router.get('/api/lista-chamada-assembleia-adm', async (req, res) => {
+    try {
+        const chamadaAssembleiaAdm= await relatorioGeral.getListaAssembleiaAdm();
+        res.json(chamadaAssembleiaAdm);
+    } catch (e) {
+        console.error('Erro ao obter lista de chamada de assembleia Administrativa', e);
         res.status(500).json({ error: 'Erro interno do servidor' });
     }
 });

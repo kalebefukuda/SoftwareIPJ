@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/listStyle/Listas.css">
     <link rel="stylesheet" href="../../styles/Footer.css">
-    <title>Lista Comungantes Sede</title>
+    <title>Lista Chamada Assembleia Administrativa</title>
 </head>
 <body>
     <header>
@@ -19,33 +19,22 @@
             <a href="/"><ion-icon name="exit-outline"></a>
         </nav>
     </header>
-
     <div class="titulo-page">
-        <h1>Lista de Chamada da Assembleia</h1>
+        <h1>Lista de Chamada da Assembleia Administrativa</h1>
     </div>
 
     <main>
-        <div>
-            <img class="logo-ipb2" src="../assets/IPJ86Ver02 2.png" alt="IPB logo2">
-            <button class="btn" id="printBtn">Imprimir PDF</button>
-        </div>
         <table>
             <thead>
                 <tr>
                     <th>Nome</th>
-                </tr>
-                <tr>
-
+                    
                 </tr>
             </thead>
-            <tbody id="listachamadaAssembleia">
+            <tbody id="listachamadaAssembleiaAdm">
                 <!-- Conteúdo será preenchido pelo JavaScript -->
             </tbody>
         </table>
-        <div class="pages">
-            <button class="btn" id="prev">Voltar</button>
-            <button class="btn" id="next">Avançar</button>
-        </div>
     </main>
 
     <footer>
@@ -75,11 +64,7 @@
     </footer>
     
 </body>
-<script src="../../scripts/listScript/ListaChamadaAssembleia.js"></script>
+<script src="../../scripts/listScript/ListaChamadaAssembleiaAdm.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
 </html>
