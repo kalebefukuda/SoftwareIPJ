@@ -47,10 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         pageData.forEach(item => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${item.nome}</td>
-                <td>${item.numero_de_rol}</td>
-                <td>${new Date(item.data_nascimento).toLocaleDateString('pt-BR')}</td>
-                <td>${item.local_residencia}</td>
+                <td>${item.NOME}</td>
             `;
             tbody.appendChild(tr);
         });
