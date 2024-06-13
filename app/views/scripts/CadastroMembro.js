@@ -1,3 +1,84 @@
+
+function prepararDadosMembros() {
+    const dadosMembro = {
+        nome: document.getElementById("campo1").value,
+        comungante: document.getElementById("campo2").value,
+        data_nascimento: document.getElementById("campo3").value,
+        numero_de_rol: document.getElementById("campo5").value,
+        nome_pai: document.getElementById("campo6").value,
+        nome_mae: document.getElementById("campo7").value,
+        sexo: document.getElementById("campo8").value,
+        escolaridade: document.getElementById("campo9").value,
+        profissao: document.getElementById("campo10").value,
+        email: document.getElementById("campo11").value,
+        telefone: document.getElementById("campo12").value,
+        celular: document.getElementById("campo13").value,
+        campoFoto: document.getElementById("upload-file").value,
+        estado_civil: document.getElementById("campo21").value,
+    };
+    return dadosMembro;
+}
+
+function prepararDadosEndereco(id_membro) {
+    const dadosEndereco = {
+        id_membro: id_membro,
+        cep: document.getElementById("campo14").value,
+        endereco: document.getElementById("campo15").value,
+        bairro: document.getElementById("campo16").value,
+        complemento: document.getElementById("campo17").value,
+        cidade: document.getElementById("campo18").value,
+        estado: document.getElementById("campo18_1").value,
+        local_residencia: document.getElementById("campo20").value,
+        local_nascimento: document.getElementById("campo4").value,
+        estado_nascimento: document.getElementById("campo4_1").value,
+    };
+    return dadosEndereco;
+}
+
+function prepararDadosBatismo(id_membro) {
+    const dadosEndereco = {
+        id_membro: id_membro,
+        
+    };
+    return dadosEndereco;
+}
+
+function enviarDadosParaRota(dados,rota) {
+    fetch(`/${rota}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Sucesso:', data);
+    })
+    .catch((error) => {
+        console.error('Erro:', error);
+    });
+}
+
+
+function adicionarIdMembro(idMembro){
+
+}
+
+
+async function SequenciaAPI() {
+    //Primeira Parte
+    dadosPrimeiraParte = prepararDadosMembros();
+    let resposta = enviarDadosParaRota(dadosPrimeiraParte,membro);
+
+
+    //Segunda Parte
+
+    resp
+
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
 
     // Função para capitalizar a primeira letra de cada palavra

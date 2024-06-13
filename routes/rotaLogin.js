@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
             }
 
             try {
-                const [rows] = await con.promise().query('SELECT * FROM login WHERE usuario = ? AND senha = ?', [usuario, senha]);
+                const [rows] = await con.promise().query('SELECT * FROM LOGIN WHERE USUARIO = ? AND SENHA = ?', [usuario, senha]);
 
                 if (rows.length > 0) {
                     res.json({ status: 'success', message: 'Login bem-sucedido' });

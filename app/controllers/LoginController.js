@@ -17,7 +17,7 @@ loginController.login = async function(req, res) {
 
             try {
                 // Consultando o banco de dados para verificar as credenciais
-                const [rows] = await con.promise().query('SELECT * FROM login WHERE usuario = ? AND senha = ?', [usuario, senha]);
+                const [rows] = await con.promise().query('SELECT * FROM LOGIN WHERE USUARIO = ? AND SENHA = ?', [usuario, senha]);
 
                 if (rows.length > 0) {
                     // Credenciais válidas
