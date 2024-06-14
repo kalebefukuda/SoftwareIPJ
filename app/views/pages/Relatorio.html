@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatorio IPJ</title>
     <link rel="stylesheet" href="../styles/Relatorio.css">
+    <link rel="stylesheet" href="../styles/Header.css">
+    <link rel="stylesheet" href="../styles/Footer.css">
 </head>
 <body>
     <header>
@@ -13,9 +15,9 @@
             <a href="/home">Home</a>
             <a href="/cadastro">Cadastro</a>
             <a href="/membros">Membros</a>
-            <a href="/relatorios">Relatórios</a>
+            <a href="/relatorios" class="active">Relatórios</a>
             <a href="/sociedade-interna">Sociedades Internas</a>
-            <a href="/"><ion-icon name="exit-outline"></a>
+            <a href="/" class="icon-link"><ion-icon name="exit-outline"></ion-icon></a>
         </nav>
     </header>
     <div class="titulo-page">
@@ -23,50 +25,51 @@
     </div>
 
     <main class="container">
-        <div class="aniversariantes card" id="listaAniversario">
+        <div class="aniversariantes card">
             <h2>Lista de Aniversariantes</h2>
-            <button>Visualizar</button>
+            <button id="listaAniversario">Visualizar</button>
         </div>
 
-        <div class="chamada-assembleia card" id="listaAssembleia">
+        <div class="chamada-assembleia card">
             <h2>Lista de Chamada Assembleia</h2>
-            <button>Visualizar</button>
+            <button id="listaAssembleia">Visualizar</button>
         </div>
 
-        <div class="comungantes-feminino card" id="listaComunFem">
-            <h2>Lista de Comungantes Feminino</h2>
-            <button>Visualizar</button>
-        </div>
-
-        <div class="comungantes-masculino card" id="listaComunMas">
-            <h2>Lista de Comungantes Masculino</h2>
-            <button>Visualizar</button>
-        </div>
-
-        <div class="nao-comungantes-feminino card" id="listaNaoComunFem">
-            <h2>Lista de nao Comungantes Feminino</h2>
-            <button>Visualizar</button>
-        </div>
-
-        <div class="nao-comungantes-masculino card" id="listaNaoComunMas">
-            <h2>Lista de nao Comungantes Masculino</h2>
-            <button>Visualizar</button>
-        </div>
-
-        <div class="comungantes-sede card" id="listaComunSede">
-            <h2>Lista de Comungantes Sede</h2>
-            <button>Visualizar</button>
-        </div>
-
-        <div class="datas-casamento card" id="listaDataCasamento">
-            <h2>Lista de Datas de Casamento</h2>
-            <button>Visualizar</button>
-        </div>
-
-        <div class="chamada-adm-assembleia card" id="listaAdmAssembleia">
+        <div class="chamada-adm-assembleia card">
             <h2>Lista de Chamada Assembleia Admistrativa</h2>
-            <button>Visualizar</button>
+            <button  id="listaAdmAssembleia">Visualizar</button>
         </div>
+
+        <div class="comungantes-feminino card">
+            <h2>Lista de Comungantes Feminino</h2>
+            <button  id="listaComunFem">Visualizar</button>
+        </div>
+
+        <div class="comungantes-masculino card">
+            <h2>Lista de Comungantes Masculino</h2>
+            <button  id="listaComunMas">Visualizar</button>
+        </div>
+
+        <div class="nao-comungantes-feminino card">
+            <h2>Lista de nao Comungantes Feminino</h2>
+            <button  id="listaNaoComunFem">Visualizar</button>
+        </div>
+
+        <div class="nao-comungantes-masculino card">
+            <h2>Lista de nao Comungantes Masculino</h2>
+            <button id="listaNaoComunMas">Visualizar</button>
+        </div>
+
+        <div class="comungantes-sede card">
+            <h2>Lista de Comungantes Sede</h2>
+            <button  id="listaComunSede">Visualizar</button>
+        </div>
+
+        <div class="datas-casamento card">
+            <h2>Lista de Datas de Casamento</h2>
+            <button  id="listaDataCasamento">Visualizar</button>
+        </div>
+
     </main>
 
     <footer>

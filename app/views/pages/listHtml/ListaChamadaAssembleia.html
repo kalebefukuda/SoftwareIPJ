@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles/listStyle/Listas.css">
+    <link rel="stylesheet" href="../../styles/listStyle/ListasChamada.css">
     <link rel="stylesheet" href="../../styles/Footer.css">
     <link rel="stylesheet" href="../../styles/Header.css">
     <title>Lista Comungantes Sede</title>
@@ -20,7 +20,6 @@
             <a href="/" class="icon-link"><ion-icon name="exit-outline"></ion-icon></a>
         </nav>
     </header>
-
     <div class="titulo-page">
         <h1>Lista de Chamada da Assembleia</h1>
     </div>
@@ -34,9 +33,7 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                </tr>
-                <tr>
-
+                    <th>Assinatura</th>
                 </tr>
             </thead>
             <tbody id="listachamadaAssembleia">
@@ -44,8 +41,13 @@
             </tbody>
         </table>
         <div class="pages">
-            <button class="btn" id="prev">Voltar</button>
-            <button class="btn" id="next">Avançar</button>
+            <div class="pagination-info">
+                Página <span id="page-number" style="font-weight: 700;"></span> de <span id="total-pages" style="font-weight: 700;"></span>
+            </div>
+            <div class="btns">
+                <button class="btn" id="prev">Voltar</button>
+                <button class="btn" id="next">Avançar</button>    
+            </div>
         </div>
     </main>
 
