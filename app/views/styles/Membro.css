@@ -6,56 +6,20 @@
     font-family: "Poppins", sans-serif;
 }
 
-a{
+a {
     text-decoration: none;
-    
 }
 
-h1{
+h1 {
     font-weight: 700;
     font-size: 40px;
-    
 }
 
-button{
+button {
     cursor: pointer;
 }
 
-header{
-    display: flex;
-    max-height: 149px;
-    background-color: white;
-    align-items: center;
-    margin-top: 12px;
-    justify-content: space-between;
-    margin-left: 45px;
-    margin-right: 30px;
-}
-
-.logo-ipb{
-    width: 98px;
-    height: 85px;
-    margin-right: 10px;
-}
-
-.nav-header{
-    font-size: 18px;
-    display: flex;
-    gap: 45px;
-    margin-right: 10px;
-    
-}
-
-.nav-header a{
-    color: #818181;
-}
-
-nav a ion-icon{
-    color: #015B40;
-    font-size: 25px;
-}
-
-.titulo-page{
+.titulo-page {
     background-color: #015B40;
     display: flex;
     justify-content: center;
@@ -64,162 +28,169 @@ nav a ion-icon{
     margin-top: 10px;
 }
 
-.titulo-page h1{
+.titulo-page h1 {
     color: white;
 }
 
-body{
+body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-main{
+main {
     display: flex;
-    flex: 1; /*ocupar todo espaço entre header e footer*/
-}
-
-.input-div{
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    width: 250px;
-}
-
-input{
-    border-radius: 15px;
-    border: none;
-    background-color: #E7E7E7;
-    color: #818181;
-    font-family: "Poppins", sans-serif;
-    width: 250px;
-    height: 34px;
-
-}
-
-.div-button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 25px;
-}
-
-#sexo, #comungante{
-    width: 85px;
-    border: none;
-    border-radius: 29px;
-    height: 40px;
-    background-color: #E7E7E7;
-    padding-left: 15px;
-    color: #015B40;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-
-#nome, #telefone, #nome-pai {
-    font-size: 14px;
-    color: #818181;
-    padding-left: 10px;
-}
-
-
-.filter-section{
-    display: flex;
-    flex: 0 21.33% 0;
-    background-color: #F6F6F6;
-    width: 21.33%; 
-    height: 100%;
-    gap: 10px;
-    flex-direction: column;
-
-}
-
-.text-filtro{
-    margin-top: 40px;
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    color: #015B40;
-}
-
-.filtros, .text-filtro {
-    margin-left: 64px;
-}
-
-.filtros{
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    color: #015B40;
-}
-
-.button-filtro{
-    border-radius: 18px;
-    border: none;
-    background-color: #42B790;
-    color: white;
-    width: 120px;
-    height: 37px;
-    margin-bottom: 40px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover{
-    background-color: #68BFA2;
-    
-}
-
-/* aside direita */
-
-.result-section {
-    display: flex;
-    flex-direction: column;
     flex: 1;
-    margin-left: 70px;
+    padding: 20px;
 }
 
-.result-filtros{
-    padding: 43px;
+.form {
+    justify-content: center;
 }
 
-.titulo-resutado{
+/* FILTROS */
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #F6F6F6;
+    width: 22%;
+    height: 100%;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.text-filtro {
     margin-bottom: 30px;
+    color: #015B40;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.h3 {
+    color: #015B40;
+    margin-left: 10px;
+    font-size: 16px;
+
+}
+
+.filtros {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input {
+    border-radius: 20px;
+    border: 1px;
+    width: 300px;
+    outline: 0 !important;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    height: 45px;
+    background-color:#E7E7E7;
+    font-size: 14px;
+    display: flex;
+}
+
+.input.initial {
+    color: gray !important;
+}
+
+.input.selected {
+    color: black !important;
+}
+
+.input-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button-filtro {
+    margin-top: 25px;
+    width: 50%;
+    padding: 10px 15px;;
+    background-color: #015B40;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-filtro:hover {
+    background-color: #037955;
+}
+
+select {
+    /* Define a aparência do select para que a seta de seleção seja invisível */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Adiciona uma imagem de fundo personalizada para a seta */
+    background-image: url('../assets/chevron-down\ \(1\).svg');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 5px) center;
+    /* padding-left: 5px; */
+}
+
+/* PÁGINA PRINCIPAL */
+.result-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.result-filtros {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-resutado {
+    margin-bottom: 20px;
     color: #015B40;
 }
 
-.card-result{
-    display: flex;
-    background-color: #F6F6F6;
-    width: 60%;
-    height: 125px;
-    border-radius: 20px;
-    gap: 40px;
-}
-
-.img-result{
+.card-result {
     display: flex;
     align-items: center;
-    margin-left: 30px;
-   
+    padding: 10px;
+    background-color: #F6F6F6;
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
 
-.text-result-membro{
-    flex: 2;
+.img-result img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.text-result-membro {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 8px;
-    color: #818181;
+    flex: 1;
 }
 
-.text-icon{
+.text-icon {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.edit-icon{
+.edit-icon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -229,84 +200,20 @@ button:hover{
     width: 35px;
     height: 24px;
     border-radius: 8px;
-    margin-right: 14px;
     transition: background-color 0.3s ease;
 }
 
-.telefone-membro{
-    display: flex;
-    gap: 10px;
+.edit-icon:hover {
+    background-color: #037955;
 }
 
-.campo-foto-card{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.campo-foto-card{
-    width: 100px;
-    height: 100px;
-}
-
-
-footer {
+.telefone-membro {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background-color: #015B40;
-}
-
-.logo-footer img{
-    position:relative;
-    left: 55px;
-    height: 292px;
-    width: 310px;
-}
-
-.social-footer {
-    height: 292px;
-    width: 310px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px; 
-    color: white;
-}
-
-.nav-links-footer {
-    height: 292px;
-    width: 310px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    list-style: none;
-    padding: 0;
-    margin: 0;
     gap: 5px;
+    color: #818181;
 }
 
-.nav-links-footer li a{
-    color: white;
-    font-weight: 700;
-    font-size: 23px;
-    text-align: right;
-}
-.nav-footer{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-}
-
-.icons-social ion-icon{
-    color: white;
-    font-size: 25px;
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
-/* Responsivo */
 @media screen and (max-width: 1600px) {
     .filter-section {
         width: 25.33%;
