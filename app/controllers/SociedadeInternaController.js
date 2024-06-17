@@ -118,4 +118,32 @@ sociedadeInterna.delete = async function(req, res) {
     }
 }
 
+sociedadeInterna.loadSociedade = async function(req, res) {
+    try {
+        let idSociedade = req.params.idSociedade; // Certifique-se de que está usando o nome correto do parâmetro
+
+        let sql = `
+            SELECT s.*, m.nome AS nome_membro, TIMESTAMPDIFF(YEAR, m.DATA_NASCIMENTO, CURDATE()) AS idade
+            FROM sociedade_interna s
+            LEFT JOIN membro_sociedade ms ON s.id_sociedade_interna = ms.id_sociedade_interna
+            LEFT JOIN membro m ON ms.id_membro = m.id_membro
+            WHERE s.id_sociedade_interna = ?;
+        `;
+
+        let [result] = await con.query(sql, [idSociedade]);
+
+        if (result.length === 0) {
+            return res.status(404).json({ ok: false, error: 'Sociedade não encontrada' });
+        }
+
+        const sociedadeInterna = result;
+        return res.json({ ok: true, sociedade: sociedadeInterna });
+        
+    } catch (error) {
+        console.error('Erro ao carregar sociedade:', error);
+        return res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+};
+
+
 export { sociedadeInterna };
