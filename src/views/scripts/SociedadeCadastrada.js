@@ -46,15 +46,13 @@ function renderizarSociedade(sociedade) {
     const banner = document.createElement('div');
     banner.className = 'banner';
     banner.innerHTML = `
-        <div class="banner-div-img">
-            <img src="${sociedade.FOTO_SOCIEDADE}" alt="">
+        <div class="banner-div-img div-image-dir">
+            <img class="image-esq" src="${sociedade.FOTO_SOCIEDADE}" alt="${sociedade.NOME_SOCIEDADE}">
         </div>
         <div class="banner-div-texto">
             <h1>${sociedade.NOME_SOCIEDADE}</h1>
         </div>
-        <div class="banner-div-img">
-            <img src="${sociedade.FOTO_SOCIEDADE}" alt="">
-        </div>
+        
     `;
     main.appendChild(banner);
 
