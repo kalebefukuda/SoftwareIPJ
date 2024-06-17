@@ -77,6 +77,9 @@ server.get("/cadastro", (req, res) => {
 //Sociedade Interna
 server.get("/sociedade-interna", sociedadeInternaRoutes)
 server.get("/sociedade-interna/cadastro",sociedadeInternaRoutes)
+server.get("/sociedade-cadastrada/:id",sociedadeInternaRoutes)
+
+server.get("/api/sociedade-cadastrada/:id",sociedadeInternaRoutes)
 server.get("/api/sociedade-interna",sociedadeInternaRoutes)
 server.post("/api/cadastro-sociedade",sociedadeInternaRoutes)
 

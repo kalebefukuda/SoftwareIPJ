@@ -13,6 +13,10 @@ router.get('/sociedade-interna', (req, res) => {
     res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'Sociedade.html'));
 });
 
+router.get('/sociedade-cadastrada/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'SociedadeCadastrada.html'));
+});
+
 router.get('/sociedade-interna/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'CadastroSociedade.html'));
 });
@@ -23,6 +27,16 @@ router.get('/api/sociedade-interna', async (req, res) => {
         res.json(sociedades);
     } catch (error) {
         console.error('Erro ao buscar sociedades:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+});
+
+router.get('/api/sociedade-cadastrada/:idSociedade', async (req, res) => {
+    try {
+        // Passe os parâmetros corretamente para a função
+        await sociedadeInterna.loadSociedade(req, res);
+    } catch (error) {
+        console.error('Erro ao carregar sociedade:', error);
         res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
     }
 });
