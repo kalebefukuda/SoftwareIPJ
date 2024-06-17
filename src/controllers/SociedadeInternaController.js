@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 
 const con = await connect();
-const uploadDir = path.join(process.cwd(), '/app/views/uploads/');
+const uploadDir = path.join(process.cwd(), '/src/views/uploads/');
 
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);

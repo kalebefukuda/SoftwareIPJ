@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { relatorioGeral } from "../app/controllers/RelatorioController.js";
+import { relatorioGeral } from "../src/controllers/RelatorioController.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,43 +11,43 @@ let router = express.Router();
 
 // Chamar arquivo
 router.get('/relatorios', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'Relatorio.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'Relatorio.html'));
 });
 
 router.get('/relatorios/lista-aniversarios', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaAniversario.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages','listHtml', 'ListaAniversario.html'));
 });
 
 router.get('/relatorios/lista-comungantes-fem', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaComunFem.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages','listHtml', 'ListaComunFem.html'));
 });
 
 router.get('/relatorios/lista-comungantes-mas', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaComunMas.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages','listHtml', 'ListaComunMas.html'));
 });
 
 router.get('/relatorios/lista-nao-comungantes-mas', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaNaoComunMas.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages','listHtml', 'ListaNaoComunMas.html'));
 });
 
 router.get('/relatorios/lista-nao-comungantes-fem', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaNaoComunFem.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages','listHtml', 'ListaNaoComunFem.html'));
 });
 
 router.get('/relatorios/lista-comungantes-sede', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaComunSede.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages','listHtml', 'ListaComunSede.html'));
 });
 
 router.get('/relatorios/lista-data-casamento', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaDataCasamento.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages','listHtml', 'ListaDataCasamento.html'));
 });
 
 router.get('/relatorios/lista-chamada-assembleia', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaChamadaAssembleia.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages','listHtml', 'ListaChamadaAssembleia.html'));
 });
 
 router.get('/relatorios/lista-chamada-assembleia-adm', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages','listHtml', 'ListaChamadaAssembleiaAdm.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages','listHtml', 'ListaChamadaAssembleiaAdm.html'));
 });
 
 

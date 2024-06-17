@@ -86,14 +86,18 @@ main{
 .banner-div-img{
     display: flex;
     align-items: center;
+    position: absolute;
+    left: 0;
+    margin-left: 90px;
 }
 .banner-div-texto{
     justify-content: start;
     align-items: center;
 }
 
-.banner img{
-    height: 225px;
+.image-esq{
+    height: 200px;
+    border-radius: 50%;
 }
 
 .banner h1{

@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { sociedadeInterna } from "../app/controllers/SociedadeInternaController.js";
+import { sociedadeInterna } from "../src/controllers/SociedadeInternaController.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -10,15 +10,15 @@ const __dirname = dirname(__filename);
 let router = express.Router();
 
 router.get('/sociedade-interna', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'Sociedade.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'Sociedade.html'));
 });
 
 router.get('/sociedade-cadastrada/:id', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'SociedadeCadastrada.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'SociedadeCadastrada.html'));
 });
 
 router.get('/sociedade-interna/cadastro', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'CadastroSociedade.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'CadastroSociedade.html'));
 });
 
 router.get('/api/sociedade-interna', async (req, res) => {

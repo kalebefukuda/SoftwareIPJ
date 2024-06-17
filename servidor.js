@@ -22,12 +22,12 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
 // Configurar o Express.js para servir arquivos estáticos
-server.use(express.static(path.join(__dirname, 'app', 'views')));
+server.use(express.static(path.join(__dirname, 'src', 'views')));
 
 
 //Login
 server.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Login.html'));
+    res.sendFile(path.join(__dirname, 'src', 'views', 'pages', 'Login.html'));
 });
 server.use("/login", loginRoutes);
 
@@ -35,7 +35,7 @@ server.use("/login", loginRoutes);
 
 // Home
 server.get("/home", (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'Home.html'));
+    res.sendFile(path.join(__dirname, 'src', 'views', 'pages', 'Home.html'));
 });
 
 //Cadastro 
@@ -70,7 +70,7 @@ server.get("/api/lista-chamada-assembleia-adm", relatorioRoutes)
 
 // Cadastro
 server.get("/cadastro", (req, res) => {
-    res.sendFile(path.join(__dirname, 'app', 'views', 'pages', 'CadastroMembro.html'));
+    res.sendFile(path.join(__dirname, 'src', 'views', 'pages', 'CadastroMembro.html'));
 });
 
 

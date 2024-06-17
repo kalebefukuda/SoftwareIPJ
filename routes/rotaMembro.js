@@ -9,7 +9,7 @@ const __dirname = dirname(__filename);
 let router = express.Router();
 
 router.get('/membros', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app', 'views', 'pages', 'Membro.html'));
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'Membro.html'));
 });
 
 export {router}
