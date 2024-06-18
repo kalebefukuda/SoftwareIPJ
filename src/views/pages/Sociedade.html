@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../styles/Header.css">
     <link rel="stylesheet" href="../styles/Footer.css">
 </head>
+
 <body>
     <header>
         <a href="/home"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
@@ -23,7 +25,7 @@
     <div class="titulo-page">
         <h1>Sociedades Internas</h1>
     </div>
-    
+
     <main class="container" id="sociedades-container">
         <button class="sociedade card" id="newSociedade">
             <div class="campo-img">
@@ -33,9 +35,20 @@
             <div class="text-card">
                 <h2>Cadastre uma nova sociedade</h2>
                 <ion-icon name="add-outline"></ion-icon>
-            </div>    
+            </div>
         </button>
-        
+        <!-- Modal de Confirmação de Exclusão -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Deseja deletar essa Sociedade Interna?</h2>
+                <div class="btns">
+                    <button id="confirmDelete">Excluir</button>
+                    <button id="cancelDelete">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer>
@@ -46,9 +59,12 @@
         <div class="social-footer">
             <h2>Siga-nos</h2>
             <div class="icons-social">
-                <a href="https://www.facebook.com/ipjoinville/?locale=pt_BR" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
-                <a href="https://www.instagram.com/ipb.joinville/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
-                <a href="https://www.youtube.com/@IgrejaPresbiterianadeJoinville" target="_blank"><ion-icon name="logo-youtube"></ion-icon></a>
+                <a href="https://www.facebook.com/ipjoinville/?locale=pt_BR" target="_blank"><ion-icon
+                        name="logo-facebook"></ion-icon></a>
+                <a href="https://www.instagram.com/ipb.joinville/" target="_blank"><ion-icon
+                        name="logo-instagram"></ion-icon></a>
+                <a href="https://www.youtube.com/@IgrejaPresbiterianadeJoinville" target="_blank"><ion-icon
+                        name="logo-youtube"></ion-icon></a>
             </div>
         </div>
 
@@ -63,9 +79,10 @@
         </div>
 
     </footer>
-    
+
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="../scripts/Sociedade.js"></script>
+
 </html>
