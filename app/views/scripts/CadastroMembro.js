@@ -61,25 +61,65 @@ function enviarDadosParaRota(dados,rota) {
 }
 
 
-function adicionarIdMembro(idMembro){
 
+async function sequenciaAPI() {
+    // Primeira Parte
+    const dadosMembro = prepararDadosMembros();
+    const respostaMembro = await enviarDadosParaRota(dadosMembro, 'membro');
+    const id_membro = respostaMembro.id_membro;
+
+    // Segunda Parte
+    const promises = [
+        enviarDadosParaRota(prepararDadosEndereco(id_membro), 'endereco'),
+        enviarDadosParaRota(prepararDadosAdmissao(id_membro), 'admissao'),
+        enviarDadosParaRota(prepararDadosBatismo(id_membro), 'batismo'),
+        enviarDadosParaRota(prepararDadosDemissao(id_membro), 'demissao'),
+        enviarDadosParaRota(prepararDadosEleicaoDiacono(id_membro), 'eleicaoDiacono'),
+        enviarDadosParaRota(prepararDadosEleicaoPresbiterio(id_membro), 'eleicaoPresbiterio'),
+        enviarDadosParaRota(prepararDadosProfissaoDeFe(id_membro), 'profissaoDeFe'),
+        enviarDadosParaRota(prepararDadosRolSeparado(id_membro), 'rolSeparado')
+    ];
+
+    await Promise.all(promises);
 }
 
 
-async function SequenciaAPI() {
-    //Primeira Parte
-    dadosPrimeiraParte = prepararDadosMembros();
-    let resposta = enviarDadosParaRota(dadosPrimeiraParte,membro);
 
-
-    //Segunda Parte
-
-    resp
-
-}
+const botaoSalvar = document.getElementById('button-salvar');
+    
+botaoSalvar.addEventListener('submit', async () => {
+    try {
+        await sequenciaAPI();
+        alert('Dados salvos com sucesso!');
+        // Aqui você pode adicionar mais ações após o salvamento, se necessário
+    } catch (error) {
+        console.error('Erro ao salvar dados:', error);
+        alert('Ocorreu um erro ao salvar os dados. Verifique o console para mais detalhes.');
+        // Tratamento de erro, se necessário
+    }
+});
 
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    const form = document.querySelector('.form');
+
+    if(form) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evita o envio padrão do formulário
+
+            // Aqui você pode acessar os campos do formulário e realizar as validações necessárias
+            // Por exemplo, vamos acessar o campo "Nome completo"
+            const campo1 = document.getElementById('campo1');
+            const nomeCompleto = campo1.value;
+
+            // Exemplo de validação simples
+            if (nomeCompleto.trim() === '') {
+                alert('Por favor, preencha o campo Nome completo.');
+                return; // Para a execução se o campo não estiver preenchido
+            }
+        })
+    }
 
     // Função para capitalizar a primeira letra de cada palavra
     function capitalizeWords(str) {
