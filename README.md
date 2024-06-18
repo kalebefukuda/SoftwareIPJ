@@ -5,7 +5,7 @@
 <h3 align="center">Projeto Software IPJ</h3>
 
 <p align="center">
-  <img src="app/views/assets/imgProjeto.png" alt="Home do Projeto">
+  <img src="src/views/assets/imgProjeto.png" alt="Home do Projeto">
 </p>
 
 
