@@ -5,13 +5,14 @@
     padding: 0;
     font-family: "Poppins", sans-serif;
 }
-body{
+
+body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-main{
+main {
     display: flex;
     flex: 1;
     flex-wrap: wrap;
@@ -22,16 +23,16 @@ main{
     margin-left: 30px;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-h1{
+h1 {
     font-weight: 700;
     font-size: 40px;
 }
 
-.titulo-page{
+.titulo-page {
     background-color: #015B40;
     display: flex;
     justify-content: center;
@@ -41,24 +42,27 @@ h1{
     margin-bottom: 25px;
 }
 
-.titulo-page h1{
+.titulo-page h1 {
     color: white;
 }
 
 /* main */
 
-.container h2{
+.container h2 {
     color: #B5B5B5;
     width: 312px;
     text-align: center;
 }
 
-.container > div {
+.container>div {
     padding: 10px;
     height: 128px;
 }
 
-.card{
+.card {
+    position: relative;
+    /* Essencial para posicionar os ícones de ação */
+
     display: flex;
     background-color: #EFEFEF;
     padding: 10px;
@@ -70,47 +74,105 @@ h1{
     transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
-.card:hover{
-    transform: scale(1.01);
+.action-icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* color: white; */
+    margin-block: 10px;
+}
+
+.edit-icon,
+.delete-icon {
+    width: 40px;
+    height: 60px;
+
+    color: #015B40;
+    /* Cor inicial dos ícones */
+    cursor: pointer;
+    font-size: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.edit-icon {
+    border-radius: 5px 17px 5px 5px;
+}
+
+.delete-icon {
+    border-radius: 5px 5px 17px 5px;
+}
+
+.edit-icon:hover,
+.delete-icon:hover {
+    transform: scale(1.1);
+    /* Aumenta ligeiramente o botão ao passar o mouse */
+}
+
+.card:hover .edit-icon {
+    background-color: #0037839f;
+    /* Fundo azul para o ícone editar */
+    color: white;
+    /* Ícone colorido em branco */
+}
+
+.card:hover .delete-icon {
+    background-color: #8000009f;
+    /* Fundo vermelho para o ícone excluir */
+    color: white;
+    /* Cor dos ícones quando hover */
+}
+
+.card:hover {
+    background-color: #0b6047;
+    /* Altera a cor de fundo do botão ao passar o mouse */
+    transform: scale(1.03);
+    /* Aumenta ligeiramente o botão ao passar o mouse */
+}
+
+.card:hover {
+    transform: scale(1.03);
     background-color: #0b6047;
 }
 
-.campo-img{
+.campo-img {
     margin-left: 20px;
 }
 
 
-.campo-foto-card{
+.campo-foto-card {
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
 
-.campo-foto-card-white{
+.campo-foto-card-white {
     display: none;
 }
 
-.card:hover .campo-foto-card{
+.card:hover .campo-foto-card {
     display: none;
 }
 
-.card:hover .campo-foto-card-white{
+.card:hover .campo-foto-card-white {
     display: inline-block;
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    
+
 }
 
-.card-sociedade-cadastrada{
+.card-sociedade-cadastrada {
     background-color: #015B40;
 }
 
-.card-sociedade-cadastrada:hover{
+.card-sociedade-cadastrada:hover {
     background-color: #037955;
 }
 
-.text-card{
+.text-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -118,22 +180,125 @@ h1{
     color: gray;
 }
 
-.text-sociedade-cadastrada h2{
+.text-sociedade-cadastrada h2 {
     color: white;
 }
 
 .card:hover .text-card h2 {
-    color: white; /* Altera a cor para branco quando há hover */
+    color: white;
+    /* Altera a cor para branco quando há hover */
 }
 
-.text-card ion-icon{
+.text-card ion-icon {
     font-size: 32px;
     color: #B5B5B5;
-    font-weight:bold;
+    font-weight: bold;
 }
 
-.card:hover .text-card ion-icon{
+.card:hover .text-card ion-icon {
     font-size: 32px;
-    color:white;
-    font-weight:bold;
+    color: white;
+    font-weight: bold;
 }
+
+#deleteModal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semitransparente */
+    display: none; /* Oculto por padrão */
+
+    z-index: 1000; /* Certifique-se que é alto o suficiente */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%; /* Ajuste conforme a necessidade */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve para destaque */
+    display: flex;
+    flex-direction: column; /* Organiza verticalmente */
+    align-items: center; /* Centraliza horizontalmente todos os filhos */
+}
+
+.close {
+    align-self: flex-end; /* Alinha o botão fechar no final do conteúdo */
+    cursor: pointer !important;
+    font-size: 24px; /* Aumenta o tamanho para melhor cliquabilidade */
+    margin-bottom: 20px; /* Espaço antes do título */
+    color: #015B40;
+}
+
+
+
+.modal-content h2 {
+    font-size: 24px;
+    color: #015B40;
+    margin-bottom: 20px;
+    white-space: nowrap; /* Mantém o texto em uma única linha */
+    overflow: hidden; /* Esconde qualquer texto que exceda o espaço horizontal */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+    width: 100%; /* Garante que o h2 ocupe toda a largura do contentor */
+    text-align: center; /* Centraliza o texto horizontalmente */
+}
+
+
+#confirmDelete, #cancelDelete {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+#confirmDelete {
+    background-color: #015B40; /* Verde para ação positiva */
+    color: white;
+    /* margin: auto; */
+    width: 120px;
+    padding: 10px 15px;;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 0 !important;
+    outline: 0 !important;    
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: background-color 0.3s ease;
+    align-self: end;
+}
+
+#confirmDelete:hover {
+    background-color: #037955; /* Verde um pouco mais escuro ao passar o mouse */
+}
+
+#cancelDelete {
+    background-color: #535353; /* Vermelho para cancelar */
+    color: white;
+    width: 120px;
+    /* margin: auto; */
+    padding: 10px 15px;;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 0 !important;
+    outline: 0 !important;    
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: background-color 0.3s ease;
+    align-self: end;
+}
+
+#cancelDelete:hover {
+    cursor: pointer;
+    background-color: #7c7c7c; /* Vermelho um pouco mais escuro ao passar o mouse */
+}
+

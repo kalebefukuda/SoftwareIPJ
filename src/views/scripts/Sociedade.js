@@ -1,4 +1,10 @@
-document.getElementById('newSociedade').addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    fetchSociedades();
+    setupModalControls();
+});
+
+document.getElementById('newSociedade').addEventListener('click', function (event) {
+    event.stopPropagation(); // Assegura que não haja propagação do evento que possa interferir com outros elementos
     window.location.href = '/sociedade-interna/cadastro';
 });
 
@@ -7,7 +13,7 @@ async function fetchSociedades() {
         const response = await fetch('/api/sociedade-interna');
         const sociedades = await response.json();
         const container = document.getElementById('sociedades-container');
-        
+
         sociedades.forEach(sociedade => {
             const button = document.createElement('button');
             button.className = 'sociedade card card-sociedade-cadastrada';
@@ -18,24 +24,65 @@ async function fetchSociedades() {
                 </div>
                 <div class="text-card text-sociedade-cadastrada">
                     <h2>${sociedade.NOME_SOCIEDADE}</h2>
+                </div>
+                <div class="action-icons">
+                    <button type="button" class="edit-icon" onclick="editSociedade('${sociedade.ID_SOCIEDADE_INTERNA}', event)">
+                        <ion-icon name="pencil-outline"></ion-icon>
+                    </button>
+                    <button type="button" class="delete-icon" onclick="showDeleteModal('${sociedade.ID_SOCIEDADE_INTERNA}', event)">
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </button>
                 </div>`;
-            
-            // Adiciona o atributo data-id com o ID_SOCIEDADE_INTERNA da sociedade
-            button.setAttribute('data-id', sociedade.ID_SOCIEDADE_INTERNA);
 
-            // Utiliza bind para passar o ID_SOCIEDADE_INTERNA para a função de clique
-            button.addEventListener('click', function(event) {
-                const sociedadeId = event.currentTarget.getAttribute('data-id');
-                window.location.href = `/sociedade-cadastrada/${sociedadeId}`;
+            button.addEventListener('click', function (event) {
+                event.stopPropagation();
+                window.location.href = `/sociedade-cadastrada/${sociedade.ID_SOCIEDADE_INTERNA}`;
             });
 
+            button.setAttribute('data-id', sociedade.ID_SOCIEDADE_INTERNA);
             container.appendChild(button);
-            console.log(sociedade)
         });
     } catch (error) {
         console.error('Erro ao buscar sociedades:', error);
     }
 }
 
-// Chama a função quando a página é carregada
-window.onload = fetchSociedades;
+function setupModalControls() {
+    const modal = document.getElementById("deleteModal");
+    const span = document.getElementsByClassName("close")[0];
+    const cancelDelete = document.getElementById("cancelDelete");
+
+    span.onclick = cancelDelete.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+}
+
+function showDeleteModal(id, event) {
+    event.stopPropagation();
+    const modal = document.getElementById("deleteModal");
+    modal.style.display = "flex";
+
+    const confirmDelete = document.getElementById("confirmDelete");
+    confirmDelete.onclick = function (event) {
+        event.stopPropagation();
+        deleteSociedade(id);
+    };
+}
+
+function editSociedade(id, event) {
+    event.stopPropagation();
+    window.location.href = `/editar-sociedade/${id}`;
+}
+
+function deleteSociedade(id) {
+    console.log('Deletando sociedade ID:', id);
+    const modal = document.getElementById("deleteModal");
+    modal.style.display = "none";
+    // Implementar chamada de API de exclusão aqui, se necessário
+}
