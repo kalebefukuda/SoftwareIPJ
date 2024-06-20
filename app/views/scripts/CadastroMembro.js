@@ -126,10 +126,10 @@ async function sequenciaAPI() {
 
         //Rota Admissão
 
-        const dadosAdmissao = prepararDadosAdmissão(id_membro);
-        console.log(dadosAdmissao);
-        const resposta = await enviarDadosParaRota(dadosAdmissao, 'admissao');
-        console.log(resposta);
+        // const dadosAdmissao = prepararDadosAdmissão(id_membro);
+        // console.log(dadosAdmissao);
+        // const resposta = await enviarDadosParaRota(dadosAdmissao, 'admissao');
+        // console.log(resposta);
 
 
         alert('Rota testada com sucesso!');
