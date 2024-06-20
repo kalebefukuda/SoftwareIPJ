@@ -113,7 +113,6 @@ h1 {
 
 .card:hover .edit-icon {
     background-color: #0037839f;
-    /* Fundo azul para o ícone editar */
     color: white;
     /* Ícone colorido em branco */
 }
@@ -274,10 +273,11 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: background-color 0.3s ease;
     align-self: end;
+    font-weight: 400;
 }
 
 #confirmDelete:hover {
-    background-color: #037955; /* Verde um pouco mais escuro ao passar o mouse */
+    background-color: #037955;
 }
 
 #cancelDelete {
@@ -295,6 +295,7 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: background-color 0.3s ease;
     align-self: end;
+    font-weight: 400;
 }
 
 #cancelDelete:hover {
