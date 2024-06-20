@@ -1,28 +1,11 @@
 import MembroModel from '../models/MembroModel.js'
 import moment from 'moment';
 
-
 const MembroController = {
 
     inserirMembro: async (req, res) => {
-        const {
-            nome,
-            comungante,
-            data_nascimento,
-            nome_pai,
-            nome_mae,
-            sexo,
-            escolaridade,
-            profissao,
-            numero_de_rol,
-            email,
-            telefone,
-            celular,
-            foto_membro,
-            estado_civil
-        } = await req.body;
-            // Criação de novo objeto do model 
-            const novoMembro = new MembroModel(
+        try {
+            const {
                 nome,
                 comungante,
                 data_nascimento,
@@ -37,7 +20,26 @@ const MembroController = {
                 celular,
                 foto_membro,
                 estado_civil
+            } = req.body;
+
+            // Criação de novo objeto do model
+            const novoMembro = new MembroModel(
+                nome,
+                comungante,
+                data_nascimento,
+                nome_pai,
+                nome_mae,
+                sexo,
+                escolaridade,
+                profissao,
+                numero_de_rol,
+                email,
+                limparNumeroTelefone(telefone), // Pode lançar erro
+                limparNumeroTelefone(celular),  // Pode lançar erro
+                foto_membro,
+                estado_civil
             );
+
             // Uso da função criada no model
             MembroModel.adicionarMembro(novoMembro, (error, memberId) => {
                 if (error) {
@@ -46,9 +48,13 @@ const MembroController = {
                     res.status(201).json({ message: 'Membro inserido com sucesso', memberId: memberId });
                 }
             });
+        } catch (error) {
+            console.error('Erro ao inserir membro:', error.message);
+            res.status(400).json({ error: error.message });
+        }
     },
 
-    listarTodosMembros:  async (req, res) => {
+    listarTodosMembros: async (req, res) => {
         MembroModel.listarTodosMembros((error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Erro na requisição dos membros' });
@@ -60,7 +66,7 @@ const MembroController = {
 
     obterMembroPorId: async (req, res) => {
         const memberId = req.params.id;
-    
+
         MembroModel.obterMembroPorId(memberId, (err, membro) => {
             if (err) {
                 res.status(500).json({ error: 'Erro ao buscar membro por ID' });
@@ -71,12 +77,11 @@ const MembroController = {
             }
         });
     },
-    
 
     atualizarMembro: async (req, res) => {
         const memberId = req.params.id;
         const novosDadosMembro = req.body; // Dados atualizados do membro
-    
+
         MembroModel.atualizarMembro(memberId, novosDadosMembro, (err, result) => {
             if (err) {
                 res.status(500).json({ error: 'Erro ao atualizar membro' });
@@ -92,7 +97,7 @@ const MembroController = {
 
     excluirMembro: async (req, res) => {
         const memberId = req.params.id;
-    
+
         MembroModel.excluirMembro(memberId, (err, result) => {
             if (err) {
                 res.status(500).json({ error: 'Erro ao excluir membro' });
@@ -105,18 +110,19 @@ const MembroController = {
             }
         });
     },
-    
-    
 };
 
+// FUNÇÕES DE VERIFICAÇÃO OU CONVERSÃO
 
 
+function limparNumeroTelefone(numero) {
+    if (numero.length < 10 || numero.length > 14) {
+        // Lança um erro se o formato do número estiver incorreto
+        throw new Error('Formato do número errado');
+    }
 
-//FUNÇÕES DE VERIFICAÇÃO OU CONVERSÃO
-
-function VerificaData(data) {
-    const dataNascimento = moment(data, 'YYYY-MM-DD');
-    const dataAtual = moment();
-    return dataNascimento.isAfter(dataAtual) || moment().diff(dataNascimento, 'years') > 100;
+    // Remove parênteses, espaços, hifens e outros caracteres não numéricos
+    return numero.replace(/[^\d]/g, '');
 }
+
 export default MembroController;

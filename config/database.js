@@ -4,7 +4,8 @@ import mysql from 'mysql2';
 const databaseConfig = {
     host: 'localhost',
     user: 'root',
-    password: "",
+    port: '3307',
+    password: '123456',
     database: 'SOFTWARE_IPJ'
 };
 

@@ -2,7 +2,7 @@
 function prepararDadosMembros() {
     const dadosMembro = {
         nome: document.getElementById("campo1").value,
-        comungante: document.getElementById("campo2").value,
+        comungante: converteComungante(document.getElementById("campo2").value),
         data_nascimento: document.getElementById("campo3").value,
         numero_de_rol: document.getElementById("campo5").value,
         nome_pai: document.getElementById("campo6").value,
@@ -36,58 +36,115 @@ function prepararDadosEndereco(id_membro) {
 }
 
 function prepararDadosBatismo(id_membro) {
-    const dadosEndereco = {
+    const dadosBatismo = {
         id_membro: id_membro,
-        
+        data_batismo: document.getElementById("campo23").value,
+        nome_oficiante: document.getElementById("campo24").value
     };
-    return dadosEndereco;
+    return dadosBatismo;
 }
 
-function enviarDadosParaRota(dados,rota) {
-    fetch(`/${rota}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dados)
-    })
-    .then(response => response.json())
-    .then(data => {
+function prepararDadosProfissaodeFé(id_membro) {
+    const dadosProfissaodeFe = {
+        data_profissao_de_fe: document.getElementById("campo25").value,
+        nome_oficiante: document.getElementById("campo26").value,
+        id_membro: id_membro
+    };
+    return dadosProfissaodeFe;
+}
+
+function prepararDadosAdmissão(id_membro) {
+    const dadosAdmissao = {
+        data_admissao: document.getElementById("campo27").value,
+        forma_admissao: document.getElementById("campo28").value,
+        numero_ata: document.getElementById("campo29").value,
+        id_membro: id_membro
+    };
+    return dadosAdmissao;
+}
+
+async function enviarDadosParaRota(dados, rota) {
+    try {
+        const response = await fetch(`/${rota}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao enviar dados para a rota');
+        }
+
+        const data = await response.json();
         console.log('Sucesso:', data);
-    })
-    .catch((error) => {
+        return data;
+    } catch (error) {
         console.error('Erro:', error);
-    });
+        throw error;
+    }
 }
-
-
 
 async function sequenciaAPI() {
-    // Primeira Parte
-    const dadosMembro = prepararDadosMembros();
-    const respostaMembro = await enviarDadosParaRota(dadosMembro, 'membro');
-    const id_membro = respostaMembro.id_membro;
+    try {
+        // Primeira Parte
+        const dadosMembro = prepararDadosMembros();
+        const respostaMembro = await enviarDadosParaRota(dadosMembro, 'membro');
+        const id_membro = respostaMembro.memberId;
+        console.log(id_membro);
 
-    // Segunda Parte
-    const promises = [
-        enviarDadosParaRota(prepararDadosEndereco(id_membro), 'endereco'),
-        enviarDadosParaRota(prepararDadosAdmissao(id_membro), 'admissao'),
-        enviarDadosParaRota(prepararDadosBatismo(id_membro), 'batismo'),
-        enviarDadosParaRota(prepararDadosDemissao(id_membro), 'demissao'),
-        enviarDadosParaRota(prepararDadosEleicaoDiacono(id_membro), 'eleicaoDiacono'),
-        enviarDadosParaRota(prepararDadosEleicaoPresbiterio(id_membro), 'eleicaoPresbiterio'),
-        enviarDadosParaRota(prepararDadosProfissaoDeFe(id_membro), 'profissaoDeFe'),
-        enviarDadosParaRota(prepararDadosRolSeparado(id_membro), 'rolSeparado')
-    ];
+        if (!id_membro) {
+            throw new Error('ID do membro não foi retornado pela API');
+        }
 
-    await Promise.all(promises);
+        // Segunda Parte
+        // Teste apenas uma rota por vez
+
+
+        //Rota Endereço
+
+        // const dadosEndereco = prepararDadosEndereco(id_membro);
+        // console.log(dadosEndereco);
+        // const resposta = await enviarDadosParaRota(dadosEndereco, 'endereco');
+        // console.log(resposta);
+
+
+        //Rota Batismo
+
+        // const dadosBatismo = prepararDadosBatismo(id_membro);
+        // console.log(dadosBatismo);
+        // const resposta = await enviarDadosParaRota(dadosBatismo, 'batismo');
+        // console.log(resposta);
+
+        //Rota Profissão de Fé
+
+        // const dadosProfissaodeFe = prepararDadosProfissaodeFé(id_membro);
+        // console.log(dadosProfissaodeFe);
+        // const resposta = await enviarDadosParaRota(dadosProfissaodeFe, 'profissao-de-fe');
+        // console.log(resposta);
+
+        //Rota Admissão
+
+        const dadosAdmissao = prepararDadosAdmissão(id_membro);
+        console.log(dadosAdmissao);
+        const resposta = await enviarDadosParaRota(dadosAdmissao, 'admissao');
+        console.log(resposta);
+
+
+        alert('Rota testada com sucesso!');
+    } catch (error) {
+        console.error('Erro ao testar rota:', error);
+        alert('Ocorreu um erro ao testar a rota. Verifique o console para mais detalhes.');
+    }
 }
 
 
 
-const botaoSalvar = document.getElementById('button-salvar');
-    
-botaoSalvar.addEventListener('submit', async () => {
+
+
+
+document.getElementById('button-salvar').addEventListener('click', async () => {
     try {
         await sequenciaAPI();
         alert('Dados salvos com sucesso!');
@@ -100,26 +157,30 @@ botaoSalvar.addEventListener('submit', async () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', function () {
-
-    const form = document.querySelector('.form');
-
-    if(form) {
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // Evita o envio padrão do formulário
-
-            // Aqui você pode acessar os campos do formulário e realizar as validações necessárias
-            // Por exemplo, vamos acessar o campo "Nome completo"
-            const campo1 = document.getElementById('campo1');
-            const nomeCompleto = campo1.value;
-
-            // Exemplo de validação simples
-            if (nomeCompleto.trim() === '') {
-                alert('Por favor, preencha o campo Nome completo.');
-                return; // Para a execução se o campo não estiver preenchido
-            }
-        })
+// Função que converte a escolha em "S" ou "N"
+function converteComungante(escolha) {
+    if (escolha.toLowerCase() === 'sim') {
+        return true;
+    } else if (escolha.toLowerCase() === 'não' || escolha.toLowerCase() === 'nao') {
+        return false;
+    } else {
+        return '';
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
 
     // Função para capitalizar a primeira letra de cada palavra
     function capitalizeWords(str) {
