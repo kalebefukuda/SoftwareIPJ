@@ -17,6 +17,10 @@ router.get('/sociedade-cadastrada/:id', (req, res) => {
     res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'SociedadeCadastrada.html'));
 });
 
+router.get('/sociedade-interna/editar-sociedade/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'EditarSociedade.html'));
+});
+
 router.get('/sociedade-interna/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'CadastroSociedade.html'));
 });
@@ -50,7 +54,7 @@ router.post('/api/cadastro-sociedade', async (req, res) => {
     }
 });
 
-router.put('/sociedade-interna/:id_sociedade_interna', async (req, res) => {
+router.put('/api/sociedade-interna/editar-sociedade/:id_sociedade_interna', async (req, res) => {
     try {
         await sociedadeInterna.update(req, res);
     } catch (error) {
@@ -59,7 +63,7 @@ router.put('/sociedade-interna/:id_sociedade_interna', async (req, res) => {
     }
 });
 
-router.delete('/sociedade-interna/:id_sociedade_interna', async (req, res) => {
+router.delete('/api/sociedade-interna/:id_sociedade_interna', async (req, res) => {
     try {
         await sociedadeInterna.delete(req, res);
     } catch (error) {
