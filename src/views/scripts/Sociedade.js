@@ -77,7 +77,7 @@ function showDeleteModal(id, event) {
 
 function editSociedade(id, event) {
     event.stopPropagation();
-    window.location.href = `/editar-sociedade/${id}`;
+    window.location.href = `/sociedade-interna/editar-sociedade/${id}`;
 }
 
 function deleteSociedade(id) {

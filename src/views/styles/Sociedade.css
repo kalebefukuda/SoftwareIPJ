@@ -112,14 +112,14 @@ h1 {
 }
 
 .card:hover .edit-icon {
-    background-color: #0037839f;
+    background-color: #1785de;
     /* Fundo azul para o ícone editar */
     color: white;
     /* Ícone colorido em branco */
 }
 
 .card:hover .delete-icon {
-    background-color: #8000009f;
+    background-color:#d71b2bf1;
     /* Fundo vermelho para o ícone excluir */
     color: white;
     /* Cor dos ícones quando hover */
