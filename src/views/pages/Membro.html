@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,14 @@
     <link rel="stylesheet" href="../styles/Header.css">
     <link rel="stylesheet" href="../styles/Footer.css">
 </head>
+
 <body>
     <header>
         <a href="/home"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
         <nav class="nav-header">
             <a href="/home">Home</a>
             <a href="/cadastro">Cadastro</a>
-            <a href="/membros" class="active" >Membros</a>
+            <a href="/membros" class="active">Membros</a>
             <a href="/relatorios">Relatórios</a>
             <a href="/sociedade-interna">Sociedades Internas</a>
             <a href="/" class="icon-link"><ion-icon name="exit-outline"></a>
@@ -47,15 +49,17 @@
                     <div class="input-div">
                         <h3 class="h3">Sexo</h3>
                         <select name="sexo" id="sexo" class="input">
-                            <option value="masculino">M</option>
-                            <option value="feminino" selected>F</option>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="mas">Masculino</option>
+                            <option value="fem">Feminino</option>
                         </select>
                     </div>
                     <div class="input-div">
                         <h3 class="h3">Comungante</h3>
                         <select name="comungante" id="comungante" class="input">
+                            <option value="" disabled selected>Selecione uma opção</option>
                             <option value="sim">Sim</option>
-                            <option value="nao" selected>Não</option>
+                            <option value="nao">Não</option>
                         </select>
                     </div>
                 </div>
@@ -72,18 +76,34 @@
                     </div>
                     <div class="text-result-membro">
                         <div class="text-icon">
-                            <h3>Nome membro</h3>
+                            <h3 class="memberName">Nome membro</h3>
                             <button class="edit-icon">
                                 <ion-icon name="pencil-outline"></ion-icon>
                             </button>
                         </div>
                         <div class="telefone-membro">
                             <ion-icon name="phone-portrait-outline"></ion-icon>
-                            <h5>telefone membro</h5>
+                            <h5>(47) 99999-8888</h5>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="card-result">
+                    <div class="img-result">
+                        <img class="campo-foto-card" src="../assets/Ellipse.png" alt="Foto do membro">
+                    </div>
+                    <div class="text-result-membro">
+                        <div class="text-icon">
+                            <h3 class="memberName">Nome membro</h3>
+                            <button class="edit-icon">
+                                <ion-icon name="pencil-outline"></ion-icon>
+                            </button>
+                        </div>
+                        <div class="telefone-membro">
+                            <ion-icon name="phone-portrait-outline"></ion-icon>
+                            <h5>(47) 99999-8888</h5>
+                        </div>
+                    </div>
+                </div>
         </section>
     </main>
 
@@ -95,9 +115,12 @@
         <div class="social-footer">
             <h2>Siga-nos</h2>
             <div class="icons-social">
-                <a href="https://www.facebook.com/ipjoinville/?locale=pt_BR" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
-                <a href="https://www.instagram.com/ipb.joinville/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
-                <a href="https://www.youtube.com/@IgrejaPresbiterianadeJoinville" target="_blank"><ion-icon name="logo-youtube"></ion-icon></a>
+                <a href="https://www.facebook.com/ipjoinville/?locale=pt_BR" target="_blank"><ion-icon
+                        name="logo-facebook"></ion-icon></a>
+                <a href="https://www.instagram.com/ipb.joinville/" target="_blank"><ion-icon
+                        name="logo-instagram"></ion-icon></a>
+                <a href="https://www.youtube.com/@IgrejaPresbiterianadeJoinville" target="_blank"><ion-icon
+                        name="logo-youtube"></ion-icon></a>
             </div>
         </div>
 
@@ -112,9 +135,10 @@
         </div>
 
     </footer>
-    
+
 </body>
 <script src="../scripts/Membro.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </html>

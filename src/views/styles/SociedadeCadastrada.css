@@ -27,41 +27,6 @@ body{
     min-height: 100vh;
 }
 
-header{
-    display: flex;
-    max-height: 149px;
-    background-color: white;
-    align-items: center;
-    margin-top: 12px;
-    justify-content: space-between;
-    margin-left: 45px;
-    margin-right: 30px;
-}
-
-.logo-ipb{
-    width: 98px;
-    height: 85px;
-    margin-right: 10px;
-}
-
-.nav-header{
-    font-size: 18px;
-    display: flex;
-    gap: 45px;
-    margin-right: 10px;
-    
-}
-
-.nav-header a{
-    color: #818181;
-}
-
-nav a ion-icon{
-    color: #015B40;
-    font-size: 25px;
-}
-
-
 main{
     display: flex;
     flex: 1; /*ocupar todo espaço entre header e footer*/
@@ -126,7 +91,7 @@ main{
 }
 .busca-div input{
     border: none;
-    color: #757575;
+    color: #000000;
     background-color: #E7E7E7;
     width: 100%;
     margin-left: 12px;
@@ -134,6 +99,16 @@ main{
 
 .busca-div ion-icon{
     margin-right: 12px;
+}
+
+
+
+.search-btn {
+    border: 0 !important;
+    background: none;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 .btn-add{
@@ -228,65 +203,6 @@ input:focus {
     width: 100px;
     height: 100px;
 }
-
-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #015B40;
-    margin-top: 30px;
-}
-
-.logo-footer img{
-    position:relative;
-    left: 55px;
-    height: 292px;
-    width: 310px;
-}
-
-
-.social-footer {
-    height: 292px;
-    width: 310px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px; 
-    color: white;
-}
-
-.nav-links-footer {
-    height: 292px;
-    width: 310px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    gap: 5px;
-}
-
-.nav-links-footer li a{
-    color: white;
-    font-weight: 700;
-    font-size: 23px;
-    text-align: right;
-}
-.nav-footer{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-}
-
-.icons-social ion-icon{
-    color: white;
-    font-size: 25px;
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
 
 /* Responsivo */
 @media screen and (max-width: 1600px) {
