@@ -2,15 +2,14 @@ import EleicaoPresbitero from '../models/EleiçãoPresbiterioModel.js';
 
 const EleicaoPresbiteroController = {
     inserirEleicaoPresbitero: async (req, res) => {
-        const { id_membro, data_eleicao, reeleicao_1, reeleicao_2, reeleicao_3, reeleicao_4 } = req.body;
+        const { id_membro, data_eleicao_presbitero_1, data_eleicao_presbitero_2, data_eleicao_presbitero_3, data_eleicao_presbitero_4 } = req.body;
 
         const novaEleicaoPresbitero = new EleicaoPresbitero(
             id_membro,
-            data_eleicao,
-            reeleicao_1,
-            reeleicao_2,
-            reeleicao_3,
-            reeleicao_4
+            data_eleicao_presbitero_1,
+            data_eleicao_presbitero_2,
+            data_eleicao_presbitero_3,
+            data_eleicao_presbitero_4,
         );
 
         EleicaoPresbitero.adicionarEleicaoPresbitero(novaEleicaoPresbitero, (error, result) => {

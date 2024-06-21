@@ -97,7 +97,6 @@ server.use('/admissao', admissaoRoutes);
 server.use('/demissao', demissaoRoutes);
 server.use('/profissao-de-fe', profissaodeFeRoutes);
 server.use('/rol-separado', rolSeparadoRoutes);
-server.use('/rol-separado', sociedadeInternaRoutes);
 server.use('/membro-sociedade', membroSociedadeRoutes);
 
 

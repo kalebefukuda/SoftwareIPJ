@@ -63,6 +63,52 @@ function prepararDadosAdmissão(id_membro) {
     return dadosAdmissao;
 }
 
+function prepararDadosDemissão(id_membro) {
+    const dadosDemissao = {
+        data_demissao: document.getElementById("campo30").value,
+        forma_demissao: document.getElementById("campo31").value,
+        numero_ata: document.getElementById("campo32").value,
+        id_membro: id_membro
+    };
+    return dadosDemissao;
+}
+
+function prepararDadosRolSeparado(id_membro) {
+    const dadosRolSeparado = {
+        data_rol_separado: document.getElementById("campo42").value,
+        ata_rol_separado: document.getElementById("campo43").value,
+        casamento: document.getElementById("campo44").value,
+        disciplina: document.getElementById("campo45").value,
+        data_disciplina: document.getElementById("campo46").value,
+        ata_disciplina: document.getElementById("campo47").value,
+        id_membro: id_membro
+    };
+    return dadosRolSeparado;
+}
+
+function prepararDadosEleiçãoDiacono(id_membro) {
+    const dadosEleiçãoDiacono = {
+        data_eleicao: document.getElementById("campo33").value,
+        reeleicao_1: document.getElementById("campo34").value,
+        reeleicao_2: document.getElementById("campo35").value,
+        reeleicao_3: document.getElementById("campo36").value,
+        reeleicao_4: document.getElementById("campo37").value,
+        id_membro: id_membro,
+    };
+    return dadosEleiçãoDiacono;
+}
+
+function prepararDadosEleiçãoPresbitero(id_membro) {
+    const dadosEleiçãoDiacono = {
+        data_eleicao_presbiterio_1: document.getElementById("campo38").value,
+        data_eleicao_presbiterio_2: document.getElementById("campo39").value,
+        data_eleicao_presbiterio_3: document.getElementById("campo40").value,
+        data_eleicao_presbiterio_4: document.getElementById("campo41").value,
+        id_membro: id_membro,
+    };
+    return dadosEleiçãoDiacono;
+}
+
 async function enviarDadosParaRota(dados, rota) {
     try {
         const response = await fetch(`/${rota}`, {
@@ -88,7 +134,7 @@ async function enviarDadosParaRota(dados, rota) {
 
 async function sequenciaAPI() {
     try {
-        // Primeira Parte
+        // Primeira Parte - Enviar dados do membro
         const dadosMembro = prepararDadosMembros();
         const respostaMembro = await enviarDadosParaRota(dadosMembro, 'membro');
         const id_membro = respostaMembro.memberId;
@@ -98,46 +144,39 @@ async function sequenciaAPI() {
             throw new Error('ID do membro não foi retornado pela API');
         }
 
-        // Segunda Parte
-        // Teste apenas uma rota por vez
+        // Segunda Parte - Preparar dados para outras rotas
+        const dadosEndereco = prepararDadosEndereco(id_membro);
+        const dadosBatismo = prepararDadosBatismo(id_membro);
+        const dadosProfissaodeFe = prepararDadosProfissaodeFé(id_membro);
+        const dadosAdmissao = prepararDadosAdmissão(id_membro);
+        const dadosDemissao = prepararDadosDemissão(id_membro);
+        const dadosRolSeparado = prepararDadosRolSeparado(id_membro);
+        const dadosEleicaoDiacono = prepararDadosEleiçãoDiacono(id_membro);
+        const dadosEleicaoPresbitero = prepararDadosEleiçãoPresbitero(id_membro);
 
+        // Lista de promessas para enviar os dados em paralelo
+        const promessas = [
+            enviarDadosParaRota(dadosEndereco, 'endereco'),
+            enviarDadosParaRota(dadosBatismo, 'batismo'),
+            enviarDadosParaRota(dadosProfissaodeFe, 'profissao-de-fe'),
+            enviarDadosParaRota(dadosAdmissao, 'admissao'),
+            enviarDadosParaRota(dadosDemissao, 'demissao'),
+            enviarDadosParaRota(dadosRolSeparado, 'rol-separado'),
+            enviarDadosParaRota(dadosEleicaoDiacono, 'eleicao-diacono'),
+            enviarDadosParaRota(dadosEleicaoPresbitero, 'eleicao-presbitero')
+        ];
 
-        //Rota Endereço
+        // Executar todas as promessas em paralelo e aguardar sua conclusão
+        const respostas = await Promise.all(promessas);
+        respostas.forEach(resposta => console.log(resposta));
 
-        // const dadosEndereco = prepararDadosEndereco(id_membro);
-        // console.log(dadosEndereco);
-        // const resposta = await enviarDadosParaRota(dadosEndereco, 'endereco');
-        // console.log(resposta);
-
-
-        //Rota Batismo
-
-        // const dadosBatismo = prepararDadosBatismo(id_membro);
-        // console.log(dadosBatismo);
-        // const resposta = await enviarDadosParaRota(dadosBatismo, 'batismo');
-        // console.log(resposta);
-
-        //Rota Profissão de Fé
-
-        // const dadosProfissaodeFe = prepararDadosProfissaodeFé(id_membro);
-        // console.log(dadosProfissaodeFe);
-        // const resposta = await enviarDadosParaRota(dadosProfissaodeFe, 'profissao-de-fe');
-        // console.log(resposta);
-
-        //Rota Admissão
-
-        // const dadosAdmissao = prepararDadosAdmissão(id_membro);
-        // console.log(dadosAdmissao);
-        // const resposta = await enviarDadosParaRota(dadosAdmissao, 'admissao');
-        // console.log(resposta);
-
-
-        alert('Rota testada com sucesso!');
+        alert('Rotas testadas com sucesso!');
     } catch (error) {
-        console.error('Erro ao testar rota:', error);
-        alert('Ocorreu um erro ao testar a rota. Verifique o console para mais detalhes.');
+        console.error('Erro ao testar rotas:', error);
+        alert('Ocorreu um erro ao testar as rotas. Verifique o console para mais detalhes.');
     }
 }
+
 
 
 

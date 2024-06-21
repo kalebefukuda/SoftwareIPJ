@@ -1,13 +1,12 @@
 import { connectDatabase } from '../../config/database.js';
 
 class EleicaoPresbitero {
-    constructor(id_membro, data_eleicao, reeleicao_1, reeleicao_2, reeleicao_3, reeleicao_4) {
+    constructor(id_membro, data_eleicao_presbitero_1, data_eleicao_presbitero_2, data_eleicao_presbitero_3, data_eleicao_presbitero_4, reeleicao_4) {
+        this.data_eleicao_presbitero_1 = data_eleicao_presbitero_1;
+        this.data_eleicao_presbitero_2 = data_eleicao_presbitero_2;
+        this.data_eleicao_presbitero_3 = data_eleicao_presbitero_3;
+        this.data_eleicao_presbitero_4 = data_eleicao_presbitero_4;
         this.id_membro = id_membro;
-        this.data_eleicao = data_eleicao;
-        this.reeleicao_1 = reeleicao_1;
-        this.reeleicao_2 = reeleicao_2;
-        this.reeleicao_3 = reeleicao_3;
-        this.reeleicao_4 = reeleicao_4;
     }
 
     static adicionarEleicaoPresbitero(eleicaoPresbitero, callback) {
