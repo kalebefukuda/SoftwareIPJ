@@ -1,0 +1,73 @@
+Membro
+
+1-Nome -
+2-Comungante -
+3-Data Nascimento -
+5-Numero de Rol -
+6-Nome do Pai -
+7-Nome da Mae -
+8-Sexo -
+9-Escolaridade -
+10-Profissão -
+11-Email -
+12-Telefone -
+13-Celular -
+21-Estado Civil -
+upload-file - Foto Membro -
+
+
+Endereço
+
+4-Local Nascimento
+4_1- Estado Nascimento(UF)
+14- CEP
+15- Endereço
+16- Bairro
+17- Complemento
+18- Cidade
+18_1 -Estado atual(UF)
+20- Local Residencia
+
+Batismo
+
+23 - Data
+24 - Oficiante
+
+Profissão de Fé
+
+25 - Data
+26 - Oficiante
+
+Admissão
+
+27 - Data
+28 - Forma
+29 - Ata
+
+Demissão
+
+30 - Data
+31 - Forma
+32 - Ata
+
+Rol Separado
+
+42 - Data
+43 - Ata
+44 - Casamento
+45 - Disciplina
+46 - Data da Disciplina
+47 - Ata da Disciplina
+
+Eleição de Diacono
+33 - Data
+34 - Data
+35 - Data
+36 - Data
+37 - Data
+
+Eleição de Presbitério
+38 - Data
+39 - Data
+40 - Data
+41 - Data

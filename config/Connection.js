@@ -23,7 +23,8 @@ import mysql from "mysql2/promise";
 const databaseConfig = {
     host: 'localhost',
     user: 'root',
-    password: "jpdx1906",
+    port: '3307',
+    password: '123456',
     database: 'SOFTWARE_IPJ'
 };
 

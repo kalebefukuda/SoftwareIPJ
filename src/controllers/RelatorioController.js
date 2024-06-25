@@ -1,7 +1,7 @@
-import connect from '../../config/Connection.js'
+import  connect  from '../../config/Connection.js';
 
 const con = await connect()
-let relatorioGeral = {}
+let relatorioGeral = {};
 
 relatorioGeral.getAniverario = async function(req, res) {
     try {
@@ -13,7 +13,7 @@ relatorioGeral.getAniverario = async function(req, res) {
 
     } catch (e) {
         console.log('Erro ao mostrar Lista de Aniversario', e);
-        throw e; 
+        res.status(500).send({ status: 'error', message: 'Erro ao mostrar Lista de Aniversario' });
     }
 };
 

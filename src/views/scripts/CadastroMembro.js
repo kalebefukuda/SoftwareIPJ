@@ -1,3 +1,185 @@
+
+function prepararDadosMembros() {
+    const dadosMembro = {
+        nome: document.getElementById("campo1").value,
+        comungante: converteComungante(document.getElementById("campo2").value),
+        data_nascimento: document.getElementById("campo3").value,
+        numero_de_rol: document.getElementById("campo5").value,
+        nome_pai: document.getElementById("campo6").value,
+        nome_mae: document.getElementById("campo7").value,
+        sexo: document.getElementById("campo8").value,
+        escolaridade: document.getElementById("campo9").value,
+        profissao: document.getElementById("campo10").value,
+        email: document.getElementById("campo11").value,
+        telefone: document.getElementById("campo12").value,
+        celular: document.getElementById("campo13").value,
+        campoFoto: document.getElementById("upload-file").value,
+        estado_civil: document.getElementById("campo21").value,
+    };
+    return dadosMembro;
+}
+
+function prepararDadosEndereco(id_membro) {
+    const dadosEndereco = {
+        id_membro: id_membro,
+        cep: document.getElementById("campo14").value,
+        endereco: document.getElementById("campo15").value,
+        bairro: document.getElementById("campo16").value,
+        complemento: document.getElementById("campo17").value,
+        cidade: document.getElementById("campo18").value,
+        estado: document.getElementById("campo18_1").value,
+        local_residencia: document.getElementById("campo20").value,
+        local_nascimento: document.getElementById("campo4").value,
+        estado_nascimento: document.getElementById("campo4_1").value,
+    };
+    return dadosEndereco;
+}
+
+function prepararDadosBatismo(id_membro) {
+    const dadosBatismo = {
+        id_membro: id_membro,
+        data_batismo: document.getElementById("campo23").value,
+        nome_oficiante: document.getElementById("campo24").value
+    };
+    return dadosBatismo;
+}
+
+function prepararDadosProfissaodeFé(id_membro) {
+    const dadosProfissaodeFe = {
+        data_profissao_de_fe: document.getElementById("campo25").value,
+        nome_oficiante: document.getElementById("campo26").value,
+        id_membro: id_membro
+    };
+    return dadosProfissaodeFe;
+}
+
+function prepararDadosAdmissão(id_membro) {
+    const dadosAdmissao = {
+        data_admissao: document.getElementById("campo27").value,
+        forma_admissao: document.getElementById("campo28").value,
+        numero_ata: document.getElementById("campo29").value,
+        id_membro: id_membro
+    };
+    return dadosAdmissao;
+}
+
+async function enviarDadosParaRota(dados, rota) {
+    try {
+        const response = await fetch(`/${rota}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao enviar dados para a rota');
+        }
+
+        const data = await response.json();
+        console.log('Sucesso:', data);
+        return data;
+    } catch (error) {
+        console.error('Erro:', error);
+        throw error;
+    }
+}
+
+async function sequenciaAPI() {
+    try {
+        // Primeira Parte
+        const dadosMembro = prepararDadosMembros();
+        const respostaMembro = await enviarDadosParaRota(dadosMembro, 'membro');
+        const id_membro = respostaMembro.memberId;
+        console.log(id_membro);
+
+        if (!id_membro) {
+            throw new Error('ID do membro não foi retornado pela API');
+        }
+
+        // Segunda Parte
+        // Teste apenas uma rota por vez
+
+
+        //Rota Endereço
+
+        // const dadosEndereco = prepararDadosEndereco(id_membro);
+        // console.log(dadosEndereco);
+        // const resposta = await enviarDadosParaRota(dadosEndereco, 'endereco');
+        // console.log(resposta);
+
+
+        //Rota Batismo
+
+        // const dadosBatismo = prepararDadosBatismo(id_membro);
+        // console.log(dadosBatismo);
+        // const resposta = await enviarDadosParaRota(dadosBatismo, 'batismo');
+        // console.log(resposta);
+
+        //Rota Profissão de Fé
+
+        // const dadosProfissaodeFe = prepararDadosProfissaodeFé(id_membro);
+        // console.log(dadosProfissaodeFe);
+        // const resposta = await enviarDadosParaRota(dadosProfissaodeFe, 'profissao-de-fe');
+        // console.log(resposta);
+
+        //Rota Admissão
+
+        // const dadosAdmissao = prepararDadosAdmissão(id_membro);
+        // console.log(dadosAdmissao);
+        // const resposta = await enviarDadosParaRota(dadosAdmissao, 'admissao');
+        // console.log(resposta);
+
+
+        alert('Rota testada com sucesso!');
+    } catch (error) {
+        console.error('Erro ao testar rota:', error);
+        alert('Ocorreu um erro ao testar a rota. Verifique o console para mais detalhes.');
+    }
+}
+
+
+
+
+
+
+document.getElementById('button-salvar').addEventListener('click', async () => {
+    try {
+        await sequenciaAPI();
+        alert('Dados salvos com sucesso!');
+        // Aqui você pode adicionar mais ações após o salvamento, se necessário
+    } catch (error) {
+        console.error('Erro ao salvar dados:', error);
+        alert('Ocorreu um erro ao salvar os dados. Verifique o console para mais detalhes.');
+        // Tratamento de erro, se necessário
+    }
+});
+
+
+// Função que converte a escolha em "S" ou "N"
+function converteComungante(escolha) {
+    if (escolha.toLowerCase() === 'sim') {
+        return true;
+    } else if (escolha.toLowerCase() === 'não' || escolha.toLowerCase() === 'nao') {
+        return false;
+    } else {
+        return '';
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
 
     // Função para capitalizar a primeira letra de cada palavra
