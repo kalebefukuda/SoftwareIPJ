@@ -1,6 +1,5 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function () {
     const idSociedade = window.location.pathname.split('/').pop(); // Captura o ID da URL
-
     console.log('ID da sociedade:', idSociedade); // Log para verificar se o ID está correto
 
     if (!idSociedade) {
@@ -19,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const sociedade = processarDados(data); // Processa os dados antes de renderizar
         renderizarSociedade(sociedade);
+        setupBusca(); // Configura os eventos de busca
 
     } catch (error) {
         console.error('Erro ao carregar sociedade:', error);
@@ -29,7 +29,8 @@ function processarDados(data) {
     const sociedadeData = data.sociedade[0]; // Pegue o primeiro item para os dados da sociedade
     const membros = data.sociedade.map(item => ({
         NOME_MEMBRO: item.nome_membro,
-        IDADE: item.idade
+        IDADE: item.idade,
+        FOTO_MEMBRO: item.foto_membro // Adicione a chave correta se for diferente
     }));
 
     return {
@@ -40,8 +41,9 @@ function processarDados(data) {
 }
 
 function renderizarSociedade(sociedade) {
+    document.title = sociedade.NOME_SOCIEDADE; // Atualiza o título da página
     const main = document.getElementById('info-sociedade');
-    main.innerHTML = '';
+    main.innerHTML = ''; // Limpa conteúdo existente
 
     const banner = document.createElement('div');
     banner.className = 'banner';
@@ -52,17 +54,17 @@ function renderizarSociedade(sociedade) {
         <div class="banner-div-texto">
             <h1>${sociedade.NOME_SOCIEDADE}</h1>
         </div>
-        
     `;
     main.appendChild(banner);
 
-    // Adicionando a funcionalidade de busca e adição de membros
     const pesquisaDiv = document.createElement('div');
     pesquisaDiv.className = 'pesquisa-div';
     pesquisaDiv.innerHTML = `
         <div class="busca-div">
-            <input type="text" id="nome" placeholder="Digite o nome do membro...">
-            <ion-icon name="search-outline"></ion-icon>
+            <input type="text" id="inputBuscaNome" placeholder="Digite o nome do membro...">
+            <button class="search-btn">
+                <ion-icon name="search-outline"></ion-icon>
+            </button>
         </div>
         <div class="adicionar-membro">
             <button class="btn-add">
@@ -74,9 +76,7 @@ function renderizarSociedade(sociedade) {
 
     const divMembrosResultado = document.createElement('div');
     divMembrosResultado.className = 'div-membros-resultado';
-    divMembrosResultado.innerHTML = `
-        <h2>Membros Cadastrados:</h2>
-    `;
+    divMembrosResultado.innerHTML = '<h2>Membros Cadastrados:</h2>';
     main.appendChild(divMembrosResultado);
 
     sociedade.MEMBROS.forEach(membro => {
@@ -98,4 +98,24 @@ function renderizarSociedade(sociedade) {
         `;
         divMembrosResultado.appendChild(membrosCadastrados);
     });
+}
+
+function setupBusca() {
+    const inputBusca = document.getElementById('inputBuscaNome');
+    const searchButton = document.querySelector('.search-btn');
+
+    searchButton.addEventListener('click', function() {
+        realizarBusca(inputBusca.value);
+    });
+
+    inputBusca.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            realizarBusca(inputBusca.value);
+        }
+    });
+}
+
+function realizarBusca(query) {
+    console.log('Buscando por:', query);
+    // Implementar lógica de busca aqui
 }

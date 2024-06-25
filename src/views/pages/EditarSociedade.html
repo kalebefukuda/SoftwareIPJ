@@ -3,31 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="../styles/SociedadeCadastrada.css">
-    <link rel="stylesheet" href="../styles/Header.css">
-    <link rel="stylesheet" href="../styles/Footer.css">
+    <title>Editar Sociedade</title>
+    <link rel="stylesheet" href="/styles/EditarSociedade.css">
 </head>
 <body>
     <header>
-        <a href="/home"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
+        <a href="/home"><img class="logo-ipb" src="/assets/ipj.png" alt="IPB logo"></a>
         <nav class="nav-header">
             <a href="/home">Home</a>
             <a href="/cadastro">Cadastro</a>
             <a href="/membros">Membros</a>
             <a href="/relatorios">Relatórios</a>
-            <a href="/sociedade-interna" class="active">Sociedades Internas</a>
-            <a href="/" class="icon-link"><ion-icon name="exit-outline"></ion-icon></a>
+            <a href="/sociedade-interna">Sociedades Internas</a>
+            <a href="/"><ion-icon name="exit-outline"></ion-icon></a>
         </nav>
     </header>
+    <div class="titulo-page">
+        <h1>Editar Sociedade Interna</h1>
+    </div>
 
-    <main id="info-sociedade">
-        <!-- preenchido pelo js -->
+    <main>
+        <input type="file" id="foto-sociedade" class="input-foto-sociedade" accept="image/*" style="display: none;">
+        <label for="foto-sociedade" class="select-photo">
+            <img id="foto-preview" src="/assets/ImgCadastroSoci.svg" alt="Image icon">
+        </label>
+        <div class="form-container">
+            <p class="titulo-form">Nome da sociedade:</p>
+            <form id="form-editar-sociedade" class="form" enctype="multipart/form-data">
+                <input type="text" class="input-name-sociedade" id="nomeSociedade" name="nome_sociedade" placeholder="Digite o nome" required>
+                <button type="submit" class="form-btn">Salvar Alterações</button> 
+            </form>
+        </div>
     </main>
 
     <footer>
         <div class="logo-footer">
-            <img src="../assets/IPJ_Logo_Login.jpg" alt="Logo Igreja Presbiteriana de Joinville">
+            <img src="/assets/IPJ_Logo_Login.jpg" alt="Logo Igreja Presbiteriana de Joinville">
         </div>
 
         <div class="social-footer">
@@ -48,12 +59,9 @@
                 <li><a href="/sociedade-interna">Sociedades</a></li>
             </ul>
         </div>
-
     </footer>
-
-    
 </body>
-<script src="../scripts/SociedadeCadastrada.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="/scripts/EditarSociedade.js"></script>
 </html>
