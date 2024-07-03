@@ -63,12 +63,18 @@ router.put('/api/sociedade-interna/editar-sociedade/:id_sociedade_interna', asyn
     }
 });
 
-router.delete('/api/sociedade-interna/:id_sociedade_interna', async (req, res) => {
+router.delete('/api/sociedade-interna/delete/:id_sociedade_interna', async (req, res) => {
+    const { id_sociedade_interna: id } = req.params;
+
     try {
-        await sociedadeInterna.delete(req, res);
+        const result = await sociedadeInterna.delete(id);
+        if (result) {
+            res.status(200).json({ message: 'Sociedade deletada com sucesso' });
+        } else {
+            res.status(404).json({ error: 'Sociedade não encontrada' });
+        }
     } catch (error) {
-        console.error('Erro ao deletar sociedade:', error);
-        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+        res.status(500).json({ error: 'Erro ao deletar sociedade' });
     }
 });
 
