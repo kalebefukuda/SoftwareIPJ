@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.getElementById('newSociedade').addEventListener('click', function (event) {
-    event.stopPropagation(); // Assegura que não haja propagação do evento que possa interferir com outros elementos
+    event.stopPropagation();
     window.location.href = '/sociedade-interna/cadastro';
 });
 
@@ -80,9 +80,23 @@ function editSociedade(id, event) {
     window.location.href = `/sociedade-interna/editar-sociedade/${id}`;
 }
 
-function deleteSociedade(id) {
+async function deleteSociedade(id) {
     console.log('Deletando sociedade ID:', id);
     const modal = document.getElementById("deleteModal");
     modal.style.display = "none";
-    // Implementar chamada de API de exclusão aqui, se necessário
+
+    try {
+        const response = await fetch(`/api/sociedade-interna/delete/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            console.log('Sociedade deletada com sucesso');
+            window.location.reload();
+        } else {
+            console.error('Erro ao deletar sociedade');
+        }
+    } catch (error) {
+        console.error('Erro ao deletar sociedade:', error);
+    }
 }

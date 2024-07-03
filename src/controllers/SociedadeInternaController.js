@@ -102,21 +102,36 @@ sociedadeInterna.update = async function(req, res) {
 }
 
 // Delete
-sociedadeInterna.delete = async function(req, res) {
+sociedadeInterna.delete = async function(id) {
     try {
-        let idSociedade = req.params.id_sociedade_interna;
-        let sql = "DELETE FROM sociedade_interna WHERE id_sociedade_interna = ?;";
-        let result = await con.query(sql, [idSociedade]);
+        const [rows] = await con.query("SELECT FOTO_SOCIEDADE FROM sociedade_interna WHERE id_sociedade_interna = ?", [id]);
+        if (rows.length === 0) {
+            console.error('Sociedade não encontrada');
+            return false;
+        }
 
-        res.send({
-            status: "Delete concluido",
-            result: result
-        });
+        const sociedade = rows[0];
+        const fotoCaminho = sociedade.FOTO_SOCIEDADE;
+
+        // Remover todas as referências na tabela membro_sociedade
+        await con.query("DELETE FROM membro_sociedade WHERE ID_SOCIEDADE_INTERNA = ?", [id]);
+
+        // Agora, deletar a sociedade
+        await con.query("DELETE FROM sociedade_interna WHERE id_sociedade_interna = ?", [id]);
+
+        if (fotoCaminho) {
+            const filePath = path.join(uploadDir, fotoCaminho);
+            if (fs.existsSync(filePath)) {
+                fs.unlinkSync(filePath);
+            }
+        }
+
+        return true;
     } catch (e) {
         console.log('Erro ao deletar Sociedade', e);
-        res.status(500).json({ error: 'Erro interno do servidor' });
+        return false;
     }
-}
+};
 
 sociedadeInterna.loadSociedade = async function(req, res) {
     try {

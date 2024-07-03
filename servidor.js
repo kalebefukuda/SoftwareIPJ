@@ -84,6 +84,7 @@ server.get("/api/sociedade-cadastrada/:id",sociedadeInternaRoutes)
 server.get("/api/sociedade-interna",sociedadeInternaRoutes)
 server.post("/api/cadastro-sociedade",sociedadeInternaRoutes)
 server.put("/api/sociedade-interna/editar-sociedade/:id_sociedade_interna",sociedadeInternaRoutes)
+server.delete("/api/sociedade-interna/delete/:id_sociedade_interna",sociedadeInternaRoutes)
 
 // Configurando o servidor 
 const PORT = process.env.PORT || 3000;
