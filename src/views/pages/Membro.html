@@ -19,7 +19,7 @@
             <a href="/membros" class="active">Membros</a>
             <a href="/relatorios">Relatórios</a>
             <a href="/sociedade-interna">Sociedades Internas</a>
-            <a href="/" class="icon-link"><ion-icon name="exit-outline"></a>
+            <a href="/" class="icon-link"><ion-icon name="exit-outline"></ion-icon></a>
         </nav>
     </header>
 
@@ -70,40 +70,10 @@
         <section class="result-section">
             <div class="result-filtros">
                 <h2 class="titulo-resutado">Resultados Filtrados:</h2>
-                <div class="card-result">
-                    <div class="img-result">
-                        <img class="campo-foto-card" src="../assets/Ellipse.png" alt="Foto do membro">
-                    </div>
-                    <div class="text-result-membro">
-                        <div class="text-icon">
-                            <h3 class="memberName">Nome membro</h3>
-                            <button class="edit-icon">
-                                <ion-icon name="pencil-outline"></ion-icon>
-                            </button>
-                        </div>
-                        <div class="telefone-membro">
-                            <ion-icon name="phone-portrait-outline"></ion-icon>
-                            <h5>(47) 99999-8888</h5>
-                        </div>
-                    </div>
+                <div id="membrosContainer" class="card-result2">
+                    <!-- Os membros serão inseridos aqui pelo JavaScript -->
                 </div>
-                <div class="card-result">
-                    <div class="img-result">
-                        <img class="campo-foto-card" src="../assets/Ellipse.png" alt="Foto do membro">
-                    </div>
-                    <div class="text-result-membro">
-                        <div class="text-icon">
-                            <h3 class="memberName">Nome membro</h3>
-                            <button class="edit-icon">
-                                <ion-icon name="pencil-outline"></ion-icon>
-                            </button>
-                        </div>
-                        <div class="telefone-membro">
-                            <ion-icon name="phone-portrait-outline"></ion-icon>
-                            <h5>(47) 99999-8888</h5>
-                        </div>
-                    </div>
-                </div>
+            </div>
         </section>
     </main>
 
@@ -115,12 +85,9 @@
         <div class="social-footer">
             <h2>Siga-nos</h2>
             <div class="icons-social">
-                <a href="https://www.facebook.com/ipjoinville/?locale=pt_BR" target="_blank"><ion-icon
-                        name="logo-facebook"></ion-icon></a>
-                <a href="https://www.instagram.com/ipb.joinville/" target="_blank"><ion-icon
-                        name="logo-instagram"></ion-icon></a>
-                <a href="https://www.youtube.com/@IgrejaPresbiterianadeJoinville" target="_blank"><ion-icon
-                        name="logo-youtube"></ion-icon></a>
+                <a href="https://www.facebook.com/ipjoinville/?locale=pt_BR" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
+                <a href="https://www.instagram.com/ipb.joinville/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="https://www.youtube.com/@IgrejaPresbiterianadeJoinville" target="_blank"><ion-icon name="logo-youtube"></ion-icon></a>
             </div>
         </div>
 
@@ -133,12 +100,11 @@
                 <li><a href="/sociedade-interna">Sociedades</a></li>
             </ul>
         </div>
-
     </footer>
 
+    <script src="../scripts/Membro.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
-<script src="../scripts/Membro.js"></script>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </html>

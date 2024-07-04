@@ -1,15 +1,21 @@
-import express from "express";
-import path from "path";
-import { dirname } from 'path';
+import express from 'express';
+import path from 'path';
 import { fileURLToPath } from 'url';
+import { membroController } from '../src/controllers/MembroController.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
-let router = express.Router();
+const router = express.Router();
 
-router.get('/membros', (req, res) => {
-    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'Membro.html'));
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../src/views/pages/Membro.html'));
 });
 
-export {router}
+// API Routes
+router.get('/api/membros', membroController.list);
+router.post('/api/membros', membroController.create);
+router.put('/api/membros/:id', membroController.update);
+router.delete('/api/membros/:id', membroController.delete);
+
+export { router };

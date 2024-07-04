@@ -1,141 +1,96 @@
-import Model from '../models/MembroModel.js'
-import moment from 'moment';
+import connect from '../../config/Connection.js';
 
+const membroController = {};
 
-const MembroController = {
-
-    inserirMembro: async (req, res) => {
-        const {
-            nome,
-            comungante,
-            data_nascimento,
-            nome_pai,
-            nome_mae,
-            sexo,
-            escolaridade,
-            profissao,
-            numero_de_rol,
-            email,
-            telefone,
-            celular,
-            foto_membro,
-        } = await req.body;
-
-            // Deserialização do JSON TODO ....
-            // Verificação de tipo de dados
-
-            //EsquecI que isso é javascript /;
-
-            // try
-            // {
-            //     if (typeof nome !== 'string') {
-            //         throw new Error('O nome do membro deve ser uma string.');
-            //     }
-
-            //     if (typeof comungante !== 'boolean') {
-            //         throw new Error('O status de comungante deve ser um booleano.');
-            //     }
-
-            //     if (VerificaData(data_nascimento)) {
-            //         throw new Error('A data de nascimento é inválida.');
-            //     }
-
-            //     if (typeof nome_pai !== 'string') {
-            //         throw new Error('O nome do pai deve ser uma string.');
-            //     }
-
-            //     if (typeof nome_mae !== 'string') {
-            //         throw new Error('O nome da mãe deve ser uma string.');
-            //     }
-
-            //     if (typeof sexo !== 'string') {
-            //         throw new Error('O sexo deve ser uma string.');
-            //     }
-
-            //     if (typeof escolaridade !== 'string') {
-            //         throw new Error('A escolaridade deve ser uma string.');
-            //     }
-
-            //     if (typeof profissao !== 'string') {
-            //         throw new Error('A profissão deve ser uma string.');
-            //     }
-
-            //     if (typeof numero_de_rol !== 'number') {
-            //         throw new Error('O número de rol deve ser um número.');
-            //     }
-
-            //     if (typeof email !== 'string') {
-            //         throw new Error('O email deve ser uma string.');
-            //     }
-
-            //     if (typeof telefone !== 'string') {
-            //         throw new Error('O telefone deve ser uma string.');
-            //     }
-
-            //     if (typeof celular !== 'string') {
-            //         throw new Error('O celular deve ser uma string.');
-            //     }
-
-            //     if (!isBinary(blob)) {
-            //         throw new Error('A foto do membro deve ser um objeto binário.');
-            //     }
-            // }catch(error)
-            // {
-            //     console.log(error);
-            // }
-    
-
-
-
-
-
-            // Criação de novo objeto do model 
-            const novoMembro = new Model(
-                nome,
-                comungante,
-                data_nascimento,
-                nome_pai,
-                nome_mae,
-                sexo,
-                escolaridade,
-                profissao,
-                numero_de_rol,
-                email,
-                telefone,
-                celular,
-                foto_membro
-            );
-
-            // Uso da função criada no model
-            Model.adicionarMembro(novoMembro, (error, memberId) => {
-                if (error) {
-                    res.status(500).json({ error: 'Erro ao inserir membro' });
-                } else {
-                    res.status(201).json({ message: 'Membro inserido com sucesso', memberId: memberId });
-                }
-            });
-    },
-
-    listarTodosMembros:  async (req, res) => {
-        Model.listarTodosMembros((error, results) => {
-            if (error) {
-                res.status(500).json({ error: 'Erro na requisição dos membros' });
-            } else {
-                const membros = results.map(row => new Model(row.id_membro, row.nome, row.comungante, row.data_nascimento, row.nome_pai, row.nome_mae, row.sexo, row.escolaridade, row.profissao, row.numero_de_rol, row.email, row.telefone, row.celular, row.foto_membro));
-                res.status(201).json({ message: 'Membros em json:', membros });
-            }
-        });
-    },
+// Listar membros
+membroController.list = async (req, res) => {
+    let connection;
+    try {
+        connection = await connect();
+        const [rows] = await connection.query('SELECT * FROM MEMBRO;');
+        res.json(rows);
+    } catch (error) {
+        console.error('Erro ao listar membros:', error);
+        res.status(500).json({ error: 'Erro ao listar membros' });
+    } finally {
+        if (connection) connection.release();
+    }
 };
 
+// Criar membro
+membroController.create = async (req, res) => {
+    let connection;
+    try {
+        connection = await connect();
+        const { nome, comungante, dataNascimento, nomePai, nomeMae, sexo, escolaridade, profissao, numeroDeRol, email, telefone, celular, estadoCivil, endereco, bairro, complemento, cidade, estado, localResidencia, localNascimento, estadoNascimento, cep } = req.body;
 
+        const sqlMembro = 'INSERT INTO MEMBRO (NOME, COMUNGANTE, DATA_NASCIMENTO, NOME_PAI, NOME_MAE, SEXO, ESCOLARIDADE, PROFISSAO, NUMERO_DE_ROL, EMAIL, TELEFONE, CELULAR, ESTADO_CIVIL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+        const valuesMembro = [nome, comungante, dataNascimento, nomePai, nomeMae, sexo, escolaridade, profissao, numeroDeRol, email, telefone, celular, estadoCivil];
 
+        const [resultMembro] = await connection.query(sqlMembro, valuesMembro);
+        const idMembro = resultMembro.insertId;
 
-//FUNÇÕES DE VERIFICAÇÃO OU CONVERSÃO
+        const sqlEndereco = 'INSERT INTO ENDERECO (ID_MEMBRO, CEP, ENDERECO, BAIRRO, COMPLEMENTO, CIDADE, ESTADO, LOCAL_RESIDENCIA, LOCAL_NASCIMENTO, ESTADO_NASCIMENTO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+        const valuesEndereco = [idMembro, cep, endereco, bairro, complemento, cidade, estado, localResidencia, localNascimento, estadoNascimento];
 
-function VerificaData(data) {
-    const dataNascimento = moment(data, 'YYYY-MM-DD');
-    const dataAtual = moment();
-    return dataNascimento.isAfter(dataAtual) || moment().diff(dataNascimento, 'years') > 100;
-}
-export default MembroController;
+        await connection.query(sqlEndereco, valuesEndereco);
+
+        res.status(201).json({ message: 'Membro criado com sucesso' });
+    } catch (error) {
+        console.error('Erro ao criar membro:', error);
+        res.status(500).json({ error: 'Erro ao criar membro' });
+    } finally {
+        if (connection) connection.release();
+    }
+};
+
+// Atualizar membro
+membroController.update = async (req, res) => {
+    let connection;
+    try {
+        connection = await connect();
+        const { id } = req.params;
+        const { nome, comungante, dataNascimento, nomePai, nomeMae, sexo, escolaridade, profissao, numeroDeRol, email, telefone, celular, estadoCivil, endereco, bairro, complemento, cidade, estado, localResidencia, localNascimento, estadoNascimento, cep } = req.body;
+
+        const sqlMembro = 'UPDATE MEMBRO SET NOME = ?, COMUNGANTE = ?, DATA_NASCIMENTO = ?, NOME_PAI = ?, NOME_MAE = ?, SEXO = ?, ESCOLARIDADE = ?, PROFISSAO = ?, NUMERO_DE_ROL = ?, EMAIL = ?, TELEFONE = ?, CELULAR = ?, ESTADO_CIVIL = ? WHERE ID_MEMBRO = ?;';
+        const valuesMembro = [nome, comungante, dataNascimento, nomePai, nomeMae, sexo, escolaridade, profissao, numeroDeRol, email, telefone, celular, estadoCivil, id];
+
+        await connection.query(sqlMembro, valuesMembro);
+
+        const sqlEndereco = 'UPDATE ENDERECO SET CEP = ?, ENDERECO = ?, BAIRRO = ?, COMPLEMENTO = ?, CIDADE = ?, ESTADO = ?, LOCAL_RESIDENCIA = ?, LOCAL_NASCIMENTO = ?, ESTADO_NASCIMENTO = ? WHERE ID_MEMBRO = ?;';
+        const valuesEndereco = [cep, endereco, bairro, complemento, cidade, estado, localResidencia, localNascimento, estadoNascimento, id];
+
+        await connection.query(sqlEndereco, valuesEndereco);
+
+        res.json({ message: 'Membro atualizado com sucesso' });
+    } catch (error) {
+        console.error('Erro ao atualizar membro:', error);
+        res.status(500).json({ error: 'Erro ao atualizar membro' });
+    } finally {
+        if (connection) connection.release();
+    }
+};
+
+// Deletar membro
+membroController.delete = async (req, res) => {
+    let connection;
+    try {
+        connection = await connect();
+        const { id } = req.params;
+
+        const sqlMembro = 'DELETE FROM MEMBRO WHERE ID_MEMBRO = ?;';
+        await connection.query(sqlMembro, [id]);
+
+        const sqlEndereco = 'DELETE FROM ENDERECO WHERE ID_MEMBRO = ?;';
+        await connection.query(sqlEndereco, [id]);
+
+        res.json({ message: 'Membro deletado com sucesso' });
+    } catch (error) {
+        console.error('Erro ao deletar membro:', error);
+        res.status(500).json({ error: 'Erro ao deletar membro' });
+    } finally {
+        if (connection) connection.release();
+    }
+};
+
+export { membroController };
