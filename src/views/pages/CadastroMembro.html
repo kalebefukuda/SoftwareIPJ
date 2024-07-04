@@ -26,37 +26,35 @@
         <h1>Cadastro de Membros</h1>
     </div>
 
-
     <main>
-        <form class="form">
+        <form id="cadastroMembroForm" class="form" enctype="multipart/form-data">
             <div class="div1">
                 <div class="section1">
                     <div class="wrap">
-                        <label for="campo1">Nome completo</label>
-                        <input type="text" id="campo1" class="input" pattern="[A-Za-zÀ-ú\s]+" style="width: 400px;"
-                            required>
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" name="nome" class="input" pattern="[A-Za-zÀ-ú\s]+" style="width: 400px;" required>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo2">Comungante?</label>
-                        <select name="comungante" id="campo2" class="input" required>
+                        <label for="comungante">Comungante?</label>
+                        <select name="comungante" id="comungante" class="input" required>
                             <option value="sim">Sim</option>
                             <option value="nao">Não</option>
                         </select>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo3">Data de Nascimento</label>
-                        <input type="date" id="campo3" class="input" style="width: 160px;" required>
+                        <label for="dataNascimento">Data de Nascimento</label>
+                        <input type="date" id="dataNascimento" name="dataNascimento" class="input" style="width: 160px;" required>
                     </div>
 
                     <div class="wrap">
                         <div class="labels">
-                            <label for="campo4">Local de Nascimento</label>
+                            <label for="localNascimento">Local de Nascimento</label>
                         </div>
                         <div class="inputs">
-                            <input type="text" id="campo4" class="input" pattern="[A-Za-zÀ-ú\s]+" required>
-                            <select name="estado" id="campo4_1" class="input" style="width: 65px;" required>
+                            <input type="text" id="localNascimento" name="localNascimento" class="input" pattern="[A-Za-zÀ-ú\s]+" required>
+                            <select name="estadoNascimento" id="estadoNascimento" class="input" style="width: 65px;" required>
                                 <option value="" disabled selected>UF</option>
                                 <option value="AC">AC</option>
                                 <option value="AL">AL</option>
@@ -91,60 +89,57 @@
                     </div>
 
                     <div class="wrap">
-                        <label for="campo5">Numero de Rol</label>
-                        <input type="number" id="campo5" class="input" style="width: 150px;" required>
+                        <label for="numeroDeRol">Numero de Rol</label>
+                        <input type="number" id="numeroDeRol" name="numeroDeRol" class="input" style="width: 150px;" required>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo6">Nome do Pai</label>
-                        <input type="text" id="campo6" class="input" style="width: 400px;" pattern="[A-Za-zÀ-ú\s]+"
-                            required>
+                        <label for="nomePai">Nome do Pai</label>
+                        <input type="text" id="nomePai" name="nomePai" class="input" style="width: 400px;" pattern="[A-Za-zÀ-ú\s]+" required>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo7">Nome da Mãe</label>
-                        <input type="text" id="campo7" class="input" style="width: 400px;" pattern="[A-Za-zÀ-ú\s]+"
-                            required>
+                        <label for="nomeMae">Nome da Mãe</label>
+                        <input type="text" id="nomeMae" name="nomeMae" class="input" style="width: 400px;" pattern="[A-Za-zÀ-ú\s]+" required>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo8">Sexo</label>
-                        <select name="sex" id="campo8" class="input" style="width: 230px;" required>
+                        <label for="sexo">Sexo</label>
+                        <select name="sexo" id="sexo" class="input" style="width: 230px;" required>
                             <option value="" disabled selected>Selecione uma opção</option>
-                            <option value="mas">Masculino</option>
-                            <option value="fem">Feminino</option>
+                            <option value="mas">M</option>
+                            <option value="fem">F</option>
                         </select>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo9">Escolaridade</label>
-                        <select name="sex" id="campo9" class="input" style="width: 300px;">
+                        <label for="escolaridade">Escolaridade</label>
+                        <select name="escolaridade" id="escolaridade" class="input" style="width: 300px;">
                             <option value="" disabled selected>Selecione uma opção</option>
-                            <option value="1">Analfabeto</option>
-                            <option value="2">Alfabetizado</option>
-                            <option value="3">Ensino Fundamental Incompleto</option>
-                            <option value="4">Ensino Fundamental Completo</option>
-                            <option value="5">Ensino Médio Incompleto</option>
-                            <option value="6">Ensino Médio Completo</option>
-                            <option value="7">Ensino Superior Incompleto</option>
-                            <option value="8">Ensino Superior Completo</option>
-                            <option value="9">Pós-Graduação</option>
-                            <option value="10">Mestrado</option>
-                            <option value="11">Doutorado</option>
-                            <option value="12">Pós-Doutorado</option>
-                            <option value="13">Livre Docência</option>
+                            <option value="Analfabeto">Analfabeto</option>
+                            <option value="Alfabetizado">Alfabetizado</option>
+                            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                            <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+                            <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+                            <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                            <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                            <option value="Pós-Graduação">Pós-Graduação</option>
+                            <option value="Mestrado">Mestrado</option>
+                            <option value="Doutorado">Doutorado</option>
+                            <option value="Pós-Doutorado">Pós-Doutorado</option>
+                            <option value="Livre Docência">Livre Docência</option>
                         </select>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo10">Profissão</label>
-                        <input type="text" id="campo10" class="input" style="width: 300px;" pattern="[A-Za-zÀ-ú\s]+">
+                        <label for="profissao">Profissão</label>
+                        <input type="text" id="profissao" name="profissao" class="input" style="width: 300px;" pattern="[A-Za-zÀ-ú\s]+">
                     </div>
                 </div>
                 <div class="select-photo" id="select-photo">
-                    <input type="file" id="upload-file" style="display: none;" accept="image/*" tabindex="-1"
-                        autocomplete="off">
-                    <label for="upload-file">
+                    <input type="file" id="fotoMembro" name="fotoMembro" style="display: none;" accept="image/*" tabindex="-1" autocomplete="off">
+                    <label for="fotoMembro">
                         <div class="icon-container">
                             <div class="photo">
                                 <img src="../assets/Insira sua foto.png" class="image-icon" alt="Image icon">
@@ -158,48 +153,47 @@
             <div class="div2">
                 <div class="section3">
                     <div class="wrap">
-                        <label for="campo11">E-mail</label>
-                        <input type="email" id="campo11" class="input" style="width: 400px;">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" class="input" style="width: 400px;">
                     </div>
 
                     <div class="wrap">
-                        <label for="campo12">Telefone</label>
-                        <input type="tel" name="tel1" id="campo12" style="width: 170px;" class="input">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" style="width: 170px;" class="input">
                     </div>
 
                     <div class="wrap">
-                        <label for="campo13">Celular</label>
-                        <input type="tel" name="tel2" id="campo13" style="width: 170px;" class="input" required>
+                        <label for="celular">Celular</label>
+                        <input type="tel" id="celular" name="celular" style="width: 170px;" class="input" required>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo14">CEP</label>
-                        <input type="text" id="campo14" class="input" style="width: 150px;" required>
+                        <label for="cep">CEP</label>
+                        <input type="text" id="cep" name="cep" class="input" style="width: 150px;" required>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo15">Endereço</label>
-                        <input type="text" id="campo15" class="input" style="width: 400px;" required>
+                        <label for="endereco">Endereço</label>
+                        <input type="text" id="endereco" name="endereco" class="input" style="width: 400px;" required>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo16">Bairro</label>
-                        <input type="text" id="campo16" class="input" style="width: 300px;" pattern="[A-Za-zÀ-ú\s]+"
-                            required>
+                        <label for="bairro">Bairro</label>
+                        <input type="text" id="bairro" name="bairro" class="input" style="width: 300px;" pattern="[A-Za-zÀ-ú\s]+" required>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo17">Complemento</label>
-                        <input type="text" id="campo17" class="input" style="width: 300px;">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" id="complemento" name="complemento" class="input" style="width: 300px;">
                     </div>
 
                     <div class="wrap">
                         <div class="labels">
-                            <label for="campo18">Cidade e Estado atual</label>
+                            <label for="cidade">Cidade e Estado atual</label>
                         </div>
                         <div class="inputs">
-                            <input type="text" id="campo18" class="input" pattern="[A-Za-zÀ-ú\s]+" required>
-                            <select name="estado" id="campo18_1" class="input" style="width: 65px;" required>
+                            <input type="text" id="cidade" name="cidade" class="input" pattern="[A-Za-zÀ-ú\s]+" required>
+                            <select name="estado" id="estado" class="input" style="width: 65px;" required>
                                 <option value="" disabled selected>UF</option>
                                 <option value="AC">AC</option>
                                 <option value="AL">AL</option>
@@ -234,147 +228,145 @@
                     </div>
 
                     <div class="wrap">
-                        <label for="campo20">Local Residência</label>
-                        <select name="localResidencia" id="campo20" class="input" style="width: 100px;" required>
+                        <label for="localResidencia">Local Residência</label>
+                        <select name="localResidencia" id="localResidencia" class="input" style="width: 100px;" required>
                             <option value="sede">SEDE</option>
                             <option value="fora">FORA</option>
                         </select>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo21">Estado Civil</label>
-                        <select name="sex" id="campo21" class="input" style="width: 250px;">
+                        <label for="estadoCivil">Estado Civil</label>
+                        <select name="estadoCivil" id="estadoCivil" class="input" style="width: 250px;">
                             <option value="" disabled selected>Selecione uma opção</option>
-                            <option value="1">Solteiro(a)</option>
-                            <option value="2">Casado(a)</option>
-                            <option value="3">Víuvo(a)</option>
-                            <option value="4">Divorcidado(a)</option>
-                            <option value="5">Outros</option>
+                            <option value="Solteiro(a)">Solteiro(a)</option>
+                            <option value="Casado(a)">Casado(a)</option>
+                            <option value="Víuvo(a)">Víuvo(a)</option>
+                            <option value="Divorciado(a)">Divorciado(a)</option>
+                            <option value="Outros">Outros</option>
                         </select>
                     </div>
 
                     <div class="wrap">
-                        <label for="campo22">Religião Precedente</label>
-                        <select name="sex" id="campo22" class="input" style="width: 300px;">
+                        <label for="religiaoPrecedente">Religião Precedente</label>
+                        <select name="religiaoPrecedente" id="religiaoPrecedente" class="input" style="width: 300px;">
                             <option value="" disabled selected>Nenhum</option>
-                            <option value="1">Reformada</option>
-                            <option value="2">Pentecostal</option>
-                            <option value="3">Neo-Pentecostal</option>
-                            <option value="4">Católica Romana</option>
-                            <option value="5">Espiritismos e Assemelhados</option>
-                            <option value="6">Outros</option>
+                            <option value="Reformada">Reformada</option>
+                            <option value="Pentecostal">Pentecostal</option>
+                            <option value="Neo-Pentecostal">Neo-Pentecostal</option>
+                            <option value="Católica Romana">Católica Romana</option>
+                            <option value="Espiritismos e Assemelhados">Espiritismos e Assemelhados</option>
+                            <option value="Outros">Outros</option>
                         </select>
                     </div>
-
                 </div>
             </div>
             <div class="div3">
                 <div class="section4">
                     <div>
                         <h2>Batismo: </h2>
-                        <h2 class=" tittle">Profissão de Fé: </h2>
+                        <h2 class="tittle">Profissão de Fé: </h2>
                         <h2 class="tittle">Admissão: </h2>
                         <h2>Demissão: </h2>
                     </div>
                 </div>
                 <div class="section5">
                     <div class="wrap">
-                        <label for="campo23">Data</label>
-                        <input type="date" id="campo23" class="input" style="width: 160px;">
+                        <label for="dataBatismo">Data</label>
+                        <input type="date" id="dataBatismo" name="dataBatismo" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo24">Oficiante</label>
-                        <input type="text" id="campo24" class="input" style="width: 500px;">
+                        <label for="oficianteBatismo">Oficiante</label>
+                        <input type="text" id="oficianteBatismo" name="oficianteBatismo" class="input" style="width: 500px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo25">Data</label>
-                        <input type="date" id="campo25" class="input" style="width: 160px;">
+                        <label for="dataProfissaoFe">Data</label>
+                        <input type="date" id="dataProfissaoFe" name="dataProfissaoFe" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo26">Oficiante</label>
-                        <input type="text" id="campo26" class="input" style="width: 500px;">
+                        <label for="oficianteProfissaoFe">Oficiante</label>
+                        <input type="text" id="oficianteProfissaoFe" name="oficianteProfissaoFe" class="input" style="width: 500px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo27">Data</label>
-                        <input type="date" id="campo27" class="input" style="width: 160px;">
+                        <label for="dataAdmissao">Data</label>
+                        <input type="date" id="dataAdmissao" name="dataAdmissao" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo28">Forma</label>
-                        <select name="sex" id="campo28" class="input" style="width: 300px;">
+                        <label for="formaAdmissao">Forma</label>
+                        <select name="formaAdmissao" id="formaAdmissao" class="input" style="width: 300px;">
                             <option value="" disabled selected>Nenhum</option>
-                            <option value="1">Transferência</option>
-                            <option value="2">Batismo</option>
-                            <option value="3">Profissão de Fé</option>
-                            <option value="4">Batismo e Profissão de Fé</option>
-                            <option value="5">Jurisdição a pedido</option>
-                            <option value="6">Jurisdição ex-officio</option>
-                            <option value="7">Restauração</option>
-                            <option value="8">Designação do Presbitério</option>
+                            <option value="Transferência">Transferência</option>
+                            <option value="Batismo">Batismo</option>
+                            <option value="Profissão de Fé">Profissão de Fé</option>
+                            <option value="Batismo e Profissão de Fé">Batismo e Profissão de Fé</option>
+                            <option value="Jurisdição a pedido">Jurisdição a pedido</option>
+                            <option value="Jurisdição ex-officio">Jurisdição ex-officio</option>
+                            <option value="Restauração">Restauração</option>
+                            <option value="Designação do Presbitério">Designação do Presbitério</option>
                         </select>
                     </div>
                     <div class="wrap">
-                        <label for="campo29">Ata</label>
-                        <input type="number" id="campo29" class="input" style="width: 150px;">
+                        <label for="ataAdmissao">Ata</label>
+                        <input type="number" id="ataAdmissao" name="ataAdmissao" class="input" style="width: 150px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo30">Data</label>
-                        <input type="date" id="campo30" class="input" style="width: 160px;">
+                        <label for="dataDemissao">Data</label>
+                        <input type="date" id="dataDemissao" name="dataDemissao" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo31">Forma</label>
-                        <select name="sex" id="campo31" class="input" style="width: 300px;">
+                        <label for="formaDemissao">Forma</label>
+                        <select name="formaDemissao" id="formaDemissao" class="input" style="width: 300px;">
                             <option value="" disabled selected>Nenhum</option>
-                            <option value="1">Transferência</option>
-                            <option value="2">Batismo</option>
-                            <option value="3">Profissão de Fé</option>
-                            <option value="4">Batismo e Profissão de Fé</option>
-                            <option value="5">Jurisdição a pedido</option>
-                            <option value="6">Jurisdição ex-officio</option>
-                            <option value="7">Restauração</option>
-                            <option value="8">Designação do Presbitério</option>
+                            <option value="Transferência">Transferência</option>
+                            <option value="Batismo">Batismo</option>
+                            <option value="Profissão de Fé">Profissão de Fé</option>
+                            <option value="Jurisdição a pedido">Jurisdição a pedido</option>
+                            <option value="Jurisdição ex-officio">Jurisdição ex-officio</option>
+                            <option value="Restauração">Restauração</option>
+                            <option value="Designação do Presbitério">Designação do Presbitério</option>
                         </select>
                     </div>
                     <div class="wrap">
-                        <label for="campo32">Ata</label>
-                        <input type="number" id="campo32" class="input" style="width: 150px;">
+                        <label for="ataDemissao">Ata</label>
+                        <input type="number" id="ataDemissao" name="ataDemissao" class="input" style="width: 150px;">
                     </div>
                 </div>
                 <div class="section6">
                     <div class="wrap">
-                        <label for="campo33">Eleição de Diácono</label>
-                        <input type="date" id="campo33" class="input" style="width: 160px;">
+                        <label for="dataEleicaoDiacono">Eleição de Diácono</label>
+                        <input type="date" id="dataEleicaoDiacono" name="dataEleicaoDiacono" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo34">Reeleito em</label>
-                        <input type="date" id="campo34" class="input" style="width: 160px;">
+                        <label for="dataReeleicaoDiacono1">Reeleito em</label>
+                        <input type="date" id="dataReeleicaoDiacono1" name="dataReeleicaoDiacono1" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo35">Reeleito em</label>
-                        <input type="date" id="campo35" class="input" style="width: 160px;">
+                        <label for="dataReeleicaoDiacono2">Reeleito em</label>
+                        <input type="date" id="dataReeleicaoDiacono2" name="dataReeleicaoDiacono2" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo36">Reeleito em</label>
-                        <input type="date" id="campo36" class="input" style="width: 160px;">
+                        <label for="dataReeleicaoDiacono3">Reeleito em</label>
+                        <input type="date" id="dataReeleicaoDiacono3" name="dataReeleicaoDiacono3" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo37">Reeleito em</label>
-                        <input type="date" id="campo37" class="input" style="width: 160px;">
+                        <label for="dataReeleicaoDiacono4">Reeleito em</label>
+                        <input type="date" id="dataReeleicaoDiacono4" name="dataReeleicaoDiacono4" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo38">Eleição de Presbitério</label>
-                        <input type="date" id="campo38" class="input" style="width: 160px;">
+                        <label for="dataEleicaoPresbitero">Eleição de Presbítero</label>
+                        <input type="date" id="dataEleicaoPresbitero" name="dataEleicaoPresbitero" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo39">Eleição de Presbitério</label>
-                        <input type="date" id="campo39" class="input" style="width: 160px;">
+                        <label for="dataReeleicaoPresbitero1">Reeleito em</label>
+                        <input type="date" id="dataReeleicaoPresbitero1" name="dataReeleicaoPresbitero1" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo40">Eleição de Presbitério</label>
-                        <input type="date" id="campo40" class="input" style="width: 160px;">
+                        <label for="dataReeleicaoPresbitero2">Reeleito em</label>
+                        <input type="date" id="dataReeleicaoPresbitero2" name="dataReeleicaoPresbitero2" class="input" style="width: 160px;">
                     </div>
                     <div class="wrap">
-                        <label for="campo41">Eleição de Presbitério</label>
-                        <input type="date" id="campo41" class="input" style="width: 160px;">
+                        <label for="dataReeleicaoPresbitero3">Reeleito em</label>
+                        <input type="date" id="dataReeleicaoPresbitero3" name="dataReeleicaoPresbitero3" class="input" style="width: 160px;">
                     </div>
                 </div>
             </div>
@@ -384,40 +376,39 @@
                     <h2 style="margin-right: 65px;">Rol separado: </h2>
 
                     <div class="wrap">
-                        <label for="campo42">Data</label>
-                        <input type="date" id="campo42" class="input" style="width: 160px;">
+                        <label for="dataRolSeparado">Data</label>
+                        <input type="date" id="dataRolSeparado" name="dataRolSeparado" class="input" style="width: 160px;">
                     </div>
 
                     <div class="wrap">
-                        <label for="campo43">Ata</label>
-                        <input type="number" id="campo43" class="input" style="width: 160px;">
+                        <label for="ataRolSeparado">Ata</label>
+                        <input type="number" id="ataRolSeparado" name="ataRolSeparado" class="input" style="width: 160px;">
                     </div>
 
                     <div class="wrap">
-                        <label for="campo44">Casamento</label>
-                        <input type="date" id="campo44" class="input" style="width: 160px;">
+                        <label for="dataCasamento">Casamento</label>
+                        <input type="date" id="dataCasamento" name="dataCasamento" class="input" style="width: 160px;">
                     </div>
 
                     <div class="wrap">
-                        <label for="campo45">Disciplina</label>
-                        <input type="text" id="campo45" class="input" style="width: 160px;">
+                        <label for="disciplina">Disciplina</label>
+                        <input type="text" id="disciplina" name="disciplina" class="input" style="width: 160px;">
                     </div>
 
                     <div class="wrap">
-                        <label for="campo46">Data da Disciplina</label>
-                        <input type="date" id="campo46" class="input" style="width: 160px;">
+                        <label for="dataDisciplina">Data da Disciplina</label>
+                        <input type="date" id="dataDisciplina" name="dataDisciplina" class="input" style="width: 160px;">
                     </div>
 
                     <div class="wrap">
-                        <label for="campo47">Ata da Disciplina</label>
-                        <input type="number" id="campo47" class="input" style="width: 160px;">
+                        <label for="ataDisciplina">Ata da Disciplina</label>
+                        <input type="number" id="ataDisciplina" name="ataDisciplina" class="input" style="width: 160px;">
                     </div>
                 </div>
             </div>
             <button class="button-save" type="submit">Salvar</button>
         </form>
     </main>
-
 
     <footer>
         <div class="logo-footer">
@@ -442,7 +433,6 @@
                 <li><a href="/sociedade-interna">Sociedades</a></li>
             </ul>
         </div>
-
     </footer>
 
 </body>

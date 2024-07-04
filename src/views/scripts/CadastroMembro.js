@@ -1,17 +1,34 @@
 document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('cadastroMembroForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
 
+        const formData = new FormData(this);
+
+        try {
+            const response = await fetch('/api/membros', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                alert('Membro cadastrado com sucesso!');
+                window.location.href = '/membros';
+            } else {
+                const errorData = await response.json();
+                console.error('Erro ao cadastrar membro:', errorData);
+                alert('Erro ao cadastrar membro.');
+            }
+        } catch (error) {
+            console.error('Erro ao cadastrar membro:', error);
+            alert('Erro ao cadastrar membro.');
+        }
+    });
     // Função para capitalizar a primeira letra de cada palavra
     function capitalizeWords(str) {
-        // Divide a string em uma matriz de palavras
         let words = str.split(' ');
-
-        // Itera sobre cada palavra na matriz
         for (let i = 0; i < words.length; i++) {
-            // Converte a primeira letra de cada palavra para maiúscula e o restante para minúscula
             words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
         }
-
-        // Junta as palavras novamente em uma única string e retorna
         return words.join(' ');
     }
 
@@ -27,127 +44,57 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //Numero de ROL
-    document.getElementById('campo5').addEventListener('input', function () {
+    document.getElementById('numeroDeRol').addEventListener('input', function () {
         if (this.value.length > 3) {
             this.value = this.value.slice(0, 3); // Limita a 3 caracteres
         }
     });
 
-    //Nome completo
-    document.getElementById("campo1").addEventListener("input", function (event) {
-        // Obtém o valor atual do campo
-        let valor = event.target.value;
-
-        // Substitui todos os números e símbolos por uma string vazia
-        valor = valor.replace(/[0-9!@#$%^&*(),.?":{}|<>]/g, '');
-
-        // Capitaliza a primeira letra de cada palavra
-        valor = capitalizeWords(valor);
-
-        // Define o novo valor no campo
-        event.target.value = valor;
-
-    });
-
-    //Data de nascimento
-    const campoDataNascimento = document.getElementById('campo3');
-    if (campoDataNascimento) {
-        campoDataNascimento.addEventListener('change', function () {
+    /* Função para aplicar classes de estilo */
+    function aplicarClasseInicial(campo) {
+        campo.addEventListener('change', function () {
             applyInitialSelectedClass(this);
         });
 
         // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campoDataNascimento);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campoDataNascimento.value) {
-            campoDataNascimento.classList.add('initial');
-        }
+        applyInitialSelectedClass(campo);
     }
 
-    //Local nascimento
-    const campo4 = document.getElementById('campo4');
-    if (campo4) {
-        campo4.addEventListener('input', function (event) {
+    // IDs dos campos de seleção que precisam ser estilizados
+    const camposSelecao = ["escolaridade", "sexo", "estadoNascimento", "dataNascimento", "localResidencia", "estadoCivil", "religiaoPrecedente", "estado", "dataBatismo", "dataProfissaoFe", "dataAdmissao", "dataDemissao", "dataEleicaoDiacono", "dataReeleicaoDiacono1", "dataReeleicaoDiacono2", "dataReeleicaoDiacono3", "dataReeleicaoDiacono4", "dataEleicaoPresbitero", "dataReeleicaoPresbitero1", "dataReeleicaoPresbitero2", "dataReeleicaoPresbitero3", "dataRolSeparado", "dataCasamento", "dataDisciplina", "formaAdmissao", "formaDemissao"];
+
+    // Aplicar a função de estilização a todos os campos de seleção
+    camposSelecao.forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) {
+            aplicarClasseInicial(campo);
+        }
+    });
+
+    /* Função para capitalizar palavras e remover caracteres indesejados */
+    function formatarCampoTexto(campo) {
+        campo.addEventListener("input", function (event) {
             let valor = event.target.value;
             valor = valor.replace(/[0-9!@#$%^&*(),.?":{}|<>]/g, '');
             valor = capitalizeWords(valor);
             event.target.value = valor;
         });
     }
-    const campo4_1 = document.getElementById('campo4_1');
-    if (campo4_1) {
-        campo4_1.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
 
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo4_1);
-    }
+    // IDs dos campos de texto que precisam ser formatados
+    const camposTexto = ["nome", "localNascimento", "bairro", "nomePai", "nomeMae", "profissao", "complemento", "cidade", "oficianteProfissaoFe", "oficianteBatismo", "disciplina"];
 
-    //Nome do pai
-    document.getElementById("campo6").addEventListener("input", function (event) {
-
-        let valor = event.target.value;
-
-        valor = valor.replace(/[0-9!@#$%^&*(),.?":{}|<>]/g, '');
-
-        // Capitaliza a primeira letra de cada palavra
-        valor = capitalizeWords(valor);
-
-        event.target.value = valor;
+    // Aplicar a função de formatação a todos os campos
+    camposTexto.forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) {
+            formatarCampoTexto(campo);
+        }
     });
 
-    //Nome da mãe
-    document.getElementById("campo7").addEventListener("input", function (event) {
-
-        let valor = event.target.value;
-
-        valor = valor.replace(/[0-9!@#$%^&*(),.?":{}|<>]/g, '');
-
-        // Capitaliza a primeira letra de cada palavra
-        valor = capitalizeWords(valor);
-
-        event.target.value = valor;
-    });
-
-    //Sexo
-    const campoSexo = document.getElementById('campo8');
-    if (campoSexo) {
-        campoSexo.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campoSexo);
-    }
-
-    //Escolaridade
-    const campo9 = document.getElementById('campo9');
-    if (campo9) {
-        campo9.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo9);
-    }
-
-    //Profissão
-    document.getElementById("campo10").addEventListener("input", function (event) {
-        let valor = event.target.value;
-
-        valor = valor.replace(/[0-9!@#$%^&*(),.?":{}|<>]/g, '');
-
-        // Capitaliza a primeira letra de cada palavra
-        valor = capitalizeWords(valor);
-
-        event.target.value = valor;
-    });
 
     // Captura o elemento input file para visualizar a foto
-    const inputFile = document.getElementById('upload-file');
-
+    const inputFile = document.getElementById('fotoMembro');
     inputFile.addEventListener('change', function () {
         // Verifica se um arquivo foi selecionado
         if (inputFile.files && inputFile.files[0]) {
@@ -184,11 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Criação do "*" vermelho
-
-
-
     const requiredFields = document.querySelectorAll('input[required], select[required]');
-
     requiredFields.forEach(field => {
         // Obtém o ID do campo
         const fieldId = field.id;
@@ -202,10 +145,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
-
-    // Formatação do campo para inserção de caracteres no campo12
-    const inputTel = document.getElementById('campo12');
-
+    // Formatação do campo para inserção de caracteres no telefone
+    const inputTel = document.getElementById('telefone');
     inputTel.addEventListener('input', function (event) {
         let tel = event.target.value.replace(/\D/g, ''); // Remove todos os caracteres que não são dígitos
         let formattedTel = '';
@@ -224,7 +165,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Define o valor formatado no campo de entrada
         event.target.value = formattedTel;
     });
-
     inputTel.addEventListener('keydown', function (event) {
         // Se a tecla pressionada for backspace e o campo não estiver vazio
         if (event.key === 'Backspace' && inputTel.value.length > 0) {
@@ -239,9 +179,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Formatação do campo para inserção de caracteres no campo13
-    const inputTel2 = document.getElementById('campo13');
-
+    // Formatação do campo para inserção de caracteres no celular
+    const inputTel2 = document.getElementById('celular');
     inputTel2.addEventListener('input', function (event) {
         let tel = event.target.value.replace(/\D/g, ''); // Remove todos os caracteres que não são dígitos
         let formattedTel = '';
@@ -260,7 +199,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Define o valor formatado no campo de entrada
         event.target.value = formattedTel;
     });
-
     inputTel2.addEventListener('keydown', function (event) {
         // Se a tecla pressionada for backspace e o campo não estiver vazio
         if (event.key === 'Backspace' && inputTel2.value.length > 0) {
@@ -276,14 +214,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     //Numero de CEP
-    document.getElementById('campo14').addEventListener('input', function () {
+    document.getElementById('cep').addEventListener('input', function () {
         if (this.value.length > 9) {
             this.value = this.value.slice(0, 9); // Limita a 9 caracteres
         }
     });
-
-    const inputCep = document.getElementById('campo14');
-
+    const inputCep = document.getElementById('cep');
     inputCep.addEventListener('input', function (event) {
         let cep = event.target.value.replace(/\D/g, ''); // Remove todos os caracteres que não são dígitos
         let formattedCep = '';
@@ -298,7 +234,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Define o valor formatado no campo de entrada
         event.target.value = formattedCep;
     });
-
     inputCep.addEventListener('keydown', function (event) {
         // Se a tecla pressionada for backspace e o campo não estiver vazio
         if (event.key === 'Backspace' && inputCep.value.length > 0) {
@@ -315,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     //Endereço
-    document.getElementById("campo15").addEventListener("input", function (event) {
+    document.getElementById("endereco").addEventListener("input", function (event) {
 
         let valor = event.target.value;
 
@@ -323,402 +258,5 @@ document.addEventListener('DOMContentLoaded', function () {
         valor = capitalizeWords(valor);
 
         event.target.value = valor;
-    });
-
-    //Bairro
-    document.getElementById("campo16").addEventListener("input", function (event) {
-
-        let valor = event.target.value;
-
-        valor = valor.replace(/[0-9!@#$%^&*(),.?":{}|<>]/g, '');
-
-        // Capitaliza a primeira letra de cada palavra
-        valor = capitalizeWords(valor);
-
-        event.target.value = valor;
-    });
-
-    //Complemento
-    document.getElementById("campo17").addEventListener("input", function (event) {
-
-        let valor = event.target.value;
-
-        // Capitaliza a primeira letra de cada palavra
-        valor = capitalizeWords(valor);
-
-        event.target.value = valor;
-    });
-
-    //Cidade
-    const campo18 = document.getElementById('campo18');
-    if (campo18) {
-        campo18.addEventListener('input', function (event) {
-            let valor = event.target.value;
-            valor = valor.replace(/[0-9!@#$%^&*(),.?":{}|<>]/g, '');
-            valor = capitalizeWords(valor);
-            event.target.value = valor;
-        });
-    }
-    //Estado
-    const campo18_1 = document.getElementById('campo18_1');
-    if (campo18_1) {
-        campo18_1.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo18_1);
-    }
-
-    //Estado Civil
-    const campo21 = document.getElementById('campo21');
-    if (campo21) {
-        campo21.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo21);
-    }
-
-    //Religião Precedente
-    const campo22 = document.getElementById('campo22');
-    if (campo22) {
-        campo22.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo22);
-    }
-
-    //Data
-    const campoData = document.getElementById('campo23');
-    if (campoData) {
-        campoData.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campoData);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campoData.value) {
-            campoData.classList.add('initial');
-        }
-    }
-
-    //Oficiante
-    document.getElementById("campo24").addEventListener("input", function (event) {
-
-        let valor = event.target.value;
-
-        // Capitaliza a primeira letra de cada palavra
-        valor = capitalizeWords(valor);
-
-        event.target.value = valor;
-    });
-
-    //Data
-    const campoData2 = document.getElementById('campo25');
-    if (campoData2) {
-        campoData2.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campoData2);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campoData2.value) {
-            campoData2.classList.add('initial');
-        }
-    }
-
-    //Oficiante
-    document.getElementById("campo26").addEventListener("input", function (event) {
-
-        let valor = event.target.value;
-
-        // Capitaliza a primeira letra de cada palavra
-        valor = capitalizeWords(valor);
-
-        event.target.value = valor;
-    });
-
-    //Data
-    const campoData3 = document.getElementById('campo27');
-    if (campoData3) {
-        campoData3.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campoData3);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campoData3.value) {
-            campoData3.classList.add('initial');
-        }
-    }
-
-    //Forma
-    const campo28 = document.getElementById('campo28');
-    if (campo28) {
-        campo28.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo28);
-    }
-
-    //Ata
-    document.getElementById('campo29').addEventListener('input', function () {
-        if (this.value.length > 3) {
-            this.value = this.value.slice(0, 3); // Limita a 3 caracteres
-        }
-    });
-
-    //Data
-    const campoData4 = document.getElementById('campo30');
-    if (campoData4) {
-        campoData4.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campoData4);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campoData4.value) {
-            campoData4.classList.add('initial');
-        }
-    }
-
-    //Forma
-    const campo31 = document.getElementById('campo31');
-    if (campo31) {
-        campo31.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo31);
-    }
-
-    //Ata
-    document.getElementById('campo32').addEventListener('input', function () {
-        if (this.value.length > 3) {
-            this.value = this.value.slice(0, 3); // Limita a 3 caracteres
-        }
-    });
-    /* Datas da section 6 */
-    const campo33 = document.getElementById('campo33');
-    if (campo33) {
-        campo33.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo33);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo33.value) {
-            campo33.classList.add('initial');
-        }
-    }
-
-    const campo34 = document.getElementById('campo34');
-    if (campo34) {
-        campo34.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo34);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo34.value) {
-            campo34.classList.add('initial');
-        }
-    }
-
-    const campo35 = document.getElementById('campo35');
-    if (campo35) {
-        campo35.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo35);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo35.value) {
-            campo35.classList.add('initial');
-        }
-    }
-
-    const campo36 = document.getElementById('campo36');
-    if (campo36) {
-        campo36.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo36);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo36.value) {
-            campo36.classList.add('initial');
-        }
-    }
-
-    const campo37 = document.getElementById('campo37');
-    if (campo37) {
-        campo37.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo37);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo37.value) {
-            campo37.classList.add('initial');
-        }
-    }
-
-    const campo38 = document.getElementById('campo38');
-    if (campo38) {
-        campo38.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo38);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo38.value) {
-            campo38.classList.add('initial');
-        }
-    }
-
-    const campo39 = document.getElementById('campo39');
-    if (campo39) {
-        campo39.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo39);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo39.value) {
-            campo39.classList.add('initial');
-        }
-    }
-
-    const campo40 = document.getElementById('campo40');
-    if (campo40) {
-        campo40.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo40);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo40.value) {
-            campo40.classList.add('initial');
-        }
-    }
-
-    const campo41 = document.getElementById('campo41');
-    if (campo41) {
-        campo41.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo41);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo41.value) {
-            campo41.classList.add('initial');
-        }
-    }
-
-    //Data
-    const campo42 = document.getElementById('campo42');
-    if (campo42) {
-        campo42.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo42);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo42.value) {
-            campo42.classList.add('initial');
-        }
-    }
-    //Ata
-    document.getElementById('campo43').addEventListener('input', function () {
-        if (this.value.length > 3) {
-            this.value = this.value.slice(0, 3); // Limita a 3 caracteres
-        }
-    });
-
-    //Casamento
-    const campo44 = document.getElementById('campo44');
-    if (campo44) {
-        campo44.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo44);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo44.value) {
-            campo44.classList.add('initial');
-        }
-    }
-
-    //Disciplina
-    document.getElementById("campo45").addEventListener("input", function (event) {
-        // Obtém o valor atual do campo
-        let valor = event.target.value;
-
-        // Capitaliza a primeira letra de cada palavra
-        valor = capitalizeWords(valor);
-
-        // Define o novo valor no campo
-        event.target.value = valor;
-
-    });
-
-    //Data
-    const campo46 = document.getElementById('campo46');
-    if (campo46) {
-        campo46.addEventListener('change', function () {
-            applyInitialSelectedClass(this);
-        });
-
-        // Defina a classe inicial para o estado inicial
-        applyInitialSelectedClass(campo46);
-
-        // Verifique se o campo de data está vazio ao carregar a página
-        if (!campo46.value) {
-            campo46.classList.add('initial');
-        }
-    }
-    //Ata
-    document.getElementById('campo47').addEventListener('input', function () {
-        if (this.value.length > 3) {
-            this.value = this.value.slice(0, 3); // Limita a 3 caracteres
-        }
     });
 });
