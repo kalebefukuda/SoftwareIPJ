@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const formData = new FormData(this);
 
+        formData.forEach((value, key) => {
+            console.log(key + ': ' + value);
+        });
+
         try {
             const response = await fetch('/api/membros', {
                 method: 'POST',
@@ -23,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Erro ao cadastrar membro.');
         }
     });
+
     // Função para capitalizar a primeira letra de cada palavra
     function capitalizeWords(str) {
         let words = str.split(' ');

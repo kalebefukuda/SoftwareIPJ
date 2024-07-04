@@ -36,9 +36,6 @@ server.get("/home", (req, res) => {
 
 // Cadastro 
 server.use("/cadastro", cadastroRoutes);
-server.get("/cadastro", (req, res) => {
-    res.sendFile(path.join(__dirname, 'src', 'views', 'pages', 'CadastroMembro.html'));
-});
 
 // Página de Membros
 server.use("/membros", membroRoutes);
