@@ -95,7 +95,7 @@ select {
 .input {
     border-radius: 20px;
     border: 1px;
-    outline: 0 !important;
+    /* outline: 0 !important; */
     box-sizing: border-box;
     padding: 10px 15px;
     height: 45px;

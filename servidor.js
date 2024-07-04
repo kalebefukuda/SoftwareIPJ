@@ -35,7 +35,7 @@ server.get("/home", (req, res) => {
 });
 
 // Cadastro 
-server.get("/cadastro", cadastroRoutes);
+server.use("/cadastro", cadastroRoutes);
 
 // Página de Membros
 server.use("/membros", membroRoutes);
