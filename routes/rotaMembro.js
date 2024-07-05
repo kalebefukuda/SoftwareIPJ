@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 
 // API Routes
 router.get('/api/membros', membroController.list);
-router.post('/api/membros', membroController.create);
+router.post('/membros', membroController.create);
 router.put('/api/membros/:id', membroController.update);
 router.delete('/api/membros/:id', membroController.delete);
 

@@ -13,6 +13,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const server = express();
 
+// Adicione isso ao início do seu servidor.js para ativar logs detalhados
+server.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    console.log('Headers:', req.headers);
+    console.log('Body:', req.body);
+    next();
+});
 // habilitar o fileUpload
 server.use(fileUpload());
 
@@ -36,7 +43,9 @@ server.get("/home", (req, res) => {
 
 // Cadastro 
 server.use("/cadastro", cadastroRoutes);
-
+server.use("/api/membros-create", membroRoutes);
+server.use('/api/membros/:id', membroRoutes);
+server.use('/api/membros/:id', membroRoutes);
 // Página de Membros
 server.use("/membros", membroRoutes);
 
