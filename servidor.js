@@ -45,13 +45,11 @@ server.get("/home", (req, res) => {
 // Cadastro 
 server.use("/cadastro", cadastroRoutes);
 server.use("/api/membros-create", membroRoutes);
+server.use('/api/membros/editar-membro/:id', membroRoutes);
 server.use('/api/membros/:id', membroRoutes);
-server.use('/api/membros/:id', membroRoutes);
-// Página de Membros
-server.use("/membros", membroRoutes);
 
-// API de Membros
-server.use("/api", membroRoutes);
+server.use("/membros", membroRoutes);
+server.use("/membros/editar-membro/:id", membroRoutes);
 
 // Relatorios
 server.get("/relatorios", relatorioRoutes);

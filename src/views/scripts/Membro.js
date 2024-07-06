@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             card.innerHTML = `
                 <div class="img-result">
-                    <img class="campo-foto-card" src="../assets/Ellipse.png" alt="Foto do membro">
+                    <img class="campo-foto-card" src="${membro.FOTO_MEMBRO}" alt="Foto do membro">
                 </div>
                 <div class="text-result-membro">
                     <div class="text-icon">
@@ -28,6 +28,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             `;
 
             membrosContainer.appendChild(card);
+
+            const editButton = card.querySelector('.edit-icon');
+            editButton.addEventListener('click', function() {
+                window.location.href = `/membros/editar-membro/${membro.ID_MEMBRO}`;
+            });
         });
     } catch (error) {
         console.error('Erro ao carregar membros:', error);
