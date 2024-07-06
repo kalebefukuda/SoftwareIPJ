@@ -79,6 +79,10 @@ function renderizarSociedade(sociedade) {
     divMembrosResultado.innerHTML = '<h2>Membros Cadastrados:</h2>';
     main.appendChild(divMembrosResultado);
 
+    const resultadosBusca = document.createElement('div');
+    resultadosBusca.id = 'resultadosBusca';
+    main.appendChild(resultadosBusca);
+
     sociedade.MEMBROS.forEach(membro => {
         const membrosCadastrados = document.createElement('div');
         membrosCadastrados.className = 'membros-cadastrados';
@@ -95,6 +99,9 @@ function renderizarSociedade(sociedade) {
                     <h5>${membro.IDADE}</h5>
                 </div>
             </div>
+            <button class= "delete">
+                    <ion-icon name="trash-outline"></ion-icon>
+                </button> 
         `;
         divMembrosResultado.appendChild(membrosCadastrados);
     });
@@ -115,7 +122,46 @@ function setupBusca() {
     });
 }
 
-function realizarBusca(query) {
+async function realizarBusca(query) {
     console.log('Buscando por:', query);
-    // Implementar lógica de busca aqui
+    try {
+        const response = await fetch(`/buscar?query=${encodeURIComponent(query)}`);
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (!data.ok) {
+            console.error('Erro ao buscar membros:', data.error);
+            return;
+        }
+
+        mostrarResultadosBusca(data.data);
+    } catch (error) {
+        console.error('Erro ao buscar membros:', error);
+    }
+}
+
+function mostrarResultadosBusca(membros) {
+    const resultadosBusca = document.getElementById('resultadosBusca');
+    if (!resultadosBusca) {
+        console.error('Elemento resultadosBusca não encontrado');
+        return;
+    }
+    resultadosBusca.innerHTML = ''; // Limpa resultados anteriores
+
+    membros.forEach(membro => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'resultado-item';
+
+        itemDiv.innerHTML = `
+            <img src="${membro.FOTO_MEMBRO}" alt="Foto de ${membro.NOME_MEMBRO}">
+            <div class="info">
+                <span class="nome">${membro.NOME_MEMBRO}</span>
+                <span class="detalhes">Idade: ${membro.IDADE}</span>
+            </div>
+        `;
+
+        resultadosBusca.appendChild(itemDiv);
+    });
 }

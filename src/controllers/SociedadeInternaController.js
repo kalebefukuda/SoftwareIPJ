@@ -160,5 +160,24 @@ sociedadeInterna.loadSociedade = async function(req, res) {
     }
 };
 
+// Buscar membros por nome
+sociedadeInterna.search = async function(req, res) {
+    const query = req.query.query || '';
+
+    try {
+        const sqlQuery = `
+            SELECT M.NOME, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
+            FROM MEMBRO M
+            JOIN MEMBRO_SOCIEDADE MS ON M.ID_MEMBRO = MS.ID_MEMBRO
+            JOIN SOCIEDADE_INTERNA SI ON MS.ID_SOCIEDADE_INTERNA = SI.ID_SOCIEDADE_INTERNA
+            WHERE M.NOME LIKE ?`;
+
+        const [rows] = await con.query(sqlQuery, [`%${query}%`]);
+        res.json({ ok: true, data: rows });
+    } catch (error) {
+        console.error('Erro na busca:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+};
 
 export { sociedadeInterna };

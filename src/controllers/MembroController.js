@@ -205,10 +205,22 @@ membroController.update = async (req, res) => {
         const {
             nome, comungante, dataNascimento, nomePai, nomeMae, sexo, escolaridade, profissao,
             numeroDeRol, email, telefone, celular, estadoCivil, endereco, bairro, complemento,
-            cidade, estado, localResidencia, localNascimento, estadoNascimento, cep
+            cidade, estado, localResidencia, localNascimento, estadoNascimento, cep, dataBatismo,
+            oficianteBatismo, dataProfissaoFe, oficianteProfissaoFe, dataAdmissao, formaAdmissao,
+            ataAdmissao, dataDemissao, formaDemissao, ataDemissao, dataEleicaoDiacono,
+            dataReeleicaoDiacono1, dataReeleicaoDiacono2, dataReeleicaoDiacono3, dataReeleicaoDiacono4,
+            dataEleicaoPresbitero, dataReeleicaoPresbitero1, dataReeleicaoPresbitero2,
+            dataReeleicaoPresbitero3, dataRolSeparado, ataRolSeparado, dataCasamento, disciplina,
+            dataDisciplina, ataDisciplina
         } = req.body;
 
-        const sqlMembro = 'UPDATE MEMBRO SET NOME = ?, COMUNGANTE = ?, DATA_NASCIMENTO = ?, NOME_PAI = ?, NOME_MAE = ?, SEXO = ?, ESCOLARIDADE = ?, PROFISSAO = ?, NUMERO_DE_ROL = ?, EMAIL = ?, TELEFONE = ?, CELULAR = ?, ESTADO_CIVIL = ? WHERE ID_MEMBRO = ?;';
+        const sqlMembro = `
+            UPDATE MEMBRO SET 
+                NOME = ?, COMUNGANTE = ?, DATA_NASCIMENTO = ?, NOME_PAI = ?, NOME_MAE = ?, SEXO = ?, 
+                ESCOLARIDADE = ?, PROFISSAO = ?, NUMERO_DE_ROL = ?, EMAIL = ?, TELEFONE = ?, CELULAR = ?, 
+                ESTADO_CIVIL = ?
+            WHERE ID_MEMBRO = ?;`;
+
         const valuesMembro = [
             nome, parseInt(comungante), dataNascimento, nomePai, nomeMae, sexo, escolaridade,
             profissao, numeroDeRol, email, telefone, celular, estadoCivil, id
@@ -216,13 +228,99 @@ membroController.update = async (req, res) => {
 
         await connection.query(sqlMembro, valuesMembro);
 
-        const sqlEndereco = 'UPDATE ENDERECO SET CEP = ?, ENDERECO = ?, BAIRRO = ?, COMPLEMENTO = ?, CIDADE = ?, ESTADO = ?, LOCAL_RESIDENCIA = ?, LOCAL_NASCIMENTO = ?, ESTADO_NASCIMENTO = ? WHERE ID_MEMBRO = ?;';
+        const sqlEndereco = `
+            UPDATE ENDERECO SET 
+                CEP = ?, ENDERECO = ?, BAIRRO = ?, COMPLEMENTO = ?, CIDADE = ?, ESTADO = ?, 
+                LOCAL_RESIDENCIA = ?, LOCAL_NASCIMENTO = ?, ESTADO_NASCIMENTO = ?
+            WHERE ID_MEMBRO = ?;`;
+
         const valuesEndereco = [
             cep, endereco, bairro, complemento, cidade, estado, localResidencia, localNascimento,
             estadoNascimento, id
         ];
 
         await connection.query(sqlEndereco, valuesEndereco);
+
+        const sqlEleicaoDiacono = `
+            UPDATE ELEICAO_DIACONO SET 
+                DATA_ELEICAO = ?, REELEICAO_1 = ?, REELEICAO_2 = ?, REELEICAO_3 = ?, REELEICAO_4 = ?
+            WHERE ID_MEMBRO = ?;`;
+
+        const valuesEleicaoDiacono = [
+            parseDateOrNull(dataEleicaoDiacono), parseDateOrNull(dataReeleicaoDiacono1),
+            parseDateOrNull(dataReeleicaoDiacono2), parseDateOrNull(dataReeleicaoDiacono3),
+            parseDateOrNull(dataReeleicaoDiacono4), id
+        ];
+
+        await connection.query(sqlEleicaoDiacono, valuesEleicaoDiacono);
+
+        const sqlEleicaoPresbitero = `
+            UPDATE ELEICAO_PRESBITERO SET 
+                DATA_ELEICAO_PRESBITERO_1 = ?, DATA_ELEICAO_PRESBITERO_2 = ?, DATA_ELEICAO_PRESBITERO_3 = ?, 
+                DATA_ELEICAO_PRESBITERO_4 = ?
+            WHERE ID_MEMBRO = ?;`;
+
+        const valuesEleicaoPresbitero = [
+            parseDateOrNull(dataEleicaoPresbitero), parseDateOrNull(dataReeleicaoPresbitero1),
+            parseDateOrNull(dataReeleicaoPresbitero2), parseDateOrNull(dataReeleicaoPresbitero3), id
+        ];
+
+        await connection.query(sqlEleicaoPresbitero, valuesEleicaoPresbitero);
+
+        const sqlBatismo = `
+            UPDATE BATISMO SET 
+                DATA_BATISMO = ?, NOME_OFICIANTE = ?
+            WHERE ID_MEMBRO = ?;`;
+
+        const valuesBatismo = [parseDateOrNull(dataBatismo), oficianteBatismo, id];
+
+        await connection.query(sqlBatismo, valuesBatismo);
+
+        const sqlProfissaoDeFe = `
+            UPDATE PROFISSAO_DE_FE SET 
+                DATA_PROFISSAO_DE_FE = ?, NOME_OFICIANTE = ?
+            WHERE ID_MEMBRO = ?;`;
+
+        const valuesProfissaoDeFe = [
+            parseDateOrNull(dataProfissaoFe), oficianteProfissaoFe, id
+        ];
+
+        await connection.query(sqlProfissaoDeFe, valuesProfissaoDeFe);
+
+        const sqlAdmissao = `
+            UPDATE ADMISSAO SET 
+                DATA_ADMISSAO = ?, FORMA_ADMISSAO = ?, NUMERO_ATA = ?
+            WHERE ID_MEMBRO = ?;`;
+
+        const valuesAdmissao = [
+            parseDateOrNull(dataAdmissao), formaAdmissao, parseIntOrNull(ataAdmissao), id
+        ];
+
+        await connection.query(sqlAdmissao, valuesAdmissao);
+
+        const sqlDemissao = `
+            UPDATE DEMISSAO SET 
+                DATA_DEMISSAO = ?, FORMA_DEMISSAO = ?, NUMERO_ATA = ?
+            WHERE ID_MEMBRO = ?;`;
+
+        const valuesDemissao = [
+            parseDateOrNull(dataDemissao), formaDemissao, parseIntOrNull(ataDemissao), id
+        ];
+
+        await connection.query(sqlDemissao, valuesDemissao);
+
+        const sqlRolSeparado = `
+            UPDATE ROL_SEPARADO SET 
+                DATA_ROL_SEPARADO = ?, ATA_ROL_SEPARADO = ?, CASAMENTO = ?, DISPLINA = ?, 
+                DATA_DISCIPLINA = ?, ATA_DISCIPLINA = ?
+            WHERE ID_MEMBRO = ?;`;
+
+        const valuesRolSeparado = [
+            parseDateOrNull(dataRolSeparado), parseIntOrNull(ataRolSeparado), parseDateOrNull(dataCasamento),
+            disciplina, parseDateOrNull(dataDisciplina), parseIntOrNull(ataDisciplina), id
+        ];
+
+        await connection.query(sqlRolSeparado, valuesRolSeparado);
 
         res.json({ message: 'Membro atualizado com sucesso' });
     } catch (error) {
@@ -232,6 +330,57 @@ membroController.update = async (req, res) => {
         if (connection) connection.release();
     }
 };
+
+// Adicione esta função ao seu controlador MembroController.js
+membroController.getMembroById = async (req, res) => {
+    let connection;
+    try {
+        connection = await connect();
+        const { id } = req.params;
+        
+        const [membroRows] = await connection.query('SELECT * FROM MEMBRO WHERE ID_MEMBRO = ?;', [id]);
+        const [enderecoRows] = await connection.query('SELECT * FROM ENDERECO WHERE ID_MEMBRO = ?;', [id]);
+        const [eleicaoDiaconoRows] = await connection.query('SELECT * FROM ELEICAO_DIACONO WHERE ID_MEMBRO = ?;', [id]);
+        const [eleicaoPresbiteroRows] = await connection.query('SELECT * FROM ELEICAO_PRESBITERO WHERE ID_MEMBRO = ?;', [id]);
+        const [batismoRows] = await connection.query('SELECT * FROM BATISMO WHERE ID_MEMBRO = ?;', [id]);
+        const [profissaoDeFeRows] = await connection.query('SELECT * FROM PROFISSAO_DE_FE WHERE ID_MEMBRO = ?;', [id]);
+        const [admissaoRows] = await connection.query('SELECT * FROM ADMISSAO WHERE ID_MEMBRO = ?;', [id]);
+        const [demissaoRows] = await connection.query('SELECT * FROM DEMISSAO WHERE ID_MEMBRO = ?;', [id]);
+        const [rolSeparadoRows] = await connection.query('SELECT * FROM ROL_SEPARADO WHERE ID_MEMBRO = ?;', [id]);
+
+        if (membroRows.length === 0) {
+            return res.status(404).json({ error: 'Membro não encontrado' });
+        }
+
+        const membro = membroRows[0];
+        const endereco = enderecoRows[0] || {};
+        const eleicaoDiacono = eleicaoDiaconoRows[0] || {};
+        const eleicaoPresbitero = eleicaoPresbiteroRows[0] || {};
+        const batismo = batismoRows[0] || {};
+        const profissaoDeFe = profissaoDeFeRows[0] || {};
+        const admissao = admissaoRows[0] || {};
+        const demissao = demissaoRows[0] || {};
+        const rolSeparado = rolSeparadoRows[0] || {};
+
+        res.json({
+            ...membro,
+            ...endereco,
+            ...eleicaoDiacono,
+            ...eleicaoPresbitero,
+            ...batismo,
+            ...profissaoDeFe,
+            ...admissao,
+            ...demissao,
+            ...rolSeparado
+        });
+    } catch (error) {
+        console.error('Erro ao obter membro:', error);
+        res.status(500).json({ error: 'Erro ao obter membro' });
+    } finally {
+        if (connection) connection.release();
+    }
+};
+
 
 // Deletar membro
 membroController.delete = async (req, res) => {

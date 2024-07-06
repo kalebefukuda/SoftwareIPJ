@@ -36,6 +36,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             `;
 
             membrosContainer.appendChild(card);
+
+            const editButton = card.querySelector('.edit-icon');
+            editButton.addEventListener('click', function() {
+                window.location.href = `/membros/editar-membro/${membro.ID_MEMBRO}`;
+            });
         });
     } catch (error) {
         console.error('Erro ao carregar membros:', error);

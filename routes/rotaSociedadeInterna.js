@@ -78,4 +78,15 @@ router.delete('/api/sociedade-interna/delete/:id_sociedade_interna', async (req,
     }
 });
 
+router.get('/buscar', async (req, res) => {
+    try {
+        const { query } = req.query;
+        const membros = await sociedadeInterna.search(req, res);
+        res.json(membros);
+    } catch (error) {
+        console.error('Erro ao buscar membros:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+});
+
 export { router };

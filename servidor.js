@@ -49,13 +49,11 @@ server.get("/home", (req, res) => {
 // Cadastro 
 server.use("/cadastro", cadastroRoutes);
 server.use("/api/membros-create", membroRoutes);
+server.use('/api/membros/editar-membro/:id', membroRoutes);
 server.use('/api/membros/:id', membroRoutes);
-server.use('/api/membros/:id', membroRoutes);
-// Página de Membros
-server.use("/membros", membroRoutes);
 
-// API de Membros
-server.use("/api", membroRoutes);
+server.use("/membros", membroRoutes);
+server.use("/membros/editar-membro/:id", membroRoutes);
 
 // Relatorios
 server.get("/relatorios", relatorioRoutes);
@@ -95,6 +93,24 @@ server.get("/api/sociedade-interna", sociedadeInternaRoutes);
 server.post("/api/cadastro-sociedade", sociedadeInternaRoutes);
 server.put("/api/sociedade-interna/editar-sociedade/:id_sociedade_interna", sociedadeInternaRoutes);
 server.delete("/api/sociedade-interna/delete/:id_sociedade_interna", sociedadeInternaRoutes);
+
+// Rota de busca
+server.get('/buscar', async (req, res) => {
+    const query = req.query.query;
+    if (!query) {
+        return res.status(400).json({ ok: false, error: 'Query não fornecida' });
+    }
+
+    try {
+        // Simule a busca no banco de dados
+        const resultados = await buscarMembros(query); // Você deve implementar esta função
+
+        res.json({ ok: true, data: resultados });
+    } catch (error) {
+        console.error('Erro ao buscar membros:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+});
 
 // Configurando o servidor 
 const PORT = process.env.PORT || 3000;
