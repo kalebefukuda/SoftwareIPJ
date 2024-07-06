@@ -22,7 +22,14 @@ membroController.list = async (req, res) => {
     try {
         connection = await connect();
         const [rows] = await connection.query('SELECT * FROM MEMBRO;');
-        res.json(rows);
+        // Transformar os dados para adicionar caminho da imagem padrão quando FOTO_MEMBRO for null
+        const membros = rows.map(membro => {
+            if (!membro.FOTO_MEMBRO) {
+                membro.FOTO_MEMBRO = 'Ellipse.png'; // Define a imagem padrão
+            }
+            return membro;
+        });
+        res.json(membros);
     } catch (error) {
         console.error('Erro ao listar membros:', error);
         res.status(500).json({ error: 'Erro ao listar membros' });

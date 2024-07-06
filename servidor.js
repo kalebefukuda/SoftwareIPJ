@@ -30,6 +30,10 @@ server.use(express.urlencoded({ extended: true }));
 
 // Configurar o Express.js para servir arquivos estáticos
 server.use(express.static(path.join(__dirname, 'src', 'views')));
+server.use(express.static(path.join(__dirname, 'src', 'views', 'assets')));
+
+// Servir arquivos estáticos da pasta "uploads"
+server.use('/uploads', express.static(path.join(__dirname, 'src', 'views', 'uploads')));
 
 // Login
 server.get("/", (req, res) => {
