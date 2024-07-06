@@ -9,9 +9,17 @@ document.addEventListener('DOMContentLoaded', async function() {
             const card = document.createElement('div');
             card.classList.add('card-result');
 
+            // Verifique e ajuste o caminho da foto do membro
+            let fotoSrc = '/assets/default.jpg';
+            if (membro.FOTO_MEMBRO && membro.FOTO_MEMBRO.trim() !== '') {
+                fotoSrc = membro.FOTO_MEMBRO.startsWith('uploads/')
+                    ? `/${membro.FOTO_MEMBRO}`
+                    : `${membro.FOTO_MEMBRO}`;
+            }
+
             card.innerHTML = `
                 <div class="img-result">
-                    <img class="campo-foto-card" src="${membro.FOTO_MEMBRO}" alt="Foto do membro">
+                    <img class="campo-foto-card" src="${fotoSrc}" alt="Foto do membro">
                 </div>
                 <div class="text-result-membro">
                     <div class="text-icon">
