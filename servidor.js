@@ -20,6 +20,7 @@ server.use((req, res, next) => {
     console.log('Body:', req.body);
     next();
 });
+
 // habilitar o fileUpload
 server.use(fileUpload());
 
