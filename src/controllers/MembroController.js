@@ -2,6 +2,7 @@ import connect from '../../config/Connection.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -12,7 +13,7 @@ const parseDateOrNull = (date) => {
 };
 
 const parseIntOrNull = (value) => {
-    return value ? parseInt(value, 10) : null; // Adicionada função para tratar valores inteiros nulos
+    return value ? parseInt(value, 10) : null;
 };
 
 // Listar membros
@@ -65,16 +66,27 @@ membroController.create = async (req, res) => {
         let fotoMembro = null;
         if (req.files && req.files.fotoMembro) {
             const file = req.files.fotoMembro;
-            const uploadPath = path.join(__dirname, '../../uploads', file.name);
+            const uploadDir = path.resolve(__dirname, '../../src/views/uploads'); // Caminho relativo ao diretório atual
+
+            // Verificação da existência do diretório de uploads
+            if (!fs.existsSync(uploadDir)) {
+                return res.status(500).json({ error: 'Diretório de upload não existe' });
+            }
+
+            const fileName = `${Date.now()}-${file.name}`;
+            const uploadPath = path.join(uploadDir, fileName); // Caminho ajustado para src/views/uploads
+
+            console.log('Diretório de upload:', uploadDir);
+            console.log('Caminho do upload:', uploadPath);
+
             await file.mv(uploadPath);
-            fotoMembro = `/uploads/${file.name}`;
+            fotoMembro = `/uploads/${fileName}`;
             console.log('Uploaded file path:', fotoMembro);
         }
 
-        const sqlMembro = 'INSERT INTO MEMBRO (NOME, COMUNGANTE, DATA_NASCIMENTO, NOME_PAI, NOME_MAE, SEXO, ESCOLARIDADE, PROFISSAO, NUMERO_DE_ROL, EMAIL, TELEFONE, CELULAR, ESTADO_CIVIL, FOTO_MEMBRO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+        const sqlMembro = 'INSERT INTO MEMBRO (NOME, COMUNGANTE, DATA_NASCIMENTO, NOME_PAI, NOME_MAE, SEXO, ESCOLARIDADE, PROFISSAO, NUMERO_DE_ROL, EMAIL, TELEFONE, CELULAR, FOTO_MEMBRO, ESTADO_CIVIL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         const valuesMembro = [
-            nome, parseInt(comungante), dataNascimento, nomePai, nomeMae, sexo, escolaridade,
-            profissao, numeroDeRol, email, telefone, celular, estadoCivil, fotoMembro
+            nome, parseInt(comungante), dataNascimento, nomePai, nomeMae, sexo, escolaridade, profissao, numeroDeRol, email, telefone, celular, fotoMembro, estadoCivil
         ];
 
         console.log('SQL Membro:', sqlMembro);
@@ -139,7 +151,7 @@ membroController.create = async (req, res) => {
 
         const sqlAdmissao = 'INSERT INTO ADMISSAO (DATA_ADMISSAO, FORMA_ADMISSAO, NUMERO_ATA, ID_MEMBRO) VALUES (?, ?, ?, ?);';
         const valuesAdmissao = [
-            parseDateOrNull(dataAdmissao), formaAdmissao, parseIntOrNull(ataAdmissao), idMembro // Corrigido para tratar ataAdmissao como inteiro nulo
+            parseDateOrNull(dataAdmissao), formaAdmissao, parseIntOrNull(ataAdmissao), idMembro
         ];
 
         console.log('SQL Admissao:', sqlAdmissao);
@@ -149,7 +161,7 @@ membroController.create = async (req, res) => {
 
         const sqlDemissao = 'INSERT INTO DEMISSAO (DATA_DEMISSAO, FORMA_DEMISSAO, NUMERO_ATA, ID_MEMBRO) VALUES (?, ?, ?, ?);';
         const valuesDemissao = [
-            parseDateOrNull(dataDemissao), formaDemissao, parseIntOrNull(ataDemissao), idMembro // Corrigido para tratar ataDemissao como inteiro nulo
+            parseDateOrNull(dataDemissao), formaDemissao, parseIntOrNull(ataDemissao), idMembro
         ];
 
         console.log('SQL Demissao:', sqlDemissao);
@@ -160,7 +172,7 @@ membroController.create = async (req, res) => {
         const sqlRolSeparado = 'INSERT INTO ROL_SEPARADO (DATA_ROL_SEPARADO, ATA_ROL_SEPARADO, CASAMENTO, DISPLINA, DATA_DISCIPLINA, ATA_DISCIPLINA, ID_MEMBRO) VALUES (?, ?, ?, ?, ?, ?, ?);';
         const valuesRolSeparado = [
             parseDateOrNull(dataRolSeparado), parseIntOrNull(ataRolSeparado), parseDateOrNull(dataCasamento),
-            disciplina, parseDateOrNull(dataDisciplina), parseIntOrNull(ataDisciplina), idMembro // Corrigido para tratar ataRolSeparado e ataDisciplina como inteiros nulos
+            disciplina, parseDateOrNull(dataDisciplina), parseIntOrNull(ataDisciplina), idMembro
         ];
 
         console.log('SQL Rol Separado:', sqlRolSeparado);
