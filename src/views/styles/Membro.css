@@ -174,6 +174,8 @@ select {
     padding: 10px;
     margin-bottom: 10px;
     /* border: 1px solid #ddd; */
+    align-items: center;
+    justify-content: center;
     border-radius: 25px;
     transition: background-color 0.3s ease;
     background-color: #fff;
@@ -184,6 +186,11 @@ select {
     background-color: #E7E7E7;
     cursor: pointer;
 }
+.icons-card-result{
+    display: flex;
+    gap: 15px;
+}
+
 
 .img-result {
     margin-right: 10px;
@@ -213,8 +220,23 @@ select {
     border: none;
     background-color: #015B40;
     color: white;
-    width: 25px;
-    height: 25px;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #d71b2bf1;
+    color: white;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
 }
@@ -240,6 +262,153 @@ select {
 
 .input.selected {
     color: black !important;
+}
+
+/* Estilos para o modal de confirmação de exclusão */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#deleteModal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semitransparente */
+    display: none; /* Oculto por padrão */
+
+    z-index: 1000; /* Certifique-se que é alto o suficiente */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%; /* Ajuste conforme a necessidade */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve para destaque */
+    display: flex;
+    flex-direction: column; /* Organiza verticalmente */
+    align-items: center; /* Centraliza horizontalmente todos os filhos */
+}
+
+.close {
+    align-self: flex-end; /* Alinha o botão fechar no final do conteúdo */
+    cursor: pointer !important;
+    font-size: 24px; /* Aumenta o tamanho para melhor cliquabilidade */
+    margin-bottom: 20px; /* Espaço antes do título */
+    color: #015B40;
+}
+
+
+
+.modal-content h2 {
+    font-size: 24px;
+    color: #015B40;
+    margin-bottom: 20px;
+    white-space: nowrap; /* Mantém o texto em uma única linha */
+    overflow: hidden; /* Esconde qualquer texto que exceda o espaço horizontal */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+    width: 100%; /* Garante que o h2 ocupe toda a largura do contentor */
+    text-align: center; /* Centraliza o texto horizontalmente */
+}
+
+
+#confirmDelete, #cancelDelete {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+#confirmDelete {
+    background-color: #015B40; /* Verde para ação positiva */
+    color: white;
+    /* margin: auto; */
+    width: 120px;
+    padding: 10px 15px;;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 0 !important;
+    outline: 0 !important;    
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: background-color 0.3s ease;
+    align-self: end;
+    font-weight: 400;
+}
+
+#confirmDelete:hover {
+    background-color: #037955;
+}
+
+#cancelDelete {
+    background-color: #535353; /* Vermelho para cancelar */
+    color: white;
+    width: 120px;
+    /* margin: auto; */
+    padding: 10px 15px;;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 0 !important;
+    outline: 0 !important;    
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: background-color 0.3s ease;
+    align-self: end;
+    font-weight: 400;
+}
+
+#cancelDelete:hover {
+    cursor: pointer;
+    background-color: #7c7c7c; /* Vermelho um pouco mais escuro ao passar o mouse */
+}
+
+.btns{
+    margin-top: 15px;
 }
 
 @media screen and (max-width: 1600px) {

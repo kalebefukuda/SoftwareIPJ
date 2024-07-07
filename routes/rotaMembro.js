@@ -18,9 +18,8 @@ router.get('/editar-membro/:id', (req, res) => {
 
 // API Routes
 router.get('/api/membros', membroController.list);
-router.post('/membros', membroController.create);
+router.post('/api/membros', membroController.create);
 router.put('/api/editar-membro/:id', membroController.update);
 router.delete('/api/deletar-membro/:id', membroController.delete);
 router.get('/api/membros/:id', membroController.getMembroById);
-
 export { router };

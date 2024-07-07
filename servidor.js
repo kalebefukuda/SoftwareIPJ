@@ -48,13 +48,7 @@ server.get("/home", (req, res) => {
 
 // Cadastro 
 server.use("/cadastro", cadastroRoutes);
-server.use("/api/membros-create", membroRoutes);
-server.use('/api/membros/editar-membro/:id', membroRoutes);
-server.use('/api/membros/:id', membroRoutes);
-
-server.use("/membros", membroRoutes);
-server.use("/membros/editar-membro/:id", membroRoutes);
-
+server.use('/membros', membroRoutes);
 // Relatorios
 server.get("/relatorios", relatorioRoutes);
 server.get("/relatorios/lista-aniversarios", relatorioRoutes);

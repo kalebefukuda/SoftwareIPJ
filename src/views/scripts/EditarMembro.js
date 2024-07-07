@@ -138,17 +138,17 @@ document.addEventListener('DOMContentLoaded', async function() {
                             <input type="text" id="profissao" name="profissao" class="input" value="${handleNullString(membro.PROFISSAO)}" style="width: 300px;" pattern="[A-Za-zÀ-ú\\s]+">
                         </div>
                     </div>
-                    <div class="select-photo" id="select-photo">
-                        <input type="file" id="fotoMembro" name="fotoMembro" style="display: none;" accept="image/*" tabindex="-1" autocomplete="off">
-                        <label for="fotoMembro">
-                            <div class="icon-container">
-                                <div class="photo">
-                                    <img src="/assets/Insira sua foto.png" class="image-icon" alt="Image icon">
+                   <div class="select-photo" id="select-photo">
+                            <input type="file" id="fotoMembro" name="fotoMembro" style="display: none;" accept="image/*" tabindex="-1" autocomplete="off">
+                            <label for="fotoMembro">
+                                <div class="icon-container">
+                                    <div class="photo">
+                                        <img src="${membro.FOTO_MEMBRO ? membro.FOTO_MEMBRO : '/assets/Insira sua foto.png'}" class="image-icon" alt="Image icon" id="currentFoto">
+                                    </div>
+                                    <img src="/assets/camera.svg" class="camera-icon" alt="Camera icon">
                                 </div>
-                                <img src="/assets/camera.svg" class="camera-icon" alt="Camera icon">
-                            </div>
-                        </label>
-                    </div>
+                            </label>
+                        </div>
                 </div>
 
                 <div class="div2">
@@ -402,6 +402,18 @@ document.addEventListener('DOMContentLoaded', async function() {
                 <button class="button-save" type="submit">Salvar Alterações</button>
             </form>
         `;
+        const inputFile = document.getElementById('fotoMembro');
+        inputFile.addEventListener('change', function() {
+            const file = inputFile.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.getElementById('currentFoto');
+                    imgElement.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
         document.getElementById('cadastroMembroForm').addEventListener('submit', async function(event) {
             event.preventDefault();
