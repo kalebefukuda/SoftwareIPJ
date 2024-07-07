@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         try {
-            const response = await fetch('/api/membros', {
+            const response = await fetch('/membros/api/membros', {
                 method: 'POST',
                 body: formData,
             });

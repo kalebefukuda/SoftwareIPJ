@@ -58,37 +58,20 @@ membroController.create = async (req, res) => {
             dataDisciplina, ataDisciplina
         } = req.body;
 
-        console.log('Parsed Request Body:', {
-            nome, comungante, dataNascimento, nomePai, nomeMae, sexo, escolaridade, profissao,
-            numeroDeRol, email, telefone, celular, estadoCivil, endereco, bairro, complemento,
-            cidade, estado, localResidencia, localNascimento, estadoNascimento, cep, dataBatismo,
-            oficianteBatismo, dataProfissaoFe, oficianteProfissaoFe, dataAdmissao, formaAdmissao,
-            ataAdmissao, dataDemissao, formaDemissao, ataDemissao, dataEleicaoDiacono,
-            dataReeleicaoDiacono1, dataReeleicaoDiacono2, dataReeleicaoDiacono3, dataReeleicaoDiacono4,
-            dataEleicaoPresbitero, dataReeleicaoPresbitero1, dataReeleicaoPresbitero2,
-            dataReeleicaoPresbitero3, dataRolSeparado, ataRolSeparado, dataCasamento, disciplina,
-            dataDisciplina, ataDisciplina
-        });
-
         let fotoMembro = null;
         if (req.files && req.files.fotoMembro) {
             const file = req.files.fotoMembro;
-            const uploadDir = path.resolve(__dirname, '../../src/views/uploads'); // Caminho relativo ao diretório atual
+            const uploadDir = path.resolve(__dirname, '../../src/views/uploads');
 
-            // Verificação da existência do diretório de uploads
             if (!fs.existsSync(uploadDir)) {
-                return res.status(500).json({ error: 'Diretório de upload não existe' });
+                fs.mkdirSync(uploadDir, { recursive: true });
             }
 
             const fileName = `${Date.now()}-${file.name}`;
-            const uploadPath = path.join(uploadDir, fileName); // Caminho ajustado para src/views/uploads
-
-            console.log('Diretório de upload:', uploadDir);
-            console.log('Caminho do upload:', uploadPath);
+            const uploadPath = path.join(uploadDir, fileName);
 
             await file.mv(uploadPath);
-            fotoMembro = `/uploads/${fileName}`;
-            console.log('Uploaded file path:', fotoMembro);
+            fotoMembro = `uploads/${fileName}`;
         }
 
         const sqlMembro = 'INSERT INTO MEMBRO (NOME, COMUNGANTE, DATA_NASCIMENTO, NOME_PAI, NOME_MAE, SEXO, ESCOLARIDADE, PROFISSAO, NUMERO_DE_ROL, EMAIL, TELEFONE, CELULAR, FOTO_MEMBRO, ESTADO_CIVIL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
@@ -96,21 +79,14 @@ membroController.create = async (req, res) => {
             nome, parseInt(comungante), dataNascimento, nomePai, nomeMae, sexo, escolaridade, profissao, numeroDeRol, email, telefone, celular, fotoMembro, estadoCivil
         ];
 
-        console.log('SQL Membro:', sqlMembro);
-        console.log('Values Membro:', valuesMembro);
-
         const [resultMembro] = await connection.query(sqlMembro, valuesMembro);
         const idMembro = resultMembro.insertId;
-        console.log('Inserted Member ID:', idMembro);
 
         const sqlEndereco = 'INSERT INTO ENDERECO (ID_MEMBRO, CEP, ENDERECO, BAIRRO, COMPLEMENTO, CIDADE, ESTADO, LOCAL_RESIDENCIA, LOCAL_NASCIMENTO, ESTADO_NASCIMENTO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
         const valuesEndereco = [
             idMembro, cep, endereco, bairro, complemento, cidade, estado, localResidencia,
             localNascimento, estadoNascimento
         ];
-
-        console.log('SQL Endereco:', sqlEndereco);
-        console.log('Values Endereco:', valuesEndereco);
 
         await connection.query(sqlEndereco, valuesEndereco);
 
@@ -121,9 +97,6 @@ membroController.create = async (req, res) => {
             parseDateOrNull(dataReeleicaoDiacono4), idMembro
         ];
 
-        console.log('SQL Eleicao Diacono:', sqlEleicaoDiacono);
-        console.log('Values Eleicao Diacono:', valuesEleicaoDiacono);
-
         await connection.query(sqlEleicaoDiacono, valuesEleicaoDiacono);
 
         const sqlEleicaoPresbitero = 'INSERT INTO ELEICAO_PRESBITERO (DATA_ELEICAO_PRESBITERO_1, DATA_ELEICAO_PRESBITERO_2, DATA_ELEICAO_PRESBITERO_3, DATA_ELEICAO_PRESBITERO_4, ID_MEMBRO) VALUES (?, ?, ?, ?, ?);';
@@ -133,16 +106,10 @@ membroController.create = async (req, res) => {
             idMembro
         ];
 
-        console.log('SQL Eleicao Presbitero:', sqlEleicaoPresbitero);
-        console.log('Values Eleicao Presbitero:', valuesEleicaoPresbitero);
-
         await connection.query(sqlEleicaoPresbitero, valuesEleicaoPresbitero);
 
         const sqlBatismo = 'INSERT INTO BATISMO (DATA_BATISMO, NOME_OFICIANTE, ID_MEMBRO) VALUES (?, ?, ?);';
         const valuesBatismo = [parseDateOrNull(dataBatismo), oficianteBatismo, idMembro];
-
-        console.log('SQL Batismo:', sqlBatismo);
-        console.log('Values Batismo:', valuesBatismo);
 
         await connection.query(sqlBatismo, valuesBatismo);
 
@@ -151,18 +118,12 @@ membroController.create = async (req, res) => {
             parseDateOrNull(dataProfissaoFe), oficianteProfissaoFe, idMembro
         ];
 
-        console.log('SQL Profissao De Fe:', sqlProfissaoDeFe);
-        console.log('Values Profissao De Fe:', valuesProfissaoDeFe);
-
         await connection.query(sqlProfissaoDeFe, valuesProfissaoDeFe);
 
         const sqlAdmissao = 'INSERT INTO ADMISSAO (DATA_ADMISSAO, FORMA_ADMISSAO, NUMERO_ATA, ID_MEMBRO) VALUES (?, ?, ?, ?);';
         const valuesAdmissao = [
             parseDateOrNull(dataAdmissao), formaAdmissao, parseIntOrNull(ataAdmissao), idMembro
         ];
-
-        console.log('SQL Admissao:', sqlAdmissao);
-        console.log('Values Admissao:', valuesAdmissao);
 
         await connection.query(sqlAdmissao, valuesAdmissao);
 
@@ -171,9 +132,6 @@ membroController.create = async (req, res) => {
             parseDateOrNull(dataDemissao), formaDemissao, parseIntOrNull(ataDemissao), idMembro
         ];
 
-        console.log('SQL Demissao:', sqlDemissao);
-        console.log('Values Demissao:', valuesDemissao);
-
         await connection.query(sqlDemissao, valuesDemissao);
 
         const sqlRolSeparado = 'INSERT INTO ROL_SEPARADO (DATA_ROL_SEPARADO, ATA_ROL_SEPARADO, CASAMENTO, DISPLINA, DATA_DISCIPLINA, ATA_DISCIPLINA, ID_MEMBRO) VALUES (?, ?, ?, ?, ?, ?, ?);';
@@ -181,9 +139,6 @@ membroController.create = async (req, res) => {
             parseDateOrNull(dataRolSeparado), parseIntOrNull(ataRolSeparado), parseDateOrNull(dataCasamento),
             disciplina, parseDateOrNull(dataDisciplina), parseIntOrNull(ataDisciplina), idMembro
         ];
-
-        console.log('SQL Rol Separado:', sqlRolSeparado);
-        console.log('Values Rol Separado:', valuesRolSeparado);
 
         await connection.query(sqlRolSeparado, valuesRolSeparado);
 
@@ -213,6 +168,23 @@ membroController.update = async (req, res) => {
             dataReeleicaoPresbitero3, dataRolSeparado, ataRolSeparado, dataCasamento, disciplina,
             dataDisciplina, ataDisciplina
         } = req.body;
+
+        let fotoMembro = req.body.fotoMembroPath;
+
+        if (req.files && req.files.fotoMembro) {
+            const file = req.files.fotoMembro;
+            const uploadDir = path.resolve(__dirname, '../../src/views/uploads');
+
+            if (!fs.existsSync(uploadDir)) {
+                return res.status(500).json({ error: 'Diretório de upload não existe' });
+            }
+
+            const fileName = `${Date.now()}-${file.name}`;
+            const uploadPath = path.join(uploadDir, fileName);
+
+            await file.mv(uploadPath);
+            fotoMembro = `/uploads/${fileName}`;
+        }
 
         const sqlMembro = `
             UPDATE MEMBRO SET 
@@ -389,11 +361,19 @@ membroController.delete = async (req, res) => {
         connection = await connect();
         const { id } = req.params;
 
-        const sqlMembro = 'DELETE FROM MEMBRO WHERE ID_MEMBRO = ?;';
-        await connection.query(sqlMembro, [id]);
+        // Deletar registros associados nas tabelas relacionadas primeiro
+        await connection.query('DELETE FROM ENDERECO WHERE ID_MEMBRO = ?;', [id]);
+        await connection.query('DELETE FROM ELEICAO_DIACONO WHERE ID_MEMBRO = ?;', [id]);
+        await connection.query('DELETE FROM ELEICAO_PRESBITERO WHERE ID_MEMBRO = ?;', [id]);
+        await connection.query('DELETE FROM BATISMO WHERE ID_MEMBRO = ?;', [id]);
+        await connection.query('DELETE FROM PROFISSAO_DE_FE WHERE ID_MEMBRO = ?;', [id]);
+        await connection.query('DELETE FROM ADMISSAO WHERE ID_MEMBRO = ?;', [id]);
+        await connection.query('DELETE FROM DEMISSAO WHERE ID_MEMBRO = ?;', [id]);
+        await connection.query('DELETE FROM ROL_SEPARADO WHERE ID_MEMBRO = ?;', [id]);
+        await connection.query('DELETE FROM MEMBRO_SOCIEDADE WHERE ID_MEMBRO = ?;', [id]);
 
-        const sqlEndereco = 'DELETE FROM ENDERECO WHERE ID_MEMBRO = ?;';
-        await connection.query(sqlEndereco, [id]);
+        // Deletar o membro
+        await connection.query('DELETE FROM MEMBRO WHERE ID_MEMBRO = ?;', [id]);
 
         res.json({ message: 'Membro deletado com sucesso' });
     } catch (error) {
@@ -403,5 +383,6 @@ membroController.delete = async (req, res) => {
         if (connection) connection.release();
     }
 };
+
 
 export { membroController };
