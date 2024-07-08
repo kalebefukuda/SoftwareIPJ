@@ -12,10 +12,14 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../src/views/pages/Membro.html'));
 });
 
+router.get('/editar-membro/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, '../src/views/pages/EditarMembro.html'));
+});
+
 // API Routes
 router.get('/api/membros', membroController.list);
-router.post('/membros', membroController.create);
-router.put('/api/membros/:id', membroController.update);
-router.delete('/api/membros/:id', membroController.delete);
-
+router.post('/api/membros', membroController.create);
+router.put('/api/editar-membro/:id', membroController.update);
+router.delete('/api/deletar-membro/:id', membroController.delete);
+router.get('/api/membros/:id', membroController.getMembroById);
 export { router };
