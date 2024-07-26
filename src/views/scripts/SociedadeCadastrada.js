@@ -158,19 +158,36 @@ function mostrarResultadosBusca(membros) {
     resultadosBusca.innerHTML = ''; // Limpa resultados anteriores
 
     membros.forEach(membro => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'resultado-item';
+        const card = document.createElement('div');
+        card.classList.add('card-result');
 
-        itemDiv.innerHTML = `
-            <img src="${membro.FOTO_MEMBRO}" alt="Foto de ${membro.NOME}">
-            <div class="info">
-                <span class="nome">${membro.NOME}</span>
-                <span class="detalhes">Idade: ${membro.IDADE}</span>
+        let fotoSrc = '/assets/default.jpg';
+        if (membro.FOTO_MEMBRO && membro.FOTO_MEMBRO.trim() !== '') {
+            fotoSrc = membro.FOTO_MEMBRO.startsWith('uploads/')
+                ? `/${membro.FOTO_MEMBRO}`
+                : `${membro.FOTO_MEMBRO}`;
+        }
+
+        card.innerHTML = `
+        
+            <div class="img-result">
+                <img class="campo-foto-card" src="${fotoSrc}" alt="Foto do membro">
             </div>
-            <button class="btn-add-membro" data-id="${membro.ID_MEMBRO}">Adicionar</button>
+            <div class="text-result-membro">
+                <div class="text-icon">
+                    <h3 class="memberName">${membro.NOME}</h3>
+                    <div class="icons-card-result">
+                        <button class="btn-add-membro" data-id="${membro.ID_MEMBRO}">Adicionar</button>
+                    </div>
+                </div>
+                <div class="telefone-membro">
+                    <ion-icon name="phone-portrait-outline"></ion-icon>
+                    <h5>${membro.TELEFONE}</h5>
+                </div>
+            </div>
         `;
 
-        resultadosBusca.appendChild(itemDiv);
+        resultadosBusca.appendChild(card);
     });
 
     // Adiciona eventos de clique aos botões de adicionar membro

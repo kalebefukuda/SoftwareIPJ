@@ -260,17 +260,102 @@ input:focus {
     flex-direction: column;
     border-radius: 15px;
     width: 50%;
-    height: 50%;
+    max-height: 50%; /* Limite máximo de altura */
     margin: 5% auto;
     padding: 20px;
-    /* border: 1px solid #888; */
-    /* width: 80%; */
+    overflow-y: auto; /* Rolagem interna */
 }
 
-.modal-content h2{
+.modal-content h2 {
     color: #015B40;
     justify-content: center;
     align-self: center;
+    padding-bottom: 10px;
+}
+
+.resultadosBusca {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-result {
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    background-color: #fff;
+}
+
+.card-result:hover {
+    background-color: #E7E7E7;
+    cursor: pointer;
+}
+
+.icons-card-result {
+    display: flex;
+    gap: 15px;
+}
+
+.img-result {
+    margin-right: 10px;
+}
+
+.img-result img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.text-result-membro {
+    flex-grow: 1;
+    color: #015B40;
+}
+
+.text-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-add-membro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #015B40;
+    color: white;
+    cursor: pointer;
+    width: 80px;
+    height: 28px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-membro:hover {
+    background-color: #037955;
+}
+
+.telefone-membro {
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.telefone-membro h5 {
+    font-weight: 300;
+}
+
+.input.initial {
+    color: gray !important;
+}
+
+.input.selected {
+    color: black !important;
 }
 
 .close {
