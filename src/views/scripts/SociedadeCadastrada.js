@@ -74,10 +74,6 @@ function renderizarSociedade(sociedade) {
     divMembrosResultado.innerHTML = '<h2>Membros Cadastrados:</h2>';
     main.appendChild(divMembrosResultado);
 
-    const resultadosBusca = document.createElement('div');
-    resultadosBusca.id = 'resultadosBusca';
-    main.appendChild(resultadosBusca);
-
     sociedade.MEMBROS.forEach(membro => {
         const membrosCadastrados = document.createElement('div');
         membrosCadastrados.className = 'membros-cadastrados';
@@ -95,8 +91,8 @@ function renderizarSociedade(sociedade) {
                 </div>
             </div>
             <button class="delete">
-                    <ion-icon name="trash-outline"></ion-icon>
-                </button> 
+                <ion-icon name="trash-outline"></ion-icon>
+            </button> 
         `;
         divMembrosResultado.appendChild(membrosCadastrados);
     });

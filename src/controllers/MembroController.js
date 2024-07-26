@@ -22,7 +22,7 @@ membroController.list = async (req, res) => {
     try {
         connection = await connect();
         const [rows] = await connection.query('SELECT * FROM MEMBRO;');
-        const basePath = '/uploads/';
+        const basePath = '../uploads/';
         // Transformar os dados para adicionar caminho da imagem padrão quando FOTO_MEMBRO for null
         const membros = rows.map(membro => {
             if (!membro.FOTO_MEMBRO) {
