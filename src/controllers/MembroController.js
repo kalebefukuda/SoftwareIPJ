@@ -22,10 +22,13 @@ membroController.list = async (req, res) => {
     try {
         connection = await connect();
         const [rows] = await connection.query('SELECT * FROM MEMBRO;');
+        const basePath = '/uploads/';
         // Transformar os dados para adicionar caminho da imagem padrão quando FOTO_MEMBRO for null
         const membros = rows.map(membro => {
             if (!membro.FOTO_MEMBRO) {
                 membro.FOTO_MEMBRO = 'Ellipse.png'; // Define a imagem padrão
+            } else {
+                membro.FOTO_MEMBRO = basePath + membro.FOTO_MEMBRO;
             }
             return membro;
         });
@@ -33,6 +36,38 @@ membroController.list = async (req, res) => {
     } catch (error) {
         console.error('Erro ao listar membros:', error);
         res.status(500).json({ error: 'Erro ao listar membros' });
+    } finally {
+        if (connection) connection.release();
+    }
+};
+
+// Buscar membros por nome
+membroController.search = async (req, res) => {
+    const query = req.query.query || '';
+    let connection;
+
+    try {
+        connection = await connect();
+        const sqlQuery = `
+            SELECT M.ID_MEMBRO, M.NOME, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
+            FROM MEMBRO M
+            WHERE M.NOME LIKE ?`;
+
+        const [rows] = await connection.query(sqlQuery, [`%${query}%`]);
+        const basePath = '/uploads/';
+        const membros = rows.map(membro => {
+            if (!membro.FOTO_MEMBRO) {
+                membro.FOTO_MEMBRO = 'Ellipse.png'; // Define a imagem padrão
+            } else {
+                membro.FOTO_MEMBRO = basePath + membro.FOTO_MEMBRO;
+            }
+            return membro;
+        });
+
+        res.json({ ok: true, data: membros });
+    } catch (error) {
+        console.error('Erro na busca:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
     } finally {
         if (connection) connection.release();
     }

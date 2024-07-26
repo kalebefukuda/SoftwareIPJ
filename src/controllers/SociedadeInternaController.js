@@ -1,4 +1,5 @@
-import connect from '../../config/Connection.js'
+// SociedadeInternaController.js
+import connect from '../../config/Connection.js';
 import path from 'path';
 import fs from 'fs';
 
@@ -8,7 +9,6 @@ const uploadDir = path.join(process.cwd(), '/src/views/uploads/');
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }
-
 
 let sociedadeInterna = {};
 
@@ -58,7 +58,6 @@ sociedadeInterna.create = async function(req, res) {
         res.status(500).json({ error: 'Erro interno do servidor' });
     }
 };
-
 
 // Update
 sociedadeInterna.update = async function(req, res) {
@@ -135,7 +134,7 @@ sociedadeInterna.delete = async function(id) {
 
 sociedadeInterna.loadSociedade = async function(req, res) {
     try {
-        let idSociedade = req.params.idSociedade; // Certifique-se de que está usando o nome correto do parâmetro
+        let idSociedade = req.params.idSociedade;
 
         let sql = `
             SELECT s.*, m.nome AS nome_membro, TIMESTAMPDIFF(YEAR, m.DATA_NASCIMENTO, CURDATE()) AS idade
@@ -166,16 +165,30 @@ sociedadeInterna.search = async function(req, res) {
 
     try {
         const sqlQuery = `
-            SELECT M.NOME, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
+            SELECT M.ID_MEMBRO, M.NOME, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
             FROM MEMBRO M
-            JOIN MEMBRO_SOCIEDADE MS ON M.ID_MEMBRO = MS.ID_MEMBRO
-            JOIN SOCIEDADE_INTERNA SI ON MS.ID_SOCIEDADE_INTERNA = SI.ID_SOCIEDADE_INTERNA
             WHERE M.NOME LIKE ?`;
 
         const [rows] = await con.query(sqlQuery, [`%${query}%`]);
         res.json({ ok: true, data: rows });
     } catch (error) {
         console.error('Erro na busca:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+};
+
+// Adicionar membro à sociedade
+sociedadeInterna.addMembro = async function(req, res) {
+    try {
+        const { idSociedade } = req.params;
+        const { idMembro } = req.body;
+
+        const sqlQuery = "INSERT INTO membro_sociedade (ID_SOCIEDADE_INTERNA, ID_MEMBRO) VALUES (?, ?)";
+        await con.query(sqlQuery, [idSociedade, idMembro]);
+
+        res.json({ ok: true, message: 'Membro adicionado com sucesso' });
+    } catch (error) {
+        console.error('Erro ao adicionar membro:', error);
         res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
     }
 };

@@ -66,11 +66,6 @@ function renderizarSociedade(sociedade) {
                 <ion-icon name="search-outline"></ion-icon>
             </button>
         </div>
-        <div class="adicionar-membro">
-            <button class="btn-add">
-                Adicionar
-            </button>
-        </div>
     `;
     main.appendChild(pesquisaDiv);
 
@@ -99,7 +94,7 @@ function renderizarSociedade(sociedade) {
                     <h5>${membro.IDADE}</h5>
                 </div>
             </div>
-            <button class= "delete">
+            <button class="delete">
                     <ion-icon name="trash-outline"></ion-icon>
                 </button> 
         `;
@@ -110,6 +105,8 @@ function renderizarSociedade(sociedade) {
 function setupBusca() {
     const inputBusca = document.getElementById('inputBuscaNome');
     const searchButton = document.querySelector('.search-btn');
+    const modal = document.getElementById("modalBusca");
+    const span = document.getElementsByClassName("close")[0];
 
     searchButton.addEventListener('click', function() {
         realizarBusca(inputBusca.value);
@@ -120,12 +117,24 @@ function setupBusca() {
             realizarBusca(inputBusca.value);
         }
     });
+
+    // Fechar a modal quando o usuário clicar no X
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Fechar a modal quando o usuário clicar fora dela
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 }
 
 async function realizarBusca(query) {
     console.log('Buscando por:', query);
     try {
-        const response = await fetch(`/buscar?query=${encodeURIComponent(query)}`);
+        const response = await fetch(`/membros/api/membros/buscar?query=${encodeURIComponent(query)}`);
         if (!response.ok) {
             throw new Error(`Erro HTTP: ${response.status}`);
         }
@@ -137,6 +146,8 @@ async function realizarBusca(query) {
         }
 
         mostrarResultadosBusca(data.data);
+        abrirModal(); // Abre a modal com os resultados da busca
+
     } catch (error) {
         console.error('Erro ao buscar membros:', error);
     }
@@ -155,13 +166,52 @@ function mostrarResultadosBusca(membros) {
         itemDiv.className = 'resultado-item';
 
         itemDiv.innerHTML = `
-            <img src="${membro.FOTO_MEMBRO}" alt="Foto de ${membro.NOME_MEMBRO}">
+            <img src="${membro.FOTO_MEMBRO}" alt="Foto de ${membro.NOME}">
             <div class="info">
-                <span class="nome">${membro.NOME_MEMBRO}</span>
+                <span class="nome">${membro.NOME}</span>
                 <span class="detalhes">Idade: ${membro.IDADE}</span>
             </div>
+            <button class="btn-add-membro" data-id="${membro.ID_MEMBRO}">Adicionar</button>
         `;
 
         resultadosBusca.appendChild(itemDiv);
     });
+
+    // Adiciona eventos de clique aos botões de adicionar membro
+    document.querySelectorAll('.btn-add-membro').forEach(button => {
+        button.addEventListener('click', function() {
+            const idMembro = this.getAttribute('data-id');
+            adicionarMembro(idMembro);
+        });
+    });
+}
+
+function abrirModal() {
+    const modal = document.getElementById("modalBusca");
+    modal.style.display = "block";
+}
+
+async function adicionarMembro(idMembro) {
+    const idSociedade = window.location.pathname.split('/').pop(); // Captura o ID da URL
+    try {
+        const response = await fetch(`/api/sociedade-interna/${idSociedade}/adicionar-membro`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ idMembro })
+        });
+
+        if (response.ok) {
+            alert('Membro adicionado com sucesso!');
+            window.location.reload(); // Recarrega a página para atualizar a lista de membros
+        } else {
+            const errorData = await response.json();
+            console.error('Erro ao adicionar membro:', errorData);
+            alert('Erro ao adicionar membro.');
+        }
+    } catch (error) {
+        console.error('Erro ao adicionar membro:', error);
+        alert('Erro ao adicionar membro.');
+    }
 }

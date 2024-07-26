@@ -18,6 +18,7 @@ router.get('/editar-membro/:id', (req, res) => {
 
 // API Routes
 router.get('/api/membros', membroController.list);
+router.get('/api/membros/buscar', membroController.search); // Nova rota para busca
 router.post('/api/membros', membroController.create);
 router.put('/api/editar-membro/:id', membroController.update);
 router.delete('/api/deletar-membro/:id', membroController.delete);
