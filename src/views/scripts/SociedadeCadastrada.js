@@ -79,7 +79,7 @@ function renderizarSociedade(sociedade) {
         membrosCadastrados.className = 'membros-cadastrados';
         membrosCadastrados.innerHTML = `
             <div class="img-result">
-                <img class="campo-foto-card" src="${membro.FOTO_MEMBRO}" alt="">
+                <img class="campo-foto-card" src="${membro.FOTO_MEMBRO ? `/${membro.FOTO_MEMBRO}` : '/assets/Ellipse.png'}" alt="Foto do membro">
             </div>
             <div class="text-result-membro">
                 <div class="text-icon">
@@ -161,7 +161,7 @@ function mostrarResultadosBusca(membros) {
         const card = document.createElement('div');
         card.classList.add('card-result');
 
-        let fotoSrc = '/assets/default.jpg';
+        let fotoSrc = '/src/views/assets/Ellipse.png'; // Caminho correto para a imagem padrão
         if (membro.FOTO_MEMBRO && membro.FOTO_MEMBRO.trim() !== '') {
             fotoSrc = membro.FOTO_MEMBRO.startsWith('uploads/')
                 ? `/${membro.FOTO_MEMBRO}`
@@ -169,7 +169,6 @@ function mostrarResultadosBusca(membros) {
         }
 
         card.innerHTML = `
-        
             <div class="img-result">
                 <img class="campo-foto-card" src="${fotoSrc}" alt="Foto do membro">
             </div>
@@ -182,7 +181,7 @@ function mostrarResultadosBusca(membros) {
                 </div>
                 <div class="telefone-membro">
                     <ion-icon name="phone-portrait-outline"></ion-icon>
-                    <h5>${membro.TELEFONE}</h5>
+                    <h5>${membro.TELEFONE ? membro.TELEFONE : 'Telefone não disponível'}</h5>
                 </div>
             </div>
         `;
@@ -198,6 +197,9 @@ function mostrarResultadosBusca(membros) {
         });
     });
 }
+
+
+
 
 function abrirModal() {
     const modal = document.getElementById("modalBusca");

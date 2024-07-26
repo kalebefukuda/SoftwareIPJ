@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
 * {
     margin: 0;
@@ -6,35 +6,33 @@
     font-family: "Poppins", sans-serif;
 }
 
-a{
+a {
     text-decoration: none;
-    
 }
 
-h1{
+h1 {
     font-weight: 700;
     font-size: 40px;
-    
 }
 
-button{
+button {
     cursor: pointer;
 }
 
-body{
+body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-main{
+main {
     display: flex;
     flex: 1; /*ocupar todo espaço entre header e footer*/
     flex-wrap: wrap;
     margin-top: 15px;
 }
 
-.banner{
+.banner {
     display: flex;
     background-image: url('../assets/BannerSocCadastrada.png');
     background-size: cover;
@@ -45,33 +43,33 @@ main{
     color: white;
     justify-content: center;
     gap: 21rem;
-
 }
 
-.banner-div-img{
+.banner-div-img {
     display: flex;
     align-items: center;
     position: absolute;
     left: 0;
     margin-left: 90px;
 }
-.banner-div-texto{
+
+.banner-div-texto {
     justify-content: start;
     align-items: center;
 }
 
-.image-esq{
+.image-esq {
     height: 200px;
     width: 200px;
     border-radius: 50%;
 }
 
-.banner h1{
+.banner h1 {
     text-align: center;
     width: 450px;
 }
 
-.pesquisa-div{
+.pesquisa-div {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -79,7 +77,8 @@ main{
     margin-top: 40px;
     margin-bottom: 40px;
 }
-.busca-div{
+
+.busca-div {
     display: flex;
     background-color: #E7E7E7;
     align-items: center;
@@ -90,7 +89,8 @@ main{
     border-radius: 15px;
     padding: 3px;
 }
-.busca-div input{
+
+.busca-div input {
     border: none;
     color: #000000;
     background-color: #E7E7E7;
@@ -98,11 +98,9 @@ main{
     margin-left: 12px;
 }
 
-.busca-div ion-icon{
+.busca-div ion-icon {
     margin-right: 12px;
 }
-
-
 
 .search-btn {
     border: 0 !important;
@@ -112,7 +110,7 @@ main{
     margin: auto;
 }
 
-.btn-add{
+.btn-add {
     border: none;
     cursor: pointer;
     width: 105px;
@@ -123,11 +121,11 @@ main{
     transition: background-color 0.3s ease;
 }
 
-.btn-add:hover{
+.btn-add:hover {
     background-color: #037955;
 }
 
-.div-membros-resultado{
+.div-membros-resultado {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -135,12 +133,12 @@ main{
     margin-right: 30%;
 }
 
-.div-membros-resultado h2{
-   color: #015B40;
-   margin-bottom: 25px;
+.div-membros-resultado h2 {
+    color: #015B40;
+    margin-bottom: 25px;
 }
 
-.membros-cadastrados{
+.membros-cadastrados {
     display: flex;
     background-color: #F6F6F6;
     height: 125px;
@@ -149,18 +147,17 @@ main{
     margin-bottom: 20px;
 }
 
-.img-result{
+.img-result {
     display: flex;
     align-items: center;
     margin-left: 30px;
-   
 }
 
 input:focus {
     outline: none;
 }
 
-.text-result-membro{
+.text-result-membro {
     flex: 2;
     display: flex;
     flex-direction: column;
@@ -169,12 +166,12 @@ input:focus {
     color: #818181;
 }
 
-.text-icon{
+.text-icon {
     display: flex;
     justify-content: space-between;
 }
 
-.remove-icon{
+.remove-icon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -188,24 +185,23 @@ input:focus {
     transition: background-color 0.3s ease;
 }
 
-.idade-membro{
+.idade-membro {
     display: flex;
     gap: 6px;
 }
 
-
-.campo-foto-card{
+.campo-foto-card {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.campo-foto-card{
+.campo-foto-card {
     width: 100px;
     height: 100px;
 }
 
-.delete{
+.delete {
     width: 35px;
     height: 40px;
     cursor: pointer;
@@ -216,25 +212,22 @@ input:focus {
     transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
-.delete:hover{
-    background-color:#d71b2bf1;
-    
+.delete:hover {
+    background-color: #d71b2bf1;
     color: white;
-    
 }
-
 
 /* Responsivo */
 @media screen and (max-width: 1600px) {
-    .pesquisa-div{
+    .pesquisa-div {
         margin-top: 30px;
     }
 
-    .div-membros-resultado{
+    .div-membros-resultado {
         margin-top: 40px;
     }
 
-    .div-membros-resultado h2{
+    .div-membros-resultado h2 {
         margin-bottom: 30px;
     }
 }
@@ -260,10 +253,9 @@ input:focus {
     flex-direction: column;
     border-radius: 15px;
     width: 50%;
-    max-height: 50%; /* Limite máximo de altura */
+    height: auto;
     margin: 5% auto;
     padding: 20px;
-    overflow-y: auto; /* Rolagem interna */
 }
 
 .modal-content h2 {
@@ -274,8 +266,10 @@ input:focus {
 }
 
 .resultadosBusca {
+    background-color: #fefefe;
     display: flex;
     flex-direction: column;
+    border-radius: 15px;
 }
 
 .card-result {
@@ -312,7 +306,6 @@ input:focus {
 
 .text-result-membro {
     flex-grow: 1;
-    color: #015B40;
 }
 
 .text-icon {

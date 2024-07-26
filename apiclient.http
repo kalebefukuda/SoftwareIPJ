@@ -1,4 +1,4 @@
-GET http://localhost:3000/membros/api/membros/buscar?query=Jo HTTP/1.1
+GET http://localhost:3000/membros/api/membros/buscar?query=Joao HTTP/1.1
 Content-Type: application/json
 ###
 
