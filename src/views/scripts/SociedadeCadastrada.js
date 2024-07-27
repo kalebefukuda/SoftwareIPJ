@@ -161,7 +161,7 @@ function mostrarResultadosBusca(membros) {
         const card = document.createElement('div');
         card.classList.add('card-result');
 
-        let fotoSrc = '/src/views/assets/Ellipse.png'; // Caminho correto para a imagem padrão
+        let fotoSrc = '/assets/Ellipse.png'; // Caminho correto para a imagem padrão
         if (membro.FOTO_MEMBRO && membro.FOTO_MEMBRO.trim() !== '') {
             fotoSrc = membro.FOTO_MEMBRO.startsWith('uploads/')
                 ? `/${membro.FOTO_MEMBRO}`
@@ -197,9 +197,6 @@ function mostrarResultadosBusca(membros) {
         });
     });
 }
-
-
-
 
 function abrirModal() {
     const modal = document.getElementById("modalBusca");

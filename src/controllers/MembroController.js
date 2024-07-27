@@ -22,13 +22,10 @@ membroController.list = async (req, res) => {
     try {
         connection = await connect();
         const [rows] = await connection.query('SELECT * FROM MEMBRO;');
-        const basePath = '../uploads/';
         // Transformar os dados para adicionar caminho da imagem padrão quando FOTO_MEMBRO for null
         const membros = rows.map(membro => {
             if (!membro.FOTO_MEMBRO) {
-                membro.FOTO_MEMBRO = 'Ellipse.png'; // Define a imagem padrão
-            } else {
-                membro.FOTO_MEMBRO = basePath + membro.FOTO_MEMBRO;
+                membro.FOTO_MEMBRO = 'Ellipse.png'; // Define a imagem padrão com o caminho correto
             }
             return membro;
         });
@@ -40,6 +37,7 @@ membroController.list = async (req, res) => {
         if (connection) connection.release();
     }
 };
+
 
 // Buscar membros por nome
 membroController.search = async (req, res) => {
