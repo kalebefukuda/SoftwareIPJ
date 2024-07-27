@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
     // Captura o elemento input file para visualizar a foto
     const inputFile = document.getElementById('fotoMembro');
     inputFile.addEventListener('change', function () {
