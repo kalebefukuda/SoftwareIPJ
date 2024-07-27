@@ -163,9 +163,9 @@ function mostrarResultadosBusca(membros) {
 
         let fotoSrc = '/assets/Ellipse.png'; // Caminho correto para a imagem padrão
         if (membro.FOTO_MEMBRO && membro.FOTO_MEMBRO.trim() !== '') {
-            fotoSrc = membro.FOTO_MEMBRO.startsWith('uploads/')
-                ? `/${membro.FOTO_MEMBRO}`
-                : `${membro.FOTO_MEMBRO}`;
+            fotoSrc = membro.FOTO_MEMBRO.startsWith('/uploads/')
+                ? membro.FOTO_MEMBRO
+                : `/uploads/${membro.FOTO_MEMBRO}`;
         }
 
         card.innerHTML = `
@@ -179,9 +179,9 @@ function mostrarResultadosBusca(membros) {
                         <button class="btn-add-membro" data-id="${membro.ID_MEMBRO}">Adicionar</button>
                     </div>
                 </div>
-                <div class="telefone-membro">
-                    <ion-icon name="phone-portrait-outline"></ion-icon>
-                    <h5>${membro.TELEFONE ? membro.TELEFONE : 'Telefone não disponível'}</h5>
+                <div class="idade-membro">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <h5>${membro.IDADE}</h5>
                 </div>
             </div>
         `;
@@ -197,6 +197,7 @@ function mostrarResultadosBusca(membros) {
         });
     });
 }
+
 
 function abrirModal() {
     const modal = document.getElementById("modalBusca");

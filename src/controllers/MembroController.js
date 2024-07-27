@@ -216,19 +216,19 @@ membroController.update = async (req, res) => {
             const uploadPath = path.join(uploadDir, fileName);
 
             await file.mv(uploadPath);
-            fotoMembro = `/uploads/${fileName}`;
+            fotoMembro = `uploads/${fileName}`;
         }
 
         const sqlMembro = `
             UPDATE MEMBRO SET 
                 NOME = ?, COMUNGANTE = ?, DATA_NASCIMENTO = ?, NOME_PAI = ?, NOME_MAE = ?, SEXO = ?, 
                 ESCOLARIDADE = ?, PROFISSAO = ?, NUMERO_DE_ROL = ?, EMAIL = ?, TELEFONE = ?, CELULAR = ?, 
-                ESTADO_CIVIL = ?
+                ESTADO_CIVIL = ?, FOTO_MEMBRO = ?
             WHERE ID_MEMBRO = ?;`;
 
         const valuesMembro = [
             nome, parseInt(comungante), dataNascimento, nomePai, nomeMae, sexo, escolaridade,
-            profissao, numeroDeRol, email, telefone, celular, estadoCivil, id
+            profissao, numeroDeRol, email, telefone, celular, estadoCivil, fotoMembro, id
         ];
 
         await connection.query(sqlMembro, valuesMembro);
@@ -335,6 +335,7 @@ membroController.update = async (req, res) => {
         if (connection) connection.release();
     }
 };
+
 
 // Adicione esta função ao seu controlador MembroController.js
 membroController.getMembroById = async (req, res) => {

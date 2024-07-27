@@ -162,7 +162,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 8px;
+    /* gap: 5px; */
     color: #818181;
 }
 
@@ -263,6 +263,7 @@ input:focus {
     justify-content: center;
     align-self: center;
     padding-bottom: 10px;
+    border-bottom: #015B40;
 }
 
 .resultadosBusca {
@@ -332,14 +333,18 @@ input:focus {
     background-color: #037955;
 }
 
-.telefone-membro {
+.memberName {
+    color: #015B40;
+}
+
+.idade-membro {
     display: flex;
     align-items: center;
     color: #555;
     font-size: 0.9em;
 }
 
-.telefone-membro h5 {
+.idade-membro h5 {
     font-weight: 300;
 }
 

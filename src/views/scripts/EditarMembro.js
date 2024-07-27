@@ -425,19 +425,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         });
 
-        document.getElementById('cadastroMembroForm').addEventListener('submit', async function (event) {
+        document.getElementById('cadastroMembroForm').addEventListener('submit', async function(event) {
             event.preventDefault();
 
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
 
             try {
                 const updateResponse = await fetch(`/membros/api/editar-membro/${membroId}`, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
+                    body: formData
                 });
 
                 if (!updateResponse.ok) {

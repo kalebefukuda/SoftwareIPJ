@@ -170,12 +170,23 @@ sociedadeInterna.search = async function(req, res) {
             WHERE M.NOME LIKE ?`;
 
         const [rows] = await con.query(sqlQuery, [`%${query}%`]);
-        res.json({ ok: true, data: rows });
+
+        const membros = rows.map(membro => {
+            if (!membro.FOTO_MEMBRO || membro.FOTO_MEMBRO.trim() === '') {
+                membro.FOTO_MEMBRO = 'assets/Ellipse.png'; // Caminho para a imagem padrão
+            } else if (!membro.FOTO_MEMBRO.startsWith('uploads/')) {
+                membro.FOTO_MEMBRO = `uploads/${membro.FOTO_MEMBRO}`;
+            }
+            return membro;
+        });
+
+        res.json({ ok: true, data: membros });
     } catch (error) {
         console.error('Erro na busca:', error);
         res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
     }
 };
+
 
 // Adicionar membro à sociedade
 sociedadeInterna.addMembro = async function(req, res) {
