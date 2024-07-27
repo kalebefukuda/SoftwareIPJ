@@ -1,28 +1,28 @@
-import express from "express";
-import path from "path";
-import { dirname } from 'path';
+// rotaSociedadeInterna.js
+import express from 'express';
+import path from 'path';
 import { fileURLToPath } from 'url';
-import { sociedadeInterna } from "../src/controllers/SociedadeInternaController.js";
+import { sociedadeInterna } from '../src/controllers/SociedadeInternaController.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
-let router = express.Router();
+const router = express.Router();
 
 router.get('/sociedade-interna', (req, res) => {
-    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'Sociedade.html'));
+    res.sendFile(path.join(__dirname, '../src/views/pages/Sociedade.html'));
 });
 
 router.get('/sociedade-cadastrada/:id', (req, res) => {
-    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'SociedadeCadastrada.html'));
+    res.sendFile(path.join(__dirname, '../src/views/pages/SociedadeCadastrada.html'));
 });
 
 router.get('/sociedade-interna/editar-sociedade/:id', (req, res) => {
-    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'EditarSociedade.html'));
+    res.sendFile(path.join(__dirname, '../src/views/pages/EditarSociedade.html'));
 });
 
 router.get('/sociedade-interna/cadastro', (req, res) => {
-    res.sendFile(path.join(__dirname, '../src', 'views', 'pages', 'CadastroSociedade.html'));
+    res.sendFile(path.join(__dirname, '../src/views/pages/CadastroSociedade.html'));
 });
 
 router.get('/api/sociedade-interna', async (req, res) => {
@@ -37,7 +37,6 @@ router.get('/api/sociedade-interna', async (req, res) => {
 
 router.get('/api/sociedade-cadastrada/:idSociedade', async (req, res) => {
     try {
-        // Passe os parâmetros corretamente para a função
         await sociedadeInterna.loadSociedade(req, res);
     } catch (error) {
         console.error('Erro ao carregar sociedade:', error);
@@ -78,13 +77,22 @@ router.delete('/api/sociedade-interna/delete/:id_sociedade_interna', async (req,
     }
 });
 
-router.get('/buscar', async (req, res) => {
+router.get('/api/sociedade-cadastrada/buscar', async (req, res) => {
     try {
         const { query } = req.query;
         const membros = await sociedadeInterna.search(req, res);
         res.json(membros);
     } catch (error) {
         console.error('Erro ao buscar membros:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+});
+
+router.post('/api/sociedade-interna/:idSociedade/adicionar-membro', async (req, res) => {
+    try {
+        await sociedadeInterna.addMembro(req, res);
+    } catch (error) {
+        console.error('Erro ao adicionar membro:', error);
         res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
     }
 });

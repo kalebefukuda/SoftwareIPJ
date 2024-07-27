@@ -16,7 +16,7 @@ function handleNullString(value) {
     return value || '';
 }
 
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function () {
     const membroId = window.location.pathname.split('/').pop();
 
     try {
@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         const membro = await response.json();
 
         const mainContent = document.getElementById('main-content');
+
+        let fotoSrc = '/assets/Insira sua foto.png';
+        if (membro.FOTO_MEMBRO && membro.FOTO_MEMBRO.trim() !== '') {
+            fotoSrc = membro.FOTO_MEMBRO.startsWith('uploads/')
+                ? `/${membro.FOTO_MEMBRO}`
+                : `${membro.FOTO_MEMBRO}`;
+        }
 
         mainContent.innerHTML = `
             <form id="cadastroMembroForm" class="form" enctype="multipart/form-data">
@@ -143,7 +150,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                             <label for="fotoMembro">
                                 <div class="icon-container">
                                     <div class="photo">
-                                        <img src="${membro.FOTO_MEMBRO ? membro.FOTO_MEMBRO : '/assets/Insira sua foto.png'}" class="image-icon" alt="Image icon" id="currentFoto">
+                                                                                                                <img src="${fotoSrc}"class="image-icon selected-image" alt="Image icon" id="currentFoto">
                                     </div>
                                     <img src="/assets/camera.svg" class="camera-icon" alt="Camera icon">
                                 </div>
@@ -402,14 +409,17 @@ document.addEventListener('DOMContentLoaded', async function() {
                 <button class="button-save" type="submit">Salvar Alterações</button>
             </form>
         `;
+
         const inputFile = document.getElementById('fotoMembro');
-        inputFile.addEventListener('change', function() {
+        inputFile.addEventListener('change', function () {
             const file = inputFile.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     const imgElement = document.getElementById('currentFoto');
                     imgElement.src = e.target.result;
+                    imgElement.classList.add('selected-image');  // Adiciona a classe para manter o estilo circular
+
                 };
                 reader.readAsDataURL(file);
             }
@@ -419,15 +429,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             event.preventDefault();
 
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
 
             try {
                 const updateResponse = await fetch(`/membros/api/editar-membro/${membroId}`, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
+                    body: formData
                 });
 
                 if (!updateResponse.ok) {

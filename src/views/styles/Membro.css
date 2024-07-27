@@ -245,6 +245,10 @@ select {
     background-color: #037955;
 }
 
+.delete-icon:hover {
+    background-color: #f64a59f1;
+}
+
 .telefone-membro {
     display: flex;
     align-items: center;

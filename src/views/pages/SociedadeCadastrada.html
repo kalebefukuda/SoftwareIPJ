@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Sociedade Cadastrada</title>
     <link rel="stylesheet" href="../styles/SociedadeCadastrada.css">
     <link rel="stylesheet" href="../styles/Header.css">
     <link rel="stylesheet" href="../styles/Footer.css">
 </head>
+
 <body>
     <header>
         <a href="/home"><img class="logo-ipb" src="../assets/ipj.png" alt="IPB logo"></a>
@@ -25,6 +27,17 @@
         <!-- preenchido pelo js -->
     </main>
 
+    <!-- Modal -->
+    <div id="modalBusca" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Membros buscados:</h2>
+            <div class="resultadosBusca" id="resultadosBusca">
+                <!-- Resultados da busca serão inseridos aqui -->
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="logo-footer">
             <img src="../assets/IPJ_Logo_Login.jpg" alt="Logo Igreja Presbiteriana de Joinville">
@@ -33,9 +46,12 @@
         <div class="social-footer">
             <h2>Siga-nos</h2>
             <div class="icons-social">
-                <a href="https://www.facebook.com/ipjoinville/?locale=pt_BR" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
-                <a href="https://www.instagram.com/ipb.joinville/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
-                <a href="https://www.youtube.com/@IgrejaPresbiterianadeJoinville" target="_blank"><ion-icon name="logo-youtube"></ion-icon></a>
+                <a href="https://www.facebook.com/ipjoinville/?locale=pt_BR" target="_blank"><ion-icon
+                        name="logo-facebook"></ion-icon></a>
+                <a href="https://www.instagram.com/ipb.joinville/" target="_blank"><ion-icon
+                        name="logo-instagram"></ion-icon></a>
+                <a href="https://www.youtube.com/@IgrejaPresbiterianadeJoinville" target="_blank"><ion-icon
+                        name="logo-youtube"></ion-icon></a>
             </div>
         </div>
 

@@ -30,6 +30,7 @@ function processarDados(data) {
     const membros = data.sociedade.map(item => ({
         NOME_MEMBRO: item.nome_membro,
         IDADE: item.idade,
+        NUMERO_DE_ROL: item.numero_de_rol, // Adicione o número de rol
         FOTO_MEMBRO: item.foto_membro // Adicione a chave correta se for diferente
     }));
 
@@ -66,11 +67,6 @@ function renderizarSociedade(sociedade) {
                 <ion-icon name="search-outline"></ion-icon>
             </button>
         </div>
-        <div class="adicionar-membro">
-            <button class="btn-add">
-                Adicionar
-            </button>
-        </div>
     `;
     main.appendChild(pesquisaDiv);
 
@@ -79,29 +75,27 @@ function renderizarSociedade(sociedade) {
     divMembrosResultado.innerHTML = '<h2>Membros Cadastrados:</h2>';
     main.appendChild(divMembrosResultado);
 
-    const resultadosBusca = document.createElement('div');
-    resultadosBusca.id = 'resultadosBusca';
-    main.appendChild(resultadosBusca);
-
     sociedade.MEMBROS.forEach(membro => {
         const membrosCadastrados = document.createElement('div');
         membrosCadastrados.className = 'membros-cadastrados';
         membrosCadastrados.innerHTML = `
             <div class="img-result">
-                <img class="campo-foto-card" src="${membro.FOTO_MEMBRO}" alt="">
+                <img class="campo-foto-card" src="${membro.FOTO_MEMBRO ? `/${membro.FOTO_MEMBRO}` : '/assets/Ellipse.png'}" alt="Foto do membro">
             </div>
             <div class="text-result-membro">
                 <div class="text-icon">
                     <h3>${membro.NOME_MEMBRO}</h3>
                 </div>
                 <div class="idade-membro">
-                    <h5>Idade:</h5>
-                    <h5>${membro.IDADE}</h5>
+                    <ion-icon name="person-outline"></ion-icon>
+                    <h5>${membro.NUMERO_DE_ROL !== undefined ? membro.NUMERO_DE_ROL : 'Não disponível'}</h5>
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <h5>${membro.IDADE} Anos</h5>
                 </div>
             </div>
-            <button class= "delete">
-                    <ion-icon name="trash-outline"></ion-icon>
-                </button> 
+            <button class="delete">
+                <ion-icon name="trash-outline"></ion-icon>
+            </button> 
         `;
         divMembrosResultado.appendChild(membrosCadastrados);
     });
@@ -110,6 +104,8 @@ function renderizarSociedade(sociedade) {
 function setupBusca() {
     const inputBusca = document.getElementById('inputBuscaNome');
     const searchButton = document.querySelector('.search-btn');
+    const modal = document.getElementById("modalBusca");
+    const span = document.getElementsByClassName("close")[0];
 
     searchButton.addEventListener('click', function() {
         realizarBusca(inputBusca.value);
@@ -120,12 +116,24 @@ function setupBusca() {
             realizarBusca(inputBusca.value);
         }
     });
+
+    // Fechar a modal quando o usuário clicar no X
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Fechar a modal quando o usuário clicar fora dela
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 }
 
 async function realizarBusca(query) {
     console.log('Buscando por:', query);
     try {
-        const response = await fetch(`/buscar?query=${encodeURIComponent(query)}`);
+        const response = await fetch(`/membros/api/membros/buscar?query=${encodeURIComponent(query)}`);
         if (!response.ok) {
             throw new Error(`Erro HTTP: ${response.status}`);
         }
@@ -137,6 +145,8 @@ async function realizarBusca(query) {
         }
 
         mostrarResultadosBusca(data.data);
+        abrirModal(); // Abre a modal com os resultados da busca
+
     } catch (error) {
         console.error('Erro ao buscar membros:', error);
     }
@@ -151,17 +161,74 @@ function mostrarResultadosBusca(membros) {
     resultadosBusca.innerHTML = ''; // Limpa resultados anteriores
 
     membros.forEach(membro => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'resultado-item';
+        const card = document.createElement('div');
+        card.classList.add('card-result');
 
-        itemDiv.innerHTML = `
-            <img src="${membro.FOTO_MEMBRO}" alt="Foto de ${membro.NOME_MEMBRO}">
-            <div class="info">
-                <span class="nome">${membro.NOME_MEMBRO}</span>
-                <span class="detalhes">Idade: ${membro.IDADE}</span>
+        let fotoSrc = '/assets/Ellipse.png'; // Caminho correto para a imagem padrão
+        if (membro.FOTO_MEMBRO && membro.FOTO_MEMBRO.trim() !== '') {
+            fotoSrc = membro.FOTO_MEMBRO.startsWith('uploads/')
+                ? `/${membro.FOTO_MEMBRO}`
+                : membro.FOTO_MEMBRO;
+        }
+
+        card.innerHTML = `
+            <div class="img-result">
+                <img class="campo-foto-card" src="${fotoSrc}" alt="Foto do membro">
+            </div>
+            <div class="text-result-membro">
+                <div class="text-icon">
+                    <h3 class="memberName">${membro.NOME}</h3>
+                    <div class="icons-card-result">
+                        <button class="btn-add-membro" data-id="${membro.ID_MEMBRO}">Adicionar</button>
+                    </div>
+                </div>
+                <div class="idade-membro">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <h5>${membro.NUMERO_DE_ROL !== undefined ? membro.NUMERO_DE_ROL : 'Não disponível'}</h5>
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <h5>${membro.IDADE} Anos</h5>
+                </div>
             </div>
         `;
 
-        resultadosBusca.appendChild(itemDiv);
+        resultadosBusca.appendChild(card);
     });
+
+    // Adiciona eventos de clique aos botões de adicionar membro
+    document.querySelectorAll('.btn-add-membro').forEach(button => {
+        button.addEventListener('click', function() {
+            const idMembro = this.getAttribute('data-id');
+            adicionarMembro(idMembro);
+        });
+    });
+}
+
+function abrirModal() {
+    const modal = document.getElementById("modalBusca");
+    modal.style.display = "block";
+}
+
+async function adicionarMembro(idMembro) {
+    const idSociedade = window.location.pathname.split('/').pop(); // Captura o ID da URL
+    try {
+        const response = await fetch(`/api/sociedade-interna/${idSociedade}/adicionar-membro`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ idMembro })
+        });
+
+        if (response.ok) {
+            alert('Membro adicionado com sucesso!');
+            window.location.reload(); // Recarrega a página para atualizar a lista de membros
+        } else {
+            const errorData = await response.json();
+            console.error('Erro ao adicionar membro:', errorData);
+            alert('Erro ao adicionar membro.');
+        }
+    } catch (error) {
+        console.error('Erro ao adicionar membro:', error);
+        alert('Erro ao adicionar membro.');
+    }
 }
