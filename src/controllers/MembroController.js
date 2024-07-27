@@ -47,7 +47,7 @@ membroController.search = async (req, res) => {
     try {
         connection = await connect();
         const sqlQuery = `
-            SELECT M.ID_MEMBRO, M.NOME, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
+            SELECT M.ID_MEMBRO, M.NOME, M.NUMERO_DE_ROL, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
             FROM MEMBRO M
             WHERE M.NOME LIKE ?`;
 

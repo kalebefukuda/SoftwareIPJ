@@ -30,6 +30,7 @@ function processarDados(data) {
     const membros = data.sociedade.map(item => ({
         NOME_MEMBRO: item.nome_membro,
         IDADE: item.idade,
+        NUMERO_DE_ROL: item.numero_de_rol, // Adicione o número de rol
         FOTO_MEMBRO: item.foto_membro // Adicione a chave correta se for diferente
     }));
 
@@ -86,8 +87,10 @@ function renderizarSociedade(sociedade) {
                     <h3>${membro.NOME_MEMBRO}</h3>
                 </div>
                 <div class="idade-membro">
-                    <h5>Idade:</h5>
-                    <h5>${membro.IDADE}</h5>
+                    <ion-icon name="person-outline"></ion-icon>
+                    <h5>${membro.NUMERO_DE_ROL !== undefined ? membro.NUMERO_DE_ROL : 'Não disponível'}</h5>
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <h5>${membro.IDADE} Anos</h5>
                 </div>
             </div>
             <button class="delete">
@@ -163,9 +166,9 @@ function mostrarResultadosBusca(membros) {
 
         let fotoSrc = '/assets/Ellipse.png'; // Caminho correto para a imagem padrão
         if (membro.FOTO_MEMBRO && membro.FOTO_MEMBRO.trim() !== '') {
-            fotoSrc = membro.FOTO_MEMBRO.startsWith('/uploads/')
-                ? membro.FOTO_MEMBRO
-                : `/uploads/${membro.FOTO_MEMBRO}`;
+            fotoSrc = membro.FOTO_MEMBRO.startsWith('uploads/')
+                ? `/${membro.FOTO_MEMBRO}`
+                : membro.FOTO_MEMBRO;
         }
 
         card.innerHTML = `
@@ -181,7 +184,9 @@ function mostrarResultadosBusca(membros) {
                 </div>
                 <div class="idade-membro">
                     <ion-icon name="person-outline"></ion-icon>
-                    <h5>${membro.IDADE}</h5>
+                    <h5>${membro.NUMERO_DE_ROL !== undefined ? membro.NUMERO_DE_ROL : 'Não disponível'}</h5>
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <h5>${membro.IDADE} Anos</h5>
                 </div>
             </div>
         `;
@@ -197,7 +202,6 @@ function mostrarResultadosBusca(membros) {
         });
     });
 }
-
 
 function abrirModal() {
     const modal = document.getElementById("modalBusca");

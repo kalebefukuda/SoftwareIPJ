@@ -165,19 +165,25 @@ sociedadeInterna.search = async function(req, res) {
 
     try {
         const sqlQuery = `
-            SELECT M.ID_MEMBRO, M.NOME, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
+            SELECT M.ID_MEMBRO, M.NOME, M.NUMERO_DE_ROL, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
             FROM MEMBRO M
             WHERE M.NOME LIKE ?`;
 
         const [rows] = await con.query(sqlQuery, [`%${query}%`]);
-
+        const basePath = '/uploads/';
         const membros = rows.map(membro => {
-            if (!membro.FOTO_MEMBRO || membro.FOTO_MEMBRO.trim() === '') {
-                membro.FOTO_MEMBRO = 'assets/Ellipse.png'; // Caminho para a imagem padrão
-            } else if (!membro.FOTO_MEMBRO.startsWith('uploads/')) {
-                membro.FOTO_MEMBRO = `uploads/${membro.FOTO_MEMBRO}`;
+            if (!membro.FOTO_MEMBRO) {
+                membro.FOTO_MEMBRO = 'assets/Ellipse.png'; // Define a imagem padrão
+            } else {
+                membro.FOTO_MEMBRO = basePath + membro.FOTO_MEMBRO;
             }
-            return membro;
+            return {
+                ID_MEMBRO: membro.ID_MEMBRO,
+                NOME: membro.NOME,
+                NUMERO_DE_ROL: membro.NUMERO_DE_ROL,
+                IDADE: membro.IDADE,
+                FOTO_MEMBRO: membro.FOTO_MEMBRO
+            };
         });
 
         res.json({ ok: true, data: membros });
@@ -186,6 +192,7 @@ sociedadeInterna.search = async function(req, res) {
         res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
     }
 };
+
 
 
 // Adicionar membro à sociedade

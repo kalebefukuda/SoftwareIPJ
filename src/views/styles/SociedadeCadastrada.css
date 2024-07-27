@@ -335,6 +335,7 @@ input:focus {
 
 .memberName {
     color: #015B40;
+    font-weight: 500;
 }
 
 .idade-membro {
@@ -342,10 +343,20 @@ input:focus {
     align-items: center;
     color: #555;
     font-size: 0.9em;
+    
+}
+
+.idade-membro div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
+    
 }
 
 .idade-membro h5 {
     font-weight: 300;
+    margin: 0 10px 0 0;
 }
 
 .input.initial {
