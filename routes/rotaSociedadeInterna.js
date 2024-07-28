@@ -1,4 +1,3 @@
-// rotaSociedadeInterna.js
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -25,6 +24,7 @@ router.get('/sociedade-interna/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, '../src/views/pages/CadastroSociedade.html'));
 });
 
+// API Routes
 router.get('/api/sociedade-interna', async (req, res) => {
     try {
         const sociedades = await sociedadeInterna.all();
@@ -88,7 +88,7 @@ router.get('/api/sociedade-cadastrada/buscar', async (req, res) => {
     }
 });
 
-router.post('/api/sociedade-interna/:idSociedade/adicionar-membro', async (req, res) => {
+router.post('/api/sociedade-cadastrada/:idSociedade/adicionar-membro', async (req, res) => {
     try {
         await sociedadeInterna.addMembro(req, res);
     } catch (error) {

@@ -371,8 +371,8 @@ input:focus {
     color: #aaa;
     float: right;
     font-size: 28px;
-    font-weight: bold;
     align-self: flex-end;
+    transition: color 0.3s ease;
 }
 
 .close:hover,

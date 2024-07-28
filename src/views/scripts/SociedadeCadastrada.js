@@ -211,7 +211,7 @@ function abrirModal() {
 async function adicionarMembro(idMembro) {
     const idSociedade = window.location.pathname.split('/').pop(); // Captura o ID da URL
     try {
-        const response = await fetch(`/api/sociedade-interna/${idSociedade}/adicionar-membro`, {
+        const response = await fetch(`/api/sociedade-cadastrada/${idSociedade}/adicionar-membro`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
