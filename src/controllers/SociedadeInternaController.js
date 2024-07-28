@@ -1,4 +1,3 @@
-// SociedadeInternaController.js
 import connect from '../../config/Connection.js';
 import path from 'path';
 import fs from 'fs';
@@ -137,7 +136,7 @@ sociedadeInterna.loadSociedade = async function(req, res) {
         let idSociedade = req.params.idSociedade;
 
         let sql = `
-            SELECT s.*, m.nome AS nome_membro, TIMESTAMPDIFF(YEAR, m.DATA_NASCIMENTO, CURDATE()) AS idade
+            SELECT s.*, m.nome AS nome_membro, m.numero_de_rol, TIMESTAMPDIFF(YEAR, m.DATA_NASCIMENTO, CURDATE()) AS idade
             FROM sociedade_interna s
             LEFT JOIN membro_sociedade ms ON s.id_sociedade_interna = ms.id_sociedade_interna
             LEFT JOIN membro m ON ms.id_membro = m.id_membro
@@ -177,13 +176,7 @@ sociedadeInterna.search = async function(req, res) {
             } else {
                 membro.FOTO_MEMBRO = basePath + membro.FOTO_MEMBRO;
             }
-            return {
-                ID_MEMBRO: membro.ID_MEMBRO,
-                NOME: membro.NOME,
-                NUMERO_DE_ROL: membro.NUMERO_DE_ROL,
-                IDADE: membro.IDADE,
-                FOTO_MEMBRO: membro.FOTO_MEMBRO
-            };
+            return membro;
         });
 
         res.json({ ok: true, data: membros });
@@ -193,13 +186,18 @@ sociedadeInterna.search = async function(req, res) {
     }
 };
 
-
-
 // Adicionar membro à sociedade
 sociedadeInterna.addMembro = async function(req, res) {
     try {
+        console.log('Request Params:', req.params);
+        console.log('Request Body:', req.body);
+
         const { idSociedade } = req.params;
         const { idMembro } = req.body;
+
+        if (!idMembro) {
+            return res.status(400).json({ ok: false, error: 'ID do membro não fornecido' });
+        }
 
         const sqlQuery = "INSERT INTO membro_sociedade (ID_SOCIEDADE_INTERNA, ID_MEMBRO) VALUES (?, ?)";
         await con.query(sqlQuery, [idSociedade, idMembro]);
@@ -210,5 +208,6 @@ sociedadeInterna.addMembro = async function(req, res) {
         res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
     }
 };
+
 
 export { sociedadeInterna };
