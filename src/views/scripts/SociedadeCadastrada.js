@@ -210,6 +210,8 @@ function abrirModal() {
 
 async function adicionarMembro(idMembro) {
     const idSociedade = window.location.pathname.split('/').pop(); // Captura o ID da URL
+    console.log(idSociedade);
+    console.log(idMembro);
     try {
         const response = await fetch(`/api/sociedade-cadastrada/${idSociedade}/adicionar-membro`, {
             method: 'POST',
@@ -218,7 +220,7 @@ async function adicionarMembro(idMembro) {
             },
             body: JSON.stringify({ idMembro })
         });
-
+        console.log(idMembro);
         if (response.ok) {
             alert('Membro adicionado com sucesso!');
             window.location.reload(); // Recarrega a página para atualizar a lista de membros
