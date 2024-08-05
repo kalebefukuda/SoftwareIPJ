@@ -384,5 +384,55 @@ membroController.delete = async (req, res) => {
     }
 };
 
+membroController.list = async (req, res) => {
+    let connection;
+    try {
+        connection = await connect();
+
+        const { nome, telefone, nomePai, sexo, comungante } = req.query;
+
+        let query = 'SELECT * FROM MEMBRO WHERE 1=1';
+        const queryParams = [];
+
+        if (nome) {
+            query += ' AND NOME LIKE ?';
+            queryParams.push(`%${nome}%`);
+        }
+        if (telefone) {
+            query += ' AND TELEFONE LIKE ?';
+            queryParams.push(`%${telefone}%`);
+        }
+        if (nomePai) {
+            query += ' AND NOME_PAI LIKE ?';
+            queryParams.push(`%${nomePai}%`);
+        }
+        if (sexo) {
+            query += ' AND SEXO = ?';
+            queryParams.push(sexo);
+        }
+        if (comungante) {
+            query += ' AND COMUNGANTE = ?';
+            queryParams.push(comungante);
+        }
+
+        console.log('Consulta SQL:', query, queryParams);
+
+        const [rows] = await connection.query(query, queryParams);
+        const membros = rows.map(membro => {
+            if (!membro.FOTO_MEMBRO) {
+                membro.FOTO_MEMBRO = 'Ellipse.png'; // Define a imagem padrão
+            }
+            return membro;
+        });
+        res.json(membros);
+    } catch (error) {
+        console.error('Erro ao listar membros:', error);
+        res.status(500).json({ error: 'Erro ao listar membros' });
+    } finally {
+        if (connection) connection.release();
+    }
+};
+
+
 
 export { membroController };
