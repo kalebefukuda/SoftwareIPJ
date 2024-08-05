@@ -1,4 +1,4 @@
-import connect from '../../config/Connection.js'
+import connect from '../../config/Connection.js';
 import path from 'path';
 import fs from 'fs';
 
@@ -8,7 +8,6 @@ const uploadDir = path.join(process.cwd(), '/src/views/uploads/');
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }
-
 
 let sociedadeInterna = {};
 
@@ -58,7 +57,6 @@ sociedadeInterna.create = async function(req, res) {
         res.status(500).json({ error: 'Erro interno do servidor' });
     }
 };
-
 
 // Update
 sociedadeInterna.update = async function(req, res) {
@@ -135,10 +133,10 @@ sociedadeInterna.delete = async function(id) {
 
 sociedadeInterna.loadSociedade = async function(req, res) {
     try {
-        let idSociedade = req.params.idSociedade; // Certifique-se de que está usando o nome correto do parâmetro
+        let idSociedade = req.params.idSociedade;
 
         let sql = `
-            SELECT s.*, m.nome AS nome_membro, TIMESTAMPDIFF(YEAR, m.DATA_NASCIMENTO, CURDATE()) AS idade
+            SELECT s.*, m.nome AS nome_membro, m.numero_de_rol, TIMESTAMPDIFF(YEAR, m.DATA_NASCIMENTO, CURDATE()) AS idade
             FROM sociedade_interna s
             LEFT JOIN membro_sociedade ms ON s.id_sociedade_interna = ms.id_sociedade_interna
             LEFT JOIN membro m ON ms.id_membro = m.id_membro
@@ -166,18 +164,50 @@ sociedadeInterna.search = async function(req, res) {
 
     try {
         const sqlQuery = `
-            SELECT M.NOME, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
+            SELECT M.ID_MEMBRO, M.NOME, M.NUMERO_DE_ROL, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
             FROM MEMBRO M
-            JOIN MEMBRO_SOCIEDADE MS ON M.ID_MEMBRO = MS.ID_MEMBRO
-            JOIN SOCIEDADE_INTERNA SI ON MS.ID_SOCIEDADE_INTERNA = SI.ID_SOCIEDADE_INTERNA
             WHERE M.NOME LIKE ?`;
 
         const [rows] = await con.query(sqlQuery, [`%${query}%`]);
-        res.json({ ok: true, data: rows });
+        const basePath = '/uploads/';
+        const membros = rows.map(membro => {
+            if (!membro.FOTO_MEMBRO) {
+                membro.FOTO_MEMBRO = 'assets/Ellipse.png'; // Define a imagem padrão
+            } else {
+                membro.FOTO_MEMBRO = basePath + membro.FOTO_MEMBRO;
+            }
+            return membro;
+        });
+
+        res.json({ ok: true, data: membros });
     } catch (error) {
         console.error('Erro na busca:', error);
         res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
     }
 };
+
+// Adicionar membro à sociedade
+sociedadeInterna.addMembro = async function(req, res) {
+    try {
+        console.log('Request Params:', req.params);
+        console.log('Request Body:', req.body);
+
+        const { idSociedade } = req.params;
+        const { idMembro } = req.body;
+
+        if (!idMembro) {
+            return res.status(400).json({ ok: false, error: 'ID do membro não fornecido' });
+        }
+
+        const sqlQuery = "INSERT INTO membro_sociedade (ID_SOCIEDADE_INTERNA, ID_MEMBRO) VALUES (?, ?)";
+        await con.query(sqlQuery, [idSociedade, idMembro]);
+
+        res.json({ ok: true, message: 'Membro adicionado com sucesso' });
+    } catch (error) {
+        console.error('Erro ao adicionar membro:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
+    }
+};
+
 
 export { sociedadeInterna };

@@ -31,34 +31,6 @@ h1 {
     font-size: 40px;
 }
 
-header {
-    display: flex;
-    max-height: 149px;
-    background-color: white;
-    align-items: center;
-    margin-top: 12px;
-    justify-content: space-between;
-    margin-left: 45px;
-    margin-right: 30px;
-}
-
-.logo-ipb {
-    width: 98px;
-    height: 85px;
-    margin-right: 10px;
-}
-
-.nav-header {
-    font-size: 18px;
-    display: flex;
-    gap: 45px;
-    margin-right: 10px;
-}
-
-.nav-header a {
-    color: #818181;
-}
-
 nav a ion-icon {
     color: #015B40;
     font-size: 25px;

@@ -25,7 +25,7 @@ membroController.list = async (req, res) => {
         // Transformar os dados para adicionar caminho da imagem padrão quando FOTO_MEMBRO for null
         const membros = rows.map(membro => {
             if (!membro.FOTO_MEMBRO) {
-                membro.FOTO_MEMBRO = 'Ellipse.png'; // Define a imagem padrão
+                membro.FOTO_MEMBRO = 'Ellipse.png'; // Define a imagem padrão com o caminho correto
             }
             return membro;
         });
@@ -33,6 +33,39 @@ membroController.list = async (req, res) => {
     } catch (error) {
         console.error('Erro ao listar membros:', error);
         res.status(500).json({ error: 'Erro ao listar membros' });
+    } finally {
+        if (connection) connection.release();
+    }
+};
+
+
+// Buscar membros por nome
+membroController.search = async (req, res) => {
+    const query = req.query.query || '';
+    let connection;
+
+    try {
+        connection = await connect();
+        const sqlQuery = `
+            SELECT M.ID_MEMBRO, M.NOME, M.NUMERO_DE_ROL, TIMESTAMPDIFF(YEAR, M.DATA_NASCIMENTO, CURDATE()) AS IDADE, M.FOTO_MEMBRO
+            FROM MEMBRO M
+            WHERE M.NOME LIKE ?`;
+
+        const [rows] = await connection.query(sqlQuery, [`%${query}%`]);
+        const basePath = '/uploads/';
+        const membros = rows.map(membro => {
+            if (!membro.FOTO_MEMBRO) {
+                membro.FOTO_MEMBRO = 'Ellipse.png'; // Define a imagem padrão
+            } else {
+                membro.FOTO_MEMBRO = basePath + membro.FOTO_MEMBRO;
+            }
+            return membro;
+        });
+
+        res.json({ ok: true, data: membros });
+    } catch (error) {
+        console.error('Erro na busca:', error);
+        res.status(500).json({ ok: false, error: 'Erro interno do servidor' });
     } finally {
         if (connection) connection.release();
     }
@@ -183,19 +216,19 @@ membroController.update = async (req, res) => {
             const uploadPath = path.join(uploadDir, fileName);
 
             await file.mv(uploadPath);
-            fotoMembro = `/uploads/${fileName}`;
+            fotoMembro = `uploads/${fileName}`;
         }
 
         const sqlMembro = `
             UPDATE MEMBRO SET 
                 NOME = ?, COMUNGANTE = ?, DATA_NASCIMENTO = ?, NOME_PAI = ?, NOME_MAE = ?, SEXO = ?, 
                 ESCOLARIDADE = ?, PROFISSAO = ?, NUMERO_DE_ROL = ?, EMAIL = ?, TELEFONE = ?, CELULAR = ?, 
-                ESTADO_CIVIL = ?
+                ESTADO_CIVIL = ?, FOTO_MEMBRO = ?
             WHERE ID_MEMBRO = ?;`;
 
         const valuesMembro = [
             nome, parseInt(comungante), dataNascimento, nomePai, nomeMae, sexo, escolaridade,
-            profissao, numeroDeRol, email, telefone, celular, estadoCivil, id
+            profissao, numeroDeRol, email, telefone, celular, estadoCivil, fotoMembro, id
         ];
 
         await connection.query(sqlMembro, valuesMembro);
@@ -302,6 +335,7 @@ membroController.update = async (req, res) => {
         if (connection) connection.release();
     }
 };
+
 
 // Adicione esta função ao seu controlador MembroController.js
 membroController.getMembroById = async (req, res) => {
